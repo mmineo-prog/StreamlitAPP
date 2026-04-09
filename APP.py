@@ -905,7 +905,7 @@ if generate_btn and (sel_kpis or sel_charts):
                 kpi_data=kpi_data,
                 period=period,
                 filters_summary=filters_summary,
-                chart_images=chart_images,
+                chart_images=chart_images,   # <- matplotlib BytesIO, non Plotly
                 store_table=store_table,
                 top_cust_table=top_cust_table,
             )
