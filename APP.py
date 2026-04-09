@@ -39,8 +39,6 @@ SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
 COLORS  = ["#378ADD","#1D9E75","#D85A30","#7F77DD","#BA7517","#D4537E"]
 MCOLORS = COLORS
 
-st.write("Key presente:", "OPENROUTER_API_KEY" in st.secrets)
-
 st.set_page_config(page_title="Retail Analytics", page_icon="📊",
                    layout="wide", initial_sidebar_state="expanded")
 
