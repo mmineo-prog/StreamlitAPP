@@ -797,3 +797,69 @@ if generate_btn and (sel_kpis or sel_charts):
             )
         except Exception as e:
             st.sidebar.error(f"Errore generazione PDF: {e}")
+
+# ════════════════════════════════════════════════════════════════════════════
+# CHATBOT AI
+# ════════════════════════════════════════════════════════════════════════════
+st.divider()
+st.markdown("## 🤖 Assistente AI")
+ 
+# Badge filtro AI attivo
+if st.session_state.ai_filters.get("conditions"):
+    n_filtered = len(apply_ai_filters(sales_raw, st.session_state.ai_filters["conditions"]))
+    st.info(f"🎯 Filtro AI attivo: **{st.session_state.filter_summary}** — "
+            f"{n_filtered} righe selezionate su {len(sales_raw)}")
+    if st.button("✖ Rimuovi filtro AI", key="remove_ai_filter"):
+        st.session_state.ai_filters     = {}
+        st.session_state.filter_summary = ""
+        st.rerun()
+ 
+# Finestra chat
+chat_container = st.container(height=380, border=True)
+with chat_container:
+    if not st.session_state.chat_history:
+        st.markdown(
+            "👋 **Ciao!** Puoi chiedermi:\n"
+            "- *Qual è il canale con il fatturato più alto?*\n"
+            "- *Mostrami solo le vendite online*\n"
+            "- *Filtra per categoria Electronics*\n"
+            "- *Qual è lo scontrino medio per regione?*"
+        )
+    for msg in st.session_state.chat_history:
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
+ 
+# Input
+user_input = st.chat_input("Chiedi un insight o applica un filtro…")
+if user_input:
+    st.session_state.chat_history.append({"role": "user", "content": user_input})
+ 
+    with st.spinner("Elaborazione…"):
+        raw = call_claude(user_input, sales_raw)
+ 
+    parsed = None
+    try:
+        clean = raw.strip()
+        if clean.startswith("{"):
+            parsed = json.loads(clean)
+    except json.JSONDecodeError:
+        pass
+ 
+    if parsed and parsed.get("action") == "filter":
+        st.session_state.ai_filters     = parsed
+        st.session_state.filter_summary = parsed.get("summary", "Filtro applicato")
+        assistant_reply = f"✅ Filtro applicato: **{parsed.get('summary', '')}**"
+    elif parsed and parsed.get("action") == "reset_filters":
+        st.session_state.ai_filters     = {}
+        st.session_state.filter_summary = ""
+        assistant_reply = "✅ Filtri AI rimossi. Ora vedi tutti i dati."
+    else:
+        assistant_reply = raw
+ 
+    st.session_state.chat_history.append({"role": "assistant", "content": assistant_reply})
+    st.rerun()
+ 
+if st.session_state.chat_history:
+    if st.button("🗑 Cancella conversazione", key="clear_chat"):
+        st.session_state.chat_history = []
+        st.rerun()
