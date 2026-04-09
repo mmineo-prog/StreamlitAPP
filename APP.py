@@ -480,8 +480,9 @@ with st.sidebar:
         default=[])
 
     st.divider()
-    generate_btn = st.button("📄 Genera report PDF", use_container_width=True,
-                             type="primary", disabled=not(sel_kpis or sel_charts))
+    if st.button("📄 Genera report PDF", use_container_width=True,
+                 type="primary", disabled=not(sel_kpis or sel_charts)):
+        st.session_state["generate_pdf"] = True
     if st.button("🔄 Svuota cache", use_container_width=True):
         st.cache_data.clear()
         st.rerun()
@@ -715,7 +716,8 @@ with tab_cu:
 # ════════════════════════════════════════════════════════════════════════════
 # GENERA PDF
 # ════════════════════════════════════════════════════════════════════════════
-if generate_btn and (sel_kpis or sel_charts):
+if st.session_state.get("generate_pdf") and (sel_kpis or sel_charts):
+    st.session_state["generate_pdf"] = False  # reset subito per evitare loop
     with st.spinner("Generazione PDF in corso..."):
 
         # Costruisci immagini matplotlib
