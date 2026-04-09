@@ -1,15 +1,14 @@
 """
-Retail Analytics Dashboard — Streamlit + Supabase
-─────────────────────────────────────────────────
+Retail Analytics Dashboard — Streamlit + Supabase + Chatbot AI
+─────────────────────────────────────────────────────────────────
 secrets.toml:
-  SUPABASE_URL = "https://ttnvaxeqbxtvulofeuqs.supabase.co"
-  SUPABASE_KEY = "eyJhbGci..."
-
+  SUPABASE_URL      = "https://ttnvaxeqbxtvulofeuqs.supabase.co"
+  SUPABASE_KEY      = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0bnZheGVxYnh0dnVsb2ZldXFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MjAxNDUsImV4cCI6MjA5MTI5NjE0NX0.egdVHwUPY1xhVpeLks6ttyHKusDn94GOi31gPPgt0QQ"
+  ANTHROPIC_API_KEY = "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"
 Avvio locale:
   pip install -r requirements.txt
   streamlit run APP.py
 """
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -29,16 +28,15 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
-
+import anthropic
+import json
 # ── CONFIG ────────────────────────────────────────────────────────────────────
 SUPABASE_URL = st.secrets["SUPABASE_URL"]
 SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
 COLORS  = ["#378ADD","#1D9E75","#D85A30","#7F77DD","#BA7517","#D4537E"]
 MCOLORS = COLORS
-
 st.set_page_config(page_title="Retail Analytics", page_icon="📊",
                    layout="wide", initial_sidebar_state="expanded")
-
 st.markdown("""
 <style>
   [data-testid="metric-container"] {
@@ -52,24 +50,23 @@ st.markdown("""
   }
 </style>
 """, unsafe_allow_html=True)
-
 # ── SUPABASE ──────────────────────────────────────────────────────────────────
 @st.cache_resource
 def get_supabase():
     return create_client(SUPABASE_URL, SUPABASE_KEY)
-
+@st.cache_resource
+def get_anthropic():
+    return anthropic.Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
 @st.cache_data(ttl=300, show_spinner=False)
 def load_data(date_from: str):
     sb = get_supabase()
     errors = []
-
     def safe_load(query_fn, label):
         try:
             return pd.DataFrame(query_fn().execute().data)
         except Exception as e:
             errors.append(f"{label}: {e}")
             return pd.DataFrame()
-
     sales = safe_load(
         lambda: sb.table("fact_sales")
             .select("sale_id,store_id,product_id,customer_id,quantity,unit_price,total_amount,sale_date,channel,payment_type")
@@ -92,18 +89,15 @@ def load_data(date_from: str):
     )
     return sales, stores, products, customers, errors
 
-
 def get_date_from(period: str) -> str:
     d = datetime.now()
     offsets = {"1 mese":30,"3 mesi":90,"6 mesi":180,"12 mesi":365}
     return (d - timedelta(days=offsets.get(period, 365))).strftime("%Y-%m-%d")
 
-
 def fmt_currency(v: float) -> str:
     if v >= 1_000_000: return f"€ {v/1_000_000:,.2f}M"
     if v >= 1_000:     return f"€ {v:,.0f}"
     return f"€ {v:.2f}"
-
 
 # ── MATPLOTLIB HELPERS ────────────────────────────────────────────────────────
 def mpl_to_bytes(fig) -> BytesIO:
@@ -113,7 +107,6 @@ def mpl_to_bytes(fig) -> BytesIO:
     plt.close(fig)
     buf.seek(0)
     return buf
-
 def chart_bar_v(df, x_col, y_col, title) -> BytesIO:
     fig, ax = plt.subplots(figsize=(8, 3.5))
     clrs = [MCOLORS[i % len(MCOLORS)] for i in range(len(df))]
@@ -125,17 +118,15 @@ def chart_bar_v(df, x_col, y_col, title) -> BytesIO:
     ax.tick_params(axis="x", labelsize=8, rotation=30)
     ax.tick_params(axis="y", labelsize=8)
     ax.grid(axis="y", linestyle="--", alpha=0.4)
-    # valori sulle barre solo se abbastanza larghe
     max_v = df[y_col].max()
     for bar in bars:
         h = bar.get_height()
-        if h > max_v * 0.15:   # mostra solo se barra > 15% del max
+        if h > max_v * 0.15:
             ax.text(bar.get_x() + bar.get_width()/2, h * 0.97,
                     f"€{h:,.0f}", ha="center", va="top",
                     fontsize=7, color="white", fontweight="bold")
     fig.tight_layout()
     return mpl_to_bytes(fig)
-
 def chart_bar_h(df, x_col, y_col, title) -> BytesIO:
     fig, ax = plt.subplots(figsize=(8, max(2.5, len(df)*0.45)))
     clrs = [MCOLORS[i % len(MCOLORS)] for i in range(len(df))]
@@ -147,17 +138,15 @@ def chart_bar_h(df, x_col, y_col, title) -> BytesIO:
     ax.tick_params(axis="y", labelsize=9)
     ax.tick_params(axis="x", labelsize=8)
     ax.grid(axis="x", linestyle="--", alpha=0.4)
-    # valori nelle barre solo se abbastanza lunghe
     max_v = df[x_col].max()
     for bar in bars:
         w = bar.get_width()
-        if w > max_v * 0.25:   # mostra solo se barra > 25% del max
+        if w > max_v * 0.25:
             ax.text(w * 0.97, bar.get_y() + bar.get_height()/2,
                     f"€{w:,.0f}", ha="right", va="center",
                     fontsize=7, color="white", fontweight="bold")
     fig.tight_layout()
     return mpl_to_bytes(fig)
-
 def chart_pie(labels, values, title) -> BytesIO:
     fig, ax = plt.subplots(figsize=(5, 4))
     wedges, texts, autotexts = ax.pie(
@@ -172,7 +161,6 @@ def chart_pie(labels, values, title) -> BytesIO:
     ax.set_aspect("equal")
     fig.subplots_adjust(left=0.1, right=0.9, top=0.88, bottom=0.05)
     return mpl_to_bytes(fig)
-
 def chart_line(df, x_col, y_col, title) -> BytesIO:
     fig, ax = plt.subplots(figsize=(8, 3))
     ax.plot(df[x_col].astype(str), df[y_col],
@@ -186,9 +174,7 @@ def chart_line(df, x_col, y_col, title) -> BytesIO:
     ax.grid(axis="y", linestyle="--", alpha=0.4)
     fig.tight_layout()
     return mpl_to_bytes(fig)
-
 def chart_bar_v_days(df, x_col, y_col, title) -> BytesIO:
-    """Grafico a barre verticali per vendite per giorno della settimana."""
     fig, ax = plt.subplots(figsize=(7, 3.2))
     clrs = [MCOLORS[i % len(MCOLORS)] for i in range(len(df))]
     bars = ax.bar(df[x_col].astype(str), df[y_col], color=clrs, width=0.6)
@@ -209,40 +195,28 @@ def chart_bar_v_days(df, x_col, y_col, title) -> BytesIO:
     fig.tight_layout()
     return mpl_to_bytes(fig)
 
-
 # ── PDF BUILDER ───────────────────────────────────────────────────────────────
 def build_pdf_report(
-    sel_kpis: list,
-    sel_charts: list,
-    kpi_data: dict,
-    period: str,
-    filters_summary: str,
-    chart_imgs: dict,          # ← unico nome usato ovunque
-    store_table=None,
-    top_cust_table=None,
+    sel_kpis, sel_charts, kpi_data, period, filters_summary, chart_imgs,
+    store_table=None, top_cust_table=None,
 ) -> bytes:
-
     buf = BytesIO()
     doc = SimpleDocTemplate(buf, pagesize=A4,
                             leftMargin=2*cm, rightMargin=2*cm,
                             topMargin=2*cm, bottomMargin=2*cm)
     W = A4[0] - 4*cm
-
-    base   = getSampleStyleSheet()
-    BLUE   = colors.HexColor("#378ADD")
-    GRAY   = colors.HexColor("#f5f5f4")
-    BORDER = colors.HexColor("#e0e0dc")
-
+    base  = getSampleStyleSheet()
+    BLUE  = colors.HexColor("#378ADD")
+    GRAY  = colors.HexColor("#f5f5f4")
+    BORDER= colors.HexColor("#e0e0dc")
     def sty(name, **kw):
         return ParagraphStyle(name, parent=base["Normal"], **kw)
-
     title_sty    = sty("t",  fontSize=22, fontName="Helvetica-Bold",
                         textColor=colors.HexColor("#1c1c1a"), spaceAfter=10, spaceBefore=6)
     sub_sty      = sty("s",  fontSize=10, fontName="Helvetica",
                         textColor=colors.HexColor("#6b6b63"), spaceAfter=6, leading=16)
     section_sty  = sty("se", fontSize=13, fontName="Helvetica-Bold",
-                        textColor=colors.HexColor("#1c1c1a"),
-                        spaceBefore=14, spaceAfter=6)
+                        textColor=colors.HexColor("#1c1c1a"), spaceBefore=14, spaceAfter=6)
     body_sty     = sty("b",  fontSize=9,  fontName="Helvetica",
                         textColor=colors.HexColor("#3d3d3a"), spaceAfter=3)
     kpi_lbl_sty  = sty("kl", fontSize=9,  fontName="Helvetica",
@@ -250,19 +224,14 @@ def build_pdf_report(
     kpi_val_sty  = sty("kv", fontSize=18, fontName="Helvetica-Bold",
                         textColor=colors.HexColor("#1c1c1a"))
     footer_sty   = sty("f",  fontSize=7,  fontName="Helvetica",
-                        textColor=colors.HexColor("#aaaaaa"),
-                        alignment=TA_CENTER)
-    chart_tit_sty = sty("ct", fontSize=11, fontName="Helvetica-Bold",
-                         textColor=colors.HexColor("#1c1c1a"),
-                         spaceBefore=10, spaceAfter=4)
+                        textColor=colors.HexColor("#aaaaaa"), alignment=TA_CENTER)
+    chart_tit_sty= sty("ct", fontSize=11, fontName="Helvetica-Bold",
+                        textColor=colors.HexColor("#1c1c1a"), spaceBefore=10, spaceAfter=4)
     th_sty = sty("th", fontSize=8, fontName="Helvetica-Bold",
                  textColor=colors.HexColor("#3d3d3a"))
     td_sty = sty("td", fontSize=8, fontName="Helvetica",
                  textColor=colors.HexColor("#1c1c1a"))
-
     story = []
-
-    # Cover
     story += [
         Spacer(1, 0.5*cm),
         Paragraph("Retail Analytics Report", title_sty),
@@ -277,13 +246,9 @@ def build_pdf_report(
         story.append(Paragraph(f"Filtri attivi: {filters_summary}", sub_sty))
     story += [Spacer(1, 0.4*cm),
               HRFlowable(width=W, thickness=2, color=BLUE, spaceAfter=16)]
-
-    # KPI — griglia compatta senza celle vuote
     if sel_kpis:
         story.append(Paragraph("KPI selezionati", section_sty))
         valid_kpis = [k for k in sel_kpis if k in kpi_data]
-        col_w = W / min(len(valid_kpis), 3)
-        # suddividi in righe da max 3
         for i in range(0, len(valid_kpis), 3):
             chunk = valid_kpis[i:i+3]
             row = []
@@ -304,22 +269,17 @@ def build_pdf_report(
                 ("VALIGN",       (0,0),(-1,-1), "TOP"),
             ]))
             story += [t, Spacer(1, 0.2*cm)]
-
-    # Grafici — usa SOLO chart_imgs
     if sel_charts and chart_imgs:
         story += [Paragraph("Grafici", section_sty),
                   HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=8)]
-
-        # Altezze native per tipo di grafico
         chart_heights = {
             "Fatturato mensile":     W * 0.40,
-            "Mix canali":            W * 0.42,   # torta 5x5 — mantieni proporzione quadrata
+            "Mix canali":            W * 0.42,
             "Mix categorie":         W * 0.38,
             "Performance store":     W * 0.50,
             "Trend scontrino medio": W * 0.35,
             "Top clienti":           W * 0.45,
         }
-
         for name in sel_charts:
             if name not in chart_imgs:
                 continue
@@ -327,7 +287,6 @@ def build_pdf_report(
                 buf_img = chart_imgs[name]
                 buf_img.seek(0)
                 h = chart_heights.get(name, W * 0.40)
-                # KeepTogether impedisce lo split titolo/grafico tra pagine
                 block = KeepTogether([
                     Paragraph(name, chart_tit_sty),
                     Spacer(1, 0.15*cm),
@@ -337,8 +296,6 @@ def build_pdf_report(
                 story.append(block)
             except Exception as ex:
                 story.append(Paragraph(f"[{name} — errore: {ex}]", body_sty))
-
-    # Tabelle
     def df_to_table(s, df, title):
         if df is None or df.empty:
             return
@@ -346,8 +303,7 @@ def build_pdf_report(
               HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=6)]
         col_w = W / len(df.columns)
         header = [[Paragraph(f"<b>{c}</b>", th_sty) for c in df.columns]]
-        rows   = [[Paragraph(str(v), td_sty) for v in r]
-                  for _, r in df.iterrows()]
+        rows   = [[Paragraph(str(v), td_sty) for v in r] for _, r in df.iterrows()]
         t = Table(header + rows, colWidths=[col_w]*len(df.columns), repeatRows=1)
         t.setStyle(TableStyle([
             ("BACKGROUND",    (0,0),(-1,0),  BLUE),
@@ -361,13 +317,10 @@ def build_pdf_report(
             ("VALIGN",        (0,0),(-1,-1), "MIDDLE"),
         ]))
         s += [t, Spacer(1, 0.4*cm)]
-
     if "Performance store" in sel_charts:
         df_to_table(story, store_table, "Dettaglio performance store")
     if "Top clienti" in sel_charts:
         df_to_table(story, top_cust_table, "Top clienti per spesa")
-
-    # Footer
     story += [
         Spacer(1, 0.5*cm),
         HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=6),
@@ -376,10 +329,92 @@ def build_pdf_report(
             f"{datetime.now().strftime('%d/%m/%Y %H:%M')}",
             footer_sty)
     ]
-
     doc.build(story)
     return buf.getvalue()
 
+# ── CHATBOT — funzioni ────────────────────────────────────────────────────────
+def build_system_prompt(df: pd.DataFrame) -> str:
+    schema   = df.dtypes.to_string()
+    sample   = df.head(3).to_string()
+    stats    = df[["total_amount","quantity","unit_price"]].describe().round(2).to_string()
+    stores   = sorted(df["store_name"].dropna().unique().tolist())
+    regions  = sorted(df["region"].dropna().unique().tolist())
+    cats     = sorted(df["category"].dropna().unique().tolist())
+    channels = sorted(df["channel"].dropna().unique().tolist())
+    return f"""Sei un assistente analitico integrato in una Retail Analytics Dashboard Streamlit.
+Hai accesso al dataframe delle vendite con questa struttura:
+SCHEMA:
+{schema}
+ANTEPRIMA (3 righe):
+{sample}
+STATISTICHE NUMERICHE:
+{stats}
+VALORI DISPONIBILI PER I FILTRI:
+- store_name: {stores}
+- region: {regions}
+- category: {cats}
+- channel: {channels}
+ISTRUZIONI:
+Puoi fare due cose in base alla richiesta dell'utente:
+1. INSIGHT — Se l'utente chiede un'analisi, un confronto, una spiegazione o una domanda sui dati:
+   Rispondi in italiano in modo chiaro e conciso.
+2. FILTRO — Se l'utente chiede di filtrare, isolare, mostrare solo certi dati:
+   Rispondi ESCLUSIVAMENTE con un JSON valido, senza testo aggiuntivo, nel formato:
+   {{
+     "action": "filter",
+     "summary": "Descrizione leggibile del filtro applicato",
+     "conditions": [
+       {{"column": "store_name", "operator": "isin", "value": "Store A,Store B"}},
+       {{"column": "category",   "operator": "==",   "value": "Electronics"}},
+       {{"column": "total_amount","operator": ">",    "value": "500"}}
+     ]
+   }}
+   Operatori disponibili: ==  !=  >  <  >=  <=  contains  isin
+   Per "isin" usa valori separati da virgola come stringa.
+3. RESET FILTRI — Se l'utente chiede di rimuovere/azzerare i filtri:
+   Rispondi ESCLUSIVAMENTE con: {{"action": "reset_filters"}}
+Rispondi sempre in italiano. Non inventare valori che non esistono nel dataset.
+"""
+
+def apply_ai_filters(df: pd.DataFrame, conditions: list) -> pd.DataFrame:
+    out = df.copy()
+    for c in conditions:
+        col, op, val = c.get("column"), c.get("operator"), c.get("value")
+        if col not in out.columns:
+            continue
+        try:
+            if op == "==":        out = out[out[col].astype(str) == str(val)]
+            elif op == "!=":      out = out[out[col].astype(str) != str(val)]
+            elif op == ">":       out = out[pd.to_numeric(out[col], errors="coerce") > float(val)]
+            elif op == "<":       out = out[pd.to_numeric(out[col], errors="coerce") < float(val)]
+            elif op == ">=":      out = out[pd.to_numeric(out[col], errors="coerce") >= float(val)]
+            elif op == "<=":      out = out[pd.to_numeric(out[col], errors="coerce") <= float(val)]
+            elif op == "contains":
+                out = out[out[col].astype(str).str.contains(str(val), case=False, na=False)]
+            elif op == "isin":
+                vals = [v.strip() for v in str(val).split(",")]
+                out = out[out[col].astype(str).isin(vals)]
+        except Exception:
+            continue
+    return out
+
+def call_claude(user_msg: str, df: pd.DataFrame) -> str:
+    client = get_anthropic()
+    messages = st.session_state.chat_history + [{"role": "user", "content": user_msg}]
+    resp = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=1000,
+        system=build_system_prompt(df),
+        messages=messages,
+    )
+    return resp.content[0].text
+
+# ════════════════════════════════════════════════════════════════════════════
+# SESSION STATE
+# ════════════════════════════════════════════════════════════════════════════
+if "chat_history"   not in st.session_state: st.session_state.chat_history   = []
+if "ai_filters"     not in st.session_state: st.session_state.ai_filters     = {}
+if "filter_summary" not in st.session_state: st.session_state.filter_summary = ""
 
 # ════════════════════════════════════════════════════════════════════════════
 # SIDEBAR — PERIODO
@@ -391,20 +426,15 @@ with st.sidebar:
     st.markdown("### ⏱ Periodo")
     period = st.selectbox("Periodo", ["1 mese","3 mesi","6 mesi","12 mesi"],
                           index=3, label_visibility="collapsed")
-
 date_from = get_date_from(period)
-
 with st.spinner(f"Caricamento dati (periodo: {period})..."):
     sales_raw, stores, products, customers, load_errors = load_data(date_from)
-
 for err in load_errors:
     st.error(f"⚠ {err}")
-
 if sales_raw.empty:
     st.warning("Nessuna vendita trovata. Verifica RLS policies o il range di date.")
     st.stop()
-
-# ── Pulizia ────────────────────────────────────────────────────────────────────
+# ── Pulizia ───────────────────────────────────────────────────────────────────
 for col in ["total_amount","unit_price","quantity"]:
     sales_raw[col] = pd.to_numeric(sales_raw[col], errors="coerce").fillna(0)
 sales_raw["sale_date"]   = pd.to_datetime(sales_raw["sale_date"], utc=True)
@@ -412,7 +442,6 @@ sales_raw["month"]       = sales_raw["sale_date"].dt.to_period("M").astype(str)
 sales_raw["month_label"] = sales_raw["sale_date"].dt.strftime("%b %y")
 sales_raw["week"]        = sales_raw["sale_date"].dt.to_period("W").astype(str)
 sales_raw["day_of_week"] = sales_raw["sale_date"].dt.day_name()
-
 if not stores.empty:
     sales_raw = sales_raw.merge(
         stores[["store_id","store_name","region","city"]], on="store_id", how="left")
@@ -422,7 +451,6 @@ else:
     sales_raw["store_name"] = sales_raw["store_id"]
     sales_raw["region"]     = "N/D"
     sales_raw["city"]       = "N/D"
-
 if not products.empty:
     sales_raw = sales_raw.merge(
         products[["product_id","category"]], on="product_id", how="left")
@@ -430,14 +458,12 @@ if not products.empty:
 else:
     sales_raw["category"] = "N/D"
 
-
 # ════════════════════════════════════════════════════════════════════════════
 # SIDEBAR — FILTRI DIMENSIONALI
 # ════════════════════════════════════════════════════════════════════════════
 with st.sidebar:
     st.divider()
     st.markdown("### 🔍 Filtri")
-
     sel_stores   = st.multiselect("Store",
         sorted(sales_raw["store_name"].dropna().unique()),
         placeholder="Tutti gli store")
@@ -450,18 +476,15 @@ with st.sidebar:
     sel_channels = st.multiselect("Canale",
         sorted(sales_raw["channel"].dropna().unique()),
         placeholder="Tutti i canali")
-
     all_tiers = sorted(customers["loyalty_tier"].dropna().unique()) \
         if not customers.empty and "loyalty_tier" in customers.columns else []
     sel_tiers = st.multiselect("Loyalty tier", all_tiers,
                                placeholder="Tutti i tier")
-
     min_p = float(sales_raw["unit_price"].min())
     max_p = float(sales_raw["unit_price"].max())
     price_range = st.slider("Prezzo unitario (€)", min_p, max_p,
                             (min_p, max_p), format="€%.0f") \
         if max_p > min_p else (min_p, max_p)
-
     st.divider()
     st.markdown("### 📋 Report")
     sel_kpis   = st.multiselect("KPI",
@@ -472,7 +495,6 @@ with st.sidebar:
          "Performance store","Trend scontrino medio",
          "Vendite per giorno","% venduto per categoria"],
         default=[])
-
     st.divider()
     generate_btn = st.button("📄 Genera report PDF", use_container_width=True,
                              type="primary", disabled=not(sel_kpis or sel_charts))
@@ -480,9 +502,8 @@ with st.sidebar:
         st.cache_data.clear()
         st.rerun()
 
-
 # ════════════════════════════════════════════════════════════════════════════
-# APPLICA FILTRI
+# APPLICA FILTRI (manuali + AI)
 # ════════════════════════════════════════════════════════════════════════════
 sales = sales_raw.copy()
 if sel_stores:   sales = sales[sales["store_name"].isin(sel_stores)]
@@ -494,7 +515,9 @@ sales = sales[(sales["unit_price"] >= price_range[0]) &
 if sel_tiers and not customers.empty:
     cids = customers[customers["loyalty_tier"].isin(sel_tiers)]["customer_id"].tolist()
     sales = sales[sales["customer_id"].isin(cids)]
-
+# Filtri AI sovrapposti a quelli manuali
+if st.session_state.ai_filters.get("conditions"):
+    sales = apply_ai_filters(sales, st.session_state.ai_filters["conditions"])
 active_filters = []
 if sel_stores:   active_filters.append(f"Store: {', '.join(sel_stores)}")
 if sel_regions:  active_filters.append(f"Regione: {', '.join(sel_regions)}")
@@ -503,12 +526,12 @@ if sel_channels: active_filters.append(f"Canale: {', '.join(sel_channels)}")
 if sel_tiers:    active_filters.append(f"Tier: {', '.join(sel_tiers)}")
 if price_range != (min_p, max_p):
     active_filters.append(f"Prezzo: €{price_range[0]:.0f}–€{price_range[1]:.0f}")
+if st.session_state.filter_summary:
+    active_filters.append(f"🤖 {st.session_state.filter_summary}")
 filters_summary = " · ".join(active_filters) if active_filters else "Nessuno"
-
 if sales.empty:
     st.warning("Nessun dato con i filtri selezionati.")
     st.stop()
-
 
 # ════════════════════════════════════════════════════════════════════════════
 # KPI
@@ -518,14 +541,12 @@ transactions = len(sales)
 avg_basket   = revenue / transactions if transactions else 0
 units        = int(sales["quantity"].sum())
 unique_cust  = sales["customer_id"].nunique()
-
 kpi_data = {
     "Fatturato netto": {"label":"Fatturato netto", "value":fmt_currency(revenue)},
     "Scontrino medio": {"label":"Scontrino medio", "value":f"€ {avg_basket:.2f}"},
     "Transazioni":     {"label":"Transazioni",      "value":f"{transactions:,}"},
     "Unità vendute":   {"label":"Unità vendute",    "value":f"{units:,}"},
 }
-
 st.markdown(f"## Retail analytics — {period}")
 if active_filters:
     badges = " ".join([f'<span class="filter-tag">{f}</span>' for f in active_filters])
@@ -534,7 +555,6 @@ if active_filters:
     st.caption(f"Selezione: {revenue/tot*100:.1f}% del totale · {transactions:,} transazioni")
 else:
     st.caption(f"{transactions:,} transazioni · {unique_cust:,} clienti unici")
-
 c1,c2,c3,c4,c5 = st.columns(5)
 c1.metric("Fatturato netto", fmt_currency(revenue))
 c2.metric("Scontrino medio", f"€ {avg_basket:.2f}")
@@ -542,16 +562,13 @@ c3.metric("Transazioni",     f"{transactions:,}")
 c4.metric("Unità vendute",   f"{units:,}")
 c5.metric("Clienti unici",   f"{unique_cust:,}")
 
-
 # ════════════════════════════════════════════════════════════════════════════
 # TABS
 # ════════════════════════════════════════════════════════════════════════════
 tab_ov, tab_st, tab_pr, tab_cu = st.tabs(["📈 Overview","🏪 Store","📦 Prodotti","👥 Clienti"])
-
 PL = dict(margin=dict(l=0,r=0,t=28,b=0),
           plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
           font=dict(size=12), legend=dict(orientation="h", y=-0.2))
-
 # Overview
 with tab_ov:
     cl, cr = st.columns(2)
@@ -569,7 +586,6 @@ with tab_ov:
         fig = px.pie(ch, names="channel", values="total_amount", hole=0.45, color_discrete_sequence=COLORS)
         fig.update_layout(**PL, height=300)
         st.plotly_chart(fig, use_container_width=True)
-
     st.markdown("#### Mix categorie")
     cats = sales.groupby("category")["total_amount"].sum().reset_index()
     cats["pct"] = (cats["total_amount"]/cats["total_amount"].sum()*100).round(1)
@@ -580,7 +596,6 @@ with tab_ov:
     fig.update_traces(marker_cornerradius=4, texttemplate="%{text:.1f}%", textposition="outside")
     fig.update_layout(**PL, height=max(220,len(cats)*38), showlegend=False, xaxis=dict(gridcolor="#f0f0f0"))
     st.plotly_chart(fig, use_container_width=True)
-
     cl2, cr2 = st.columns(2)
     with cl2:
         st.markdown("#### Trend scontrino medio")
@@ -604,7 +619,6 @@ with tab_ov:
         fig.update_traces(marker_cornerradius=4)
         fig.update_layout(**PL, height=260, yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
-
 # Store
 with tab_st:
     cl, cr = st.columns(2)
@@ -630,7 +644,6 @@ with tab_st:
                      .rename(columns={"store_name":"Store","transazioni":"Transaz.",
                                       "scontrino":"Scontrino €","clienti":"Clienti","revenue_fmt":"Revenue"}),
                      use_container_width=True, hide_index=True)
-
     cl2, cr2 = st.columns(2)
     with cl2:
         if sales["region"].notna().any():
@@ -649,7 +662,6 @@ with tab_st:
             fig.update_layout(**PL, height=280, showlegend=False,
                               yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
             st.plotly_chart(fig, use_container_width=True)
-
 # Prodotti
 with tab_pr:
     cl, cr = st.columns(2)
@@ -668,7 +680,6 @@ with tab_pr:
         fig.update_layout(**PL, height=300, showlegend=False,
                           yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
-
     if not products.empty:
         st.markdown("#### Top 10 prodotti")
         tp = (sales.groupby("product_id")["total_amount"].sum().reset_index()
@@ -679,7 +690,6 @@ with tab_pr:
         st.dataframe(tp[["product_name","category","revenue_fmt","quota_%"]].rename(columns={
             "product_name":"Prodotto","category":"Categoria","revenue_fmt":"Revenue","quota_%":"Quota %"}),
             use_container_width=True, hide_index=True)
-
 # Clienti
 with tab_cu:
     cl, cr = st.columns(2)
@@ -705,47 +715,32 @@ with tab_cu:
             fig.update_layout(**PL, height=280)
             st.plotly_chart(fig, use_container_width=True)
 
-
- 
 # ════════════════════════════════════════════════════════════════════════════
 # GENERA PDF
 # ════════════════════════════════════════════════════════════════════════════
 if generate_btn and (sel_kpis or sel_charts):
     with st.spinner("Generazione PDF in corso..."):
-
-        # Costruisci immagini matplotlib
         chart_imgs = {}
-
         if "Fatturato mensile" in sel_charts:
             m = sales.groupby(["month","month_label"])["total_amount"].sum().reset_index().sort_values("month")
             chart_imgs["Fatturato mensile"] = chart_bar_v(m, "month_label", "total_amount", "Fatturato mensile")
-
         if "Mix canali" in sel_charts:
             ch = sales.groupby("channel")["total_amount"].sum().reset_index()
             chart_imgs["Mix canali"] = chart_pie(ch["channel"].tolist(), ch["total_amount"].tolist(), "Mix canali")
-
         if "Mix categorie" in sel_charts:
             cats = sales.groupby("category")["total_amount"].sum().reset_index().sort_values("total_amount")
             chart_imgs["Mix categorie"] = chart_bar_h(cats, "total_amount", "category", "Mix categorie")
-
         if "% venduto per categoria" in sel_charts:
             cats_p = sales.groupby("category")["total_amount"].sum().reset_index()
-            total_c = cats_p["total_amount"].sum()
             chart_imgs["% venduto per categoria"] = chart_pie(
-                cats_p["category"].tolist(),
-                cats_p["total_amount"].tolist(),
-                "% venduto per categoria"
-            )
-
+                cats_p["category"].tolist(), cats_p["total_amount"].tolist(), "% venduto per categoria")
         if "Performance store" in sel_charts:
             bs = sales.groupby("store_name")["total_amount"].sum().reset_index().sort_values("total_amount").tail(10)
             chart_imgs["Performance store"] = chart_bar_h(bs, "total_amount", "store_name", "Revenue per store")
-
         if "Trend scontrino medio" in sel_charts:
             w = sales.groupby("week").agg(rev=("total_amount","sum"),txn=("sale_id","count")).reset_index()
             w["basket"] = (w["rev"]/w["txn"]).round(2)
             chart_imgs["Trend scontrino medio"] = chart_line(w, "week", "basket", "Trend scontrino medio")
-
         if "Vendite per giorno" in sel_charts:
             dow_ord = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
             dow_lbl = {"Monday":"Lun","Tuesday":"Mar","Wednesday":"Mer","Thursday":"Gio",
@@ -756,8 +751,6 @@ if generate_btn and (sel_kpis or sel_charts):
             dw = dw.sort_values("ord")
             chart_imgs["Vendite per giorno"] = chart_bar_v_days(
                 dw, "lbl", "total_amount", "Vendite per giorno della settimana")
-
-        # Tabelle
         store_table = None
         if "Performance store" in sel_charts:
             sd = sales.groupby("store_name").agg(
@@ -766,7 +759,6 @@ if generate_btn and (sel_kpis or sel_charts):
             sd["Scontrino €"] = (sd["Revenue"]/sd["Transazioni"]).apply(lambda x: f"€ {x:,.2f}")
             sd["Revenue"] = sd["Revenue"].apply(fmt_currency)
             store_table = sd.rename(columns={"store_name":"Store"})
-
         top_cust_table = None
         if "Top clienti" in sel_charts and not customers.empty:
             tc2 = customers.head(10).copy()
@@ -774,17 +766,11 @@ if generate_btn and (sel_kpis or sel_charts):
             tc2["Spesa totale"] = tc2["total_spend"].apply(fmt_currency)
             top_cust_table = tc2[["name","loyalty_tier","Spesa totale"]].rename(
                 columns={"name":"Cliente","loyalty_tier":"Tier"})
-
-        # Genera PDF
         try:
             pdf_bytes = build_pdf_report(
-                sel_kpis=sel_kpis,
-                sel_charts=sel_charts,
-                kpi_data=kpi_data,
-                period=period,
-                filters_summary=filters_summary,
-                chart_imgs=chart_imgs,       # ← unico nome, nessuna ambiguità
-                store_table=store_table,
+                sel_kpis=sel_kpis, sel_charts=sel_charts, kpi_data=kpi_data,
+                period=period, filters_summary=filters_summary,
+                chart_imgs=chart_imgs, store_table=store_table,
                 top_cust_table=top_cust_table,
             )
             st.sidebar.success("✅ PDF pronto!")
@@ -797,3 +783,61 @@ if generate_btn and (sel_kpis or sel_charts):
             )
         except Exception as e:
             st.sidebar.error(f"Errore generazione PDF: {e}")
+
+# ════════════════════════════════════════════════════════════════════════════
+# CHATBOT AI
+# ════════════════════════════════════════════════════════════════════════════
+st.divider()
+st.markdown("## 🤖 Assistente AI")
+# Badge filtro AI attivo
+if st.session_state.ai_filters.get("conditions"):
+    n_filtered = len(apply_ai_filters(sales_raw, st.session_state.ai_filters["conditions"]))
+    st.info(f"🎯 Filtro AI attivo: **{st.session_state.filter_summary}** — "
+            f"{n_filtered} righe selezionate su {len(sales_raw)}")
+    if st.button("✖ Rimuovi filtro AI", key="remove_ai_filter"):
+        st.session_state.ai_filters     = {}
+        st.session_state.filter_summary = ""
+        st.rerun()
+# Finestra chat
+chat_container = st.container(height=380, border=True)
+with chat_container:
+    if not st.session_state.chat_history:
+        st.markdown(
+            "👋 **Ciao!** Puoi chiedermi:\n"
+            "- *Qual è il canale con il fatturato più alto?*\n"
+            "- *Mostrami solo le vendite online*\n"
+            "- *Filtra per categoria Electronics*\n"
+            "- *Qual è lo scontrino medio per regione?*"
+        )
+    for msg in st.session_state.chat_history:
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
+# Input
+user_input = st.chat_input("Chiedi un insight o applica un filtro…")
+if user_input:
+    st.session_state.chat_history.append({"role": "user", "content": user_input})
+    with st.spinner("Elaborazione…"):
+        raw = call_claude(user_input, sales_raw)
+    parsed = None
+    try:
+        clean = raw.strip()
+        if clean.startswith("{"):
+            parsed = json.loads(clean)
+    except json.JSONDecodeError:
+        pass
+    if parsed and parsed.get("action") == "filter":
+        st.session_state.ai_filters     = parsed
+        st.session_state.filter_summary = parsed.get("summary", "Filtro applicato")
+        assistant_reply = f"✅ Filtro applicato: **{parsed.get('summary', '')}**"
+    elif parsed and parsed.get("action") == "reset_filters":
+        st.session_state.ai_filters     = {}
+        st.session_state.filter_summary = ""
+        assistant_reply = "✅ Filtri AI rimossi. Ora vedi tutti i dati."
+    else:
+        assistant_reply = raw
+    st.session_state.chat_history.append({"role": "assistant", "content": assistant_reply})
+    st.rerun()
+if st.session_state.chat_history:
+    if st.button("🗑 Cancella conversazione", key="clear_chat"):
+        st.session_state.chat_history = []
+        st.rerun()
