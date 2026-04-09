@@ -100,8 +100,8 @@ def get_date_from(period: str) -> str:
 
 
 def fmt_currency(v: float) -> str:
-    if v >= 1_000_000: return f"€ {v/1_000_000:.2f}M"
-    if v >= 1_000:     return f"€ {v/1_000:.1f}K"
+    if v >= 1_000_000: return f"€ {v/1_000_000:,.2f}M"
+    if v >= 1_000:     return f"€ {v:,.0f}"
     return f"€ {v:.2f}"
 
 
@@ -117,41 +117,60 @@ def mpl_to_bytes(fig) -> BytesIO:
 def chart_bar_v(df, x_col, y_col, title) -> BytesIO:
     fig, ax = plt.subplots(figsize=(8, 3.5))
     clrs = [MCOLORS[i % len(MCOLORS)] for i in range(len(df))]
-    ax.bar(df[x_col].astype(str), df[y_col], color=clrs, width=0.6)
+    bars = ax.bar(df[x_col].astype(str), df[y_col], color=clrs, width=0.6)
     ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
     ax.yaxis.set_major_formatter(mticker.FuncFormatter(
-        lambda v, _: f"€{v/1000:.0f}K" if v >= 1000 else f"€{v:.0f}"))
+        lambda v, _: f"€{v:,.0f}" if v < 1000 else f"€{v/1000:.0f}K"))
     ax.spines[["top","right"]].set_visible(False)
     ax.tick_params(axis="x", labelsize=8, rotation=30)
     ax.tick_params(axis="y", labelsize=8)
     ax.grid(axis="y", linestyle="--", alpha=0.4)
+    # valori sulle barre solo se abbastanza larghe
+    max_v = df[y_col].max()
+    for bar in bars:
+        h = bar.get_height()
+        if h > max_v * 0.15:   # mostra solo se barra > 15% del max
+            ax.text(bar.get_x() + bar.get_width()/2, h * 0.97,
+                    f"€{h:,.0f}", ha="center", va="top",
+                    fontsize=7, color="white", fontweight="bold")
     fig.tight_layout()
     return mpl_to_bytes(fig)
 
 def chart_bar_h(df, x_col, y_col, title) -> BytesIO:
     fig, ax = plt.subplots(figsize=(8, max(2.5, len(df)*0.45)))
     clrs = [MCOLORS[i % len(MCOLORS)] for i in range(len(df))]
-    ax.barh(df[y_col].astype(str), df[x_col], color=clrs, height=0.6)
+    bars = ax.barh(df[y_col].astype(str), df[x_col], color=clrs, height=0.6)
     ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
     ax.xaxis.set_major_formatter(mticker.FuncFormatter(
-        lambda v, _: f"€{v/1000:.0f}K" if v >= 1000 else f"€{v:.0f}"))
+        lambda v, _: f"€{v:,.0f}" if v < 1000 else f"€{v/1000:.0f}K"))
     ax.spines[["top","right","left"]].set_visible(False)
     ax.tick_params(axis="y", labelsize=9)
     ax.tick_params(axis="x", labelsize=8)
     ax.grid(axis="x", linestyle="--", alpha=0.4)
+    # valori nelle barre solo se abbastanza lunghe
+    max_v = df[x_col].max()
+    for bar in bars:
+        w = bar.get_width()
+        if w > max_v * 0.25:   # mostra solo se barra > 25% del max
+            ax.text(w * 0.97, bar.get_y() + bar.get_height()/2,
+                    f"€{w:,.0f}", ha="right", va="center",
+                    fontsize=7, color="white", fontweight="bold")
     fig.tight_layout()
     return mpl_to_bytes(fig)
 
 def chart_pie(labels, values, title) -> BytesIO:
-    fig, ax = plt.subplots(figsize=(5, 5))
-    ax.pie(values, labels=labels, autopct="%1.1f%%",
-           colors=MCOLORS[:len(labels)], startangle=90,
-           wedgeprops=dict(width=0.55), pctdistance=0.75)
-    for txt in ax.texts:
-        txt.set_fontsize(9)
-    ax.set_title(title, fontsize=12, fontweight="bold", pad=14)
+    fig, ax = plt.subplots(figsize=(5, 4))
+    wedges, texts, autotexts = ax.pie(
+        values, labels=labels, autopct="%1.1f%%",
+        colors=MCOLORS[:len(labels)], startangle=90,
+        wedgeprops=dict(width=0.55), pctdistance=0.75,
+        labeldistance=1.12
+    )
+    for t in texts:     t.set_fontsize(8)
+    for t in autotexts: t.set_fontsize(8)
+    ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
     ax.set_aspect("equal")
-    fig.subplots_adjust(left=0.15, right=0.85, top=0.88, bottom=0.05)
+    fig.subplots_adjust(left=0.1, right=0.9, top=0.88, bottom=0.05)
     return mpl_to_bytes(fig)
 
 def chart_line(df, x_col, y_col, title) -> BytesIO:
@@ -159,11 +178,34 @@ def chart_line(df, x_col, y_col, title) -> BytesIO:
     ax.plot(df[x_col].astype(str), df[y_col],
             color="#7F77DD", linewidth=2, marker="o", markersize=4)
     ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
-    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v,_: f"€{v:.0f}"))
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(
+        lambda v, _: f"€{v:,.0f}"))
     ax.spines[["top","right"]].set_visible(False)
     ax.tick_params(axis="x", labelsize=7, rotation=45)
     ax.tick_params(axis="y", labelsize=8)
     ax.grid(axis="y", linestyle="--", alpha=0.4)
+    fig.tight_layout()
+    return mpl_to_bytes(fig)
+
+def chart_bar_v_days(df, x_col, y_col, title) -> BytesIO:
+    """Grafico a barre verticali per vendite per giorno della settimana."""
+    fig, ax = plt.subplots(figsize=(7, 3.2))
+    clrs = [MCOLORS[i % len(MCOLORS)] for i in range(len(df))]
+    bars = ax.bar(df[x_col].astype(str), df[y_col], color=clrs, width=0.6)
+    ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(
+        lambda v, _: f"€{v:,.0f}" if v < 1000 else f"€{v/1000:.0f}K"))
+    ax.spines[["top","right"]].set_visible(False)
+    ax.tick_params(axis="x", labelsize=9)
+    ax.tick_params(axis="y", labelsize=8)
+    ax.grid(axis="y", linestyle="--", alpha=0.4)
+    max_v = df[y_col].max()
+    for bar in bars:
+        h = bar.get_height()
+        if h > max_v * 0.15:
+            ax.text(bar.get_x() + bar.get_width()/2, h * 0.97,
+                    f"€{h:,.0f}", ha="center", va="top",
+                    fontsize=7, color="white", fontweight="bold")
     fig.tight_layout()
     return mpl_to_bytes(fig)
 
@@ -236,23 +278,22 @@ def build_pdf_report(
     story += [Spacer(1, 0.4*cm),
               HRFlowable(width=W, thickness=2, color=BLUE, spaceAfter=16)]
 
-    # KPI
+    # KPI — griglia compatta senza celle vuote
     if sel_kpis:
         story.append(Paragraph("KPI selezionati", section_sty))
-        row, kpi_cells = [], []
-        for i, k in enumerate(sel_kpis):
-            if k not in kpi_data:
-                continue
-            row.append([Paragraph(kpi_data[k]["label"], kpi_lbl_sty),
-                        Paragraph(kpi_data[k]["value"], kpi_val_sty)])
-            if len(row) == 3 or i == len(sel_kpis)-1:
-                while len(row) < 3:
-                    row.append([""])
-                kpi_cells.append(row)
-                row = []
-        col_w = W / 3
-        for kpi_row in kpi_cells:
-            t = Table(kpi_row, colWidths=[col_w]*3)
+        valid_kpis = [k for k in sel_kpis if k in kpi_data]
+        col_w = W / min(len(valid_kpis), 3)
+        # suddividi in righe da max 3
+        for i in range(0, len(valid_kpis), 3):
+            chunk = valid_kpis[i:i+3]
+            row = []
+            for k in chunk:
+                row.append([
+                    Paragraph(kpi_data[k]["label"], kpi_lbl_sty),
+                    Paragraph(kpi_data[k]["value"], kpi_val_sty),
+                ])
+            ncols = len(row)
+            t = Table(row, colWidths=[W/ncols]*ncols)
             t.setStyle(TableStyle([
                 ("BACKGROUND",   (0,0),(-1,-1), GRAY),
                 ("GRID",         (0,0),(-1,-1), 0.5, BORDER),
@@ -428,7 +469,8 @@ with st.sidebar:
         default=[])
     sel_charts = st.multiselect("Grafici",
         ["Fatturato mensile","Mix canali","Mix categorie",
-         "Performance store","Trend scontrino medio","Top clienti"],
+         "Performance store","Trend scontrino medio",
+         "Vendite per giorno","% venduto per categoria"],
         default=[])
 
     st.divider()
@@ -685,6 +727,15 @@ if generate_btn and (sel_kpis or sel_charts):
             cats = sales.groupby("category")["total_amount"].sum().reset_index().sort_values("total_amount")
             chart_imgs["Mix categorie"] = chart_bar_h(cats, "total_amount", "category", "Mix categorie")
 
+        if "% venduto per categoria" in sel_charts:
+            cats_p = sales.groupby("category")["total_amount"].sum().reset_index()
+            total_c = cats_p["total_amount"].sum()
+            chart_imgs["% venduto per categoria"] = chart_pie(
+                cats_p["category"].tolist(),
+                cats_p["total_amount"].tolist(),
+                "% venduto per categoria"
+            )
+
         if "Performance store" in sel_charts:
             bs = sales.groupby("store_name")["total_amount"].sum().reset_index().sort_values("total_amount").tail(10)
             chart_imgs["Performance store"] = chart_bar_h(bs, "total_amount", "store_name", "Revenue per store")
@@ -694,19 +745,24 @@ if generate_btn and (sel_kpis or sel_charts):
             w["basket"] = (w["rev"]/w["txn"]).round(2)
             chart_imgs["Trend scontrino medio"] = chart_line(w, "week", "basket", "Trend scontrino medio")
 
-        if "Top clienti" in sel_charts and not customers.empty:
-            tc = customers.head(10).copy()
-            tc["total_spend"] = pd.to_numeric(tc["total_spend"], errors="coerce").fillna(0)
-            chart_imgs["Top clienti"] = chart_bar_h(
-                tc.sort_values("total_spend"), "total_spend", "name", "Top clienti per spesa")
+        if "Vendite per giorno" in sel_charts:
+            dow_ord = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+            dow_lbl = {"Monday":"Lun","Tuesday":"Mar","Wednesday":"Mer","Thursday":"Gio",
+                       "Friday":"Ven","Saturday":"Sab","Sunday":"Dom"}
+            dw = sales.groupby("day_of_week")["total_amount"].sum().reset_index()
+            dw["ord"] = dw["day_of_week"].map({d:i for i,d in enumerate(dow_ord)})
+            dw["lbl"] = dw["day_of_week"].map(dow_lbl)
+            dw = dw.sort_values("ord")
+            chart_imgs["Vendite per giorno"] = chart_bar_v_days(
+                dw, "lbl", "total_amount", "Vendite per giorno della settimana")
 
         # Tabelle
         store_table = None
         if "Performance store" in sel_charts:
             sd = sales.groupby("store_name").agg(
                 Transazioni=("sale_id","count"), Revenue=("total_amount","sum"),
-                Clienti=("customer_id","nunique")).reset_index().sort_values("Revenue", ascending=False)
-            sd["Scontrino €"] = (sd["Revenue"]/sd["Transazioni"]).round(2)
+                Clienti=("customer_id","nunique")).reset_index().sort_values("Revenue", ascending=False).head(15)
+            sd["Scontrino €"] = (sd["Revenue"]/sd["Transazioni"]).apply(lambda x: f"€ {x:,.2f}")
             sd["Revenue"] = sd["Revenue"].apply(fmt_currency)
             store_table = sd.rename(columns={"store_name":"Store"})
 
