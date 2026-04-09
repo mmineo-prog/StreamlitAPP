@@ -187,7 +187,7 @@ def build_pdf_report(
     kpi_data: dict,
     period: str,
     filters_summary: str,
-    chart_images: dict,    # {"Fatturato mensile": BytesIO, ...}
+    chart_imgs: dict,
     store_table: pd.DataFrame | None = None,
     top_cust_table: pd.DataFrame | None = None,
 ) -> bytes:
@@ -905,7 +905,7 @@ if generate_btn and (sel_kpis or sel_charts):
                 kpi_data=kpi_data,
                 period=period,
                 filters_summary=filters_summary,
-                chart_images=chart_images,   # <- matplotlib BytesIO, non Plotly
+                chart_imgs=chart_images,
                 store_table=store_table,
                 top_cust_table=top_cust_table,
             )
