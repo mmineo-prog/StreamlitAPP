@@ -1,14 +1,3 @@
-​"""
-Retail Analytics Dashboard — Streamlit + Supabase + Chatbot AI
-─────────────────────────────────────────────────────────────────
-secrets.toml:
-  SUPABASE_URL      = "https://ttnvaxeqbxtvulofeuqs.supabase.co"
-  SUPABASE_KEY      = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0bnZheGVxYnh0dnVsb2ZldXFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MjAxNDUsImV4cCI6MjA5MTI5NjE0NX0.egdVHwUPY1xhVpeLks6ttyHKusDn94GOi31gPPgt0QQ"
-
-Avvio locale:
-  pip install -r requirements.txt
-  streamlit run APP.py
-"""
 import streamlit as st
 import pandas as pd
 import plotly.express as px
