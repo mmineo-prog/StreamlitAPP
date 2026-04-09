@@ -159,18 +159,18 @@ def chart_bar_h(df, x_col, y_col, title) -> BytesIO:
     return mpl_to_bytes(fig)
 
 def chart_pie(labels, values, title) -> BytesIO:
-    fig, ax = plt.subplots(figsize=(5, 4))
+    fig, ax = plt.subplots(figsize=(5, 3.8))
     wedges, texts, autotexts = ax.pie(
         values, labels=labels, autopct="%1.1f%%",
         colors=MCOLORS[:len(labels)], startangle=90,
         wedgeprops=dict(width=0.55), pctdistance=0.75,
-        labeldistance=1.12
+        labeldistance=1.1
     )
     for t in texts:     t.set_fontsize(8)
-    for t in autotexts: t.set_fontsize(8)
-    ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
+    for t in autotexts: t.set_fontsize(7.5)
+    ax.set_title(title, fontsize=11, fontweight="bold", pad=8)
     ax.set_aspect("equal")
-    fig.subplots_adjust(left=0.1, right=0.9, top=0.88, bottom=0.05)
+    fig.subplots_adjust(left=0.08, right=0.92, top=0.88, bottom=0.05)
     return mpl_to_bytes(fig)
 
 def chart_line(df, x_col, y_col, title) -> BytesIO:
@@ -278,22 +278,28 @@ def build_pdf_report(
     story += [Spacer(1, 0.4*cm),
               HRFlowable(width=W, thickness=2, color=BLUE, spaceAfter=16)]
 
-    # KPI — griglia compatta senza celle vuote
+    # KPI — layout adattivo senza celle vuote
     if sel_kpis:
         story.append(Paragraph("KPI selezionati", section_sty))
         valid_kpis = [k for k in sel_kpis if k in kpi_data]
-        col_w = W / min(len(valid_kpis), 3)
-        # suddividi in righe da max 3
-        for i in range(0, len(valid_kpis), 3):
-            chunk = valid_kpis[i:i+3]
-            row = []
-            for k in chunk:
-                row.append([
-                    Paragraph(kpi_data[k]["label"], kpi_lbl_sty),
-                    Paragraph(kpi_data[k]["value"], kpi_val_sty),
-                ])
-            ncols = len(row)
-            t = Table(row, colWidths=[W/ncols]*ncols)
+        n = len(valid_kpis)
+        # scegli numero colonne: multiplo di 3 → 3, pari → 2, altrimenti 3
+        if n == 0:
+            ncols = 1
+        elif n % 3 == 0:
+            ncols = 3
+        elif n % 2 == 0:
+            ncols = 2
+        else:
+            ncols = 3   # ultima riga avrà resto, gestito sotto
+
+        for i in range(0, n, ncols):
+            chunk = valid_kpis[i:i+ncols]
+            actual_cols = len(chunk)   # ultima riga può avere meno celle
+            row = [[Paragraph(kpi_data[k]["label"], kpi_lbl_sty),
+                    Paragraph(kpi_data[k]["value"], kpi_val_sty)]
+                   for k in chunk]
+            t = Table(row, colWidths=[W/actual_cols]*actual_cols)
             t.setStyle(TableStyle([
                 ("BACKGROUND",   (0,0),(-1,-1), GRAY),
                 ("GRID",         (0,0),(-1,-1), 0.5, BORDER),
@@ -765,6 +771,10 @@ if generate_btn and (sel_kpis or sel_charts):
             sd["Scontrino €"] = (sd["Revenue"]/sd["Transazioni"]).apply(lambda x: f"€ {x:,.2f}")
             sd["Revenue"] = sd["Revenue"].apply(fmt_currency)
             store_table = sd.rename(columns={"store_name":"Store"})
+
+        if "Performance store" in sel_charts and store_table is not None:
+            df_to_table(story, store_table,
+                        "Dettaglio performance store (top 15 per revenue)")
 
         top_cust_table = None
         if "Top clienti" in sel_charts and not customers.empty:
