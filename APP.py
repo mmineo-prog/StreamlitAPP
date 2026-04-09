@@ -1,16 +1,14 @@
-"""
-Retail Analytics Dashboard — Streamlit + Supabase + Chatbot AI (OpenRouter)
-─────────────────────────────────────────────────────────────────────────────
+​"""
+Retail Analytics Dashboard — Streamlit + Supabase + Chatbot AI
+─────────────────────────────────────────────────────────────────
 secrets.toml:
-  SUPABASE_URL       = "https://ttnvaxeqbxtvulofeuqs.supabase.co"
-  SUPABASE_KEY       = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0bnZheGVxYnh0dnVsb2ZldXFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MjAxNDUsImV4cCI6MjA5MTI5NjE0NX0.egdVHwUPY1xhVpeLks6ttyHKusDn94GOi31gPPgt0QQ"
-  OPENROUTER_API_KEY = "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"
+  SUPABASE_URL      = "https://ttnvaxeqbxtvulofeuqs.supabase.co"
+  SUPABASE_KEY      = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0bnZheGVxYnh0dnVsb2ZldXFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MjAxNDUsImV4cCI6MjA5MTI5NjE0NX0.egdVHwUPY1xhVpeLks6ttyHKusDn94GOi31gPPgt0QQ"
 
 Avvio locale:
   pip install -r requirements.txt
   streamlit run APP.py
 """
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -30,7 +28,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
-from openai import OpenAI
+import anthropic
 import json
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
@@ -39,9 +37,11 @@ SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
 COLORS  = ["#378ADD","#1D9E75","#D85A30","#7F77DD","#BA7517","#D4537E"]
 MCOLORS = COLORS
 
+# ✅ MODEL STRING CORRETTO
+CLAUDE_MODEL = "claude-sonnet-4-6"
+
 st.set_page_config(page_title="Retail Analytics", page_icon="📊",
                    layout="wide", initial_sidebar_state="expanded")
-
 st.markdown("""
 <style>
   [data-testid="metric-container"] {
@@ -56,129 +56,26 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ── SESSION STATE ─────────────────────────────────────────────────────────────
-if "chat_history"   not in st.session_state: st.session_state.chat_history   = []
-if "ai_filters"     not in st.session_state: st.session_state.ai_filters     = {}
-if "filter_summary" not in st.session_state: st.session_state.filter_summary = ""
-
-# ── CLIENT FACTORIES ──────────────────────────────────────────────────────────
+# ── SUPABASE ──────────────────────────────────────────────────────────────────
 @st.cache_resource
 def get_supabase():
     return create_client(SUPABASE_URL, SUPABASE_KEY)
 
 @st.cache_resource
-def get_openrouter():
-    return OpenAI(
-        api_key=st.secrets["OPENROUTER_API_KEY"],
-        base_url="https://openrouter.ai/api/v1",
-    )
+def get_anthropic():
+    # ✅ Legge la chiave dai secrets di Streamlit — non hardcoded nel codice
+    return anthropic.Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
 
-# ── CHATBOT — funzioni (definite prima di tutto il resto) ─────────────────────
-def build_system_prompt(df: pd.DataFrame) -> str:
-    schema   = df.dtypes.to_string()
-    sample   = df.head(3).to_string()
-    stats    = df[["total_amount","quantity","unit_price"]].describe().round(2).to_string()
-    stores   = sorted(df["store_name"].dropna().unique().tolist())
-    regions  = sorted(df["region"].dropna().unique().tolist())
-    cats     = sorted(df["category"].dropna().unique().tolist())
-    channels = sorted(df["channel"].dropna().unique().tolist())
-
-    return f"""Sei un assistente analitico integrato in una Retail Analytics Dashboard Streamlit.
-Hai accesso al dataframe delle vendite con questa struttura:
-
-SCHEMA:
-{schema}
-
-ANTEPRIMA (3 righe):
-{sample}
-
-STATISTICHE NUMERICHE:
-{stats}
-
-VALORI DISPONIBILI PER I FILTRI:
-- store_name: {stores}
-- region: {regions}
-- category: {cats}
-- channel: {channels}
-
-ISTRUZIONI:
-Puoi fare due cose in base alla richiesta dell'utente:
-
-1. INSIGHT — Se l'utente chiede un'analisi, un confronto, una spiegazione o una domanda sui dati:
-   Rispondi in italiano in modo chiaro e conciso.
-
-2. FILTRO — Se l'utente chiede di filtrare, isolare, mostrare solo certi dati:
-   Rispondi ESCLUSIVAMENTE con un JSON valido, senza testo aggiuntivo, nel formato:
-   {{
-     "action": "filter",
-     "summary": "Descrizione leggibile del filtro applicato",
-     "conditions": [
-       {{"column": "store_name", "operator": "isin", "value": "Store A,Store B"}},
-       {{"column": "category",   "operator": "==",   "value": "Electronics"}},
-       {{"column": "total_amount","operator": ">",    "value": "500"}}
-     ]
-   }}
-   Operatori disponibili: ==  !=  >  <  >=  <=  contains  isin
-   Per "isin" usa valori separati da virgola come stringa.
-
-3. RESET FILTRI — Se l'utente chiede di rimuovere/azzerare i filtri:
-   Rispondi ESCLUSIVAMENTE con: {{"action": "reset_filters"}}
-
-Rispondi sempre in italiano. Non inventare valori che non esistono nel dataset.
-"""
-
-
-def apply_ai_filters(df: pd.DataFrame, conditions: list) -> pd.DataFrame:
-    out = df.copy()
-    for c in conditions:
-        col, op, val = c.get("column"), c.get("operator"), c.get("value")
-        if col not in out.columns:
-            continue
-        try:
-            if op == "==":        out = out[out[col].astype(str) == str(val)]
-            elif op == "!=":      out = out[out[col].astype(str) != str(val)]
-            elif op == ">":       out = out[pd.to_numeric(out[col], errors="coerce") > float(val)]
-            elif op == "<":       out = out[pd.to_numeric(out[col], errors="coerce") < float(val)]
-            elif op == ">=":      out = out[pd.to_numeric(out[col], errors="coerce") >= float(val)]
-            elif op == "<=":      out = out[pd.to_numeric(out[col], errors="coerce") <= float(val)]
-            elif op == "contains":
-                out = out[out[col].astype(str).str.contains(str(val), case=False, na=False)]
-            elif op == "isin":
-                vals = [v.strip() for v in str(val).split(",")]
-                out = out[out[col].astype(str).isin(vals)]
-        except Exception:
-            continue
-    return out
-
-
-def call_claude(user_msg: str, df: pd.DataFrame) -> str:
-    client = get_openrouter()
-    messages = (
-        [{"role": "system", "content": build_system_prompt(df)}]
-        + st.session_state.chat_history
-        + [{"role": "user", "content": user_msg}]
-    )
-    resp = client.chat.completions.create(
-        model="anthropic/claude-sonnet-4-5",
-        max_tokens=1000,
-        messages=messages,
-    )
-    return resp.choices[0].message.content
-
-
-# ── DATA LOADING ──────────────────────────────────────────────────────────────
 @st.cache_data(ttl=300, show_spinner=False)
 def load_data(date_from: str):
     sb = get_supabase()
     errors = []
-
     def safe_load(query_fn, label):
         try:
             return pd.DataFrame(query_fn().execute().data)
         except Exception as e:
             errors.append(f"{label}: {e}")
             return pd.DataFrame()
-
     sales = safe_load(
         lambda: sb.table("fact_sales")
             .select("sale_id,store_id,product_id,customer_id,quantity,unit_price,total_amount,sale_date,channel,payment_type")
@@ -201,18 +98,15 @@ def load_data(date_from: str):
     )
     return sales, stores, products, customers, errors
 
-
 def get_date_from(period: str) -> str:
     d = datetime.now()
     offsets = {"1 mese":30,"3 mesi":90,"6 mesi":180,"12 mesi":365}
     return (d - timedelta(days=offsets.get(period, 365))).strftime("%Y-%m-%d")
 
-
 def fmt_currency(v: float) -> str:
     if v >= 1_000_000: return f"€ {v/1_000_000:,.2f}M"
     if v >= 1_000:     return f"€ {v:,.0f}"
     return f"€ {v:.2f}"
-
 
 # ── MATPLOTLIB HELPERS ────────────────────────────────────────────────────────
 def mpl_to_bytes(fig) -> BytesIO:
@@ -315,7 +209,6 @@ def chart_bar_v_days(df, x_col, y_col, title) -> BytesIO:
     fig.tight_layout()
     return mpl_to_bytes(fig)
 
-
 # ── PDF BUILDER ───────────────────────────────────────────────────────────────
 def build_pdf_report(
     sel_kpis, sel_charts, kpi_data, period, filters_summary, chart_imgs,
@@ -330,10 +223,8 @@ def build_pdf_report(
     BLUE  = colors.HexColor("#378ADD")
     GRAY  = colors.HexColor("#f5f5f4")
     BORDER= colors.HexColor("#e0e0dc")
-
     def sty(name, **kw):
         return ParagraphStyle(name, parent=base["Normal"], **kw)
-
     title_sty    = sty("t",  fontSize=22, fontName="Helvetica-Bold",
                         textColor=colors.HexColor("#1c1c1a"), spaceAfter=10, spaceBefore=6)
     sub_sty      = sty("s",  fontSize=10, fontName="Helvetica",
@@ -354,7 +245,6 @@ def build_pdf_report(
                  textColor=colors.HexColor("#3d3d3a"))
     td_sty = sty("td", fontSize=8, fontName="Helvetica",
                  textColor=colors.HexColor("#1c1c1a"))
-
     story = []
     story += [
         Spacer(1, 0.5*cm),
@@ -370,7 +260,6 @@ def build_pdf_report(
         story.append(Paragraph(f"Filtri attivi: {filters_summary}", sub_sty))
     story += [Spacer(1, 0.4*cm),
               HRFlowable(width=W, thickness=2, color=BLUE, spaceAfter=16)]
-
     if sel_kpis:
         story.append(Paragraph("KPI selezionati", section_sty))
         valid_kpis = [k for k in sel_kpis if k in kpi_data]
@@ -394,7 +283,6 @@ def build_pdf_report(
                 ("VALIGN",       (0,0),(-1,-1), "TOP"),
             ]))
             story += [t, Spacer(1, 0.2*cm)]
-
     if sel_charts and chart_imgs:
         story += [Paragraph("Grafici", section_sty),
                   HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=8)]
@@ -422,7 +310,6 @@ def build_pdf_report(
                 story.append(block)
             except Exception as ex:
                 story.append(Paragraph(f"[{name} — errore: {ex}]", body_sty))
-
     def df_to_table(s, df, title):
         if df is None or df.empty:
             return
@@ -444,12 +331,10 @@ def build_pdf_report(
             ("VALIGN",        (0,0),(-1,-1), "MIDDLE"),
         ]))
         s += [t, Spacer(1, 0.4*cm)]
-
     if "Performance store" in sel_charts:
         df_to_table(story, store_table, "Dettaglio performance store")
     if "Top clienti" in sel_charts:
         df_to_table(story, top_cust_table, "Top clienti per spesa")
-
     story += [
         Spacer(1, 0.5*cm),
         HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=6),
@@ -461,6 +346,89 @@ def build_pdf_report(
     doc.build(story)
     return buf.getvalue()
 
+# ── CHATBOT — funzioni ────────────────────────────────────────────────────────
+def build_system_prompt(df: pd.DataFrame) -> str:
+    schema   = df.dtypes.to_string()
+    sample   = df.head(3).to_string()
+    stats    = df[["total_amount","quantity","unit_price"]].describe().round(2).to_string()
+    stores   = sorted(df["store_name"].dropna().unique().tolist())
+    regions  = sorted(df["region"].dropna().unique().tolist())
+    cats     = sorted(df["category"].dropna().unique().tolist())
+    channels = sorted(df["channel"].dropna().unique().tolist())
+    return f"""Sei un assistente analitico integrato in una Retail Analytics Dashboard Streamlit.
+Hai accesso al dataframe delle vendite con questa struttura:
+SCHEMA:
+{schema}
+ANTEPRIMA (3 righe):
+{sample}
+STATISTICHE NUMERICHE:
+{stats}
+VALORI DISPONIBILI PER I FILTRI:
+- store_name: {stores}
+- region: {regions}
+- category: {cats}
+- channel: {channels}
+ISTRUZIONI:
+Puoi fare due cose in base alla richiesta dell'utente:
+1. INSIGHT — Se l'utente chiede un'analisi, un confronto, una spiegazione o una domanda sui dati:
+   Rispondi in italiano in modo chiaro e conciso.
+2. FILTRO — Se l'utente chiede di filtrare, isolare, mostrare solo certi dati:
+   Rispondi ESCLUSIVAMENTE con un JSON valido, senza testo aggiuntivo, nel formato:
+   {{
+     "action": "filter",
+     "summary": "Descrizione leggibile del filtro applicato",
+     "conditions": [
+       {{"column": "store_name", "operator": "isin", "value": "Store A,Store B"}},
+       {{"column": "category",   "operator": "==",   "value": "Electronics"}},
+       {{"column": "total_amount","operator": ">",    "value": "500"}}
+     ]
+   }}
+   Operatori disponibili: ==  !=  >  <  >=  <=  contains  isin
+   Per "isin" usa valori separati da virgola come stringa.
+3. RESET FILTRI — Se l'utente chiede di rimuovere/azzerare i filtri:
+   Rispondi ESCLUSIVAMENTE con: {{"action": "reset_filters"}}
+Rispondi sempre in italiano. Non inventare valori che non esistono nel dataset.
+"""
+
+def apply_ai_filters(df: pd.DataFrame, conditions: list) -> pd.DataFrame:
+    out = df.copy()
+    for c in conditions:
+        col, op, val = c.get("column"), c.get("operator"), c.get("value")
+        if col not in out.columns:
+            continue
+        try:
+            if op == "==":        out = out[out[col].astype(str) == str(val)]
+            elif op == "!=":      out = out[out[col].astype(str) != str(val)]
+            elif op == ">":       out = out[pd.to_numeric(out[col], errors="coerce") > float(val)]
+            elif op == "<":       out = out[pd.to_numeric(out[col], errors="coerce") < float(val)]
+            elif op == ">=":      out = out[pd.to_numeric(out[col], errors="coerce") >= float(val)]
+            elif op == "<=":      out = out[pd.to_numeric(out[col], errors="coerce") <= float(val)]
+            elif op == "contains":
+                out = out[out[col].astype(str).str.contains(str(val), case=False, na=False)]
+            elif op == "isin":
+                vals = [v.strip() for v in str(val).split(",")]
+                out = out[out[col].astype(str).isin(vals)]
+        except Exception:
+            continue
+    return out
+
+def call_claude(user_msg: str, df: pd.DataFrame) -> str:
+    client = get_anthropic()
+    messages = st.session_state.chat_history + [{"role": "user", "content": user_msg}]
+    resp = client.messages.create(
+        model=CLAUDE_MODEL,          # ✅ usa la costante corretta
+        max_tokens=1000,
+        system=build_system_prompt(df),
+        messages=messages,
+    )
+    return resp.content[0].text
+
+# ════════════════════════════════════════════════════════════════════════════
+# SESSION STATE
+# ════════════════════════════════════════════════════════════════════════════
+if "chat_history"   not in st.session_state: st.session_state.chat_history   = []
+if "ai_filters"     not in st.session_state: st.session_state.ai_filters     = {}
+if "filter_summary" not in st.session_state: st.session_state.filter_summary = ""
 
 # ════════════════════════════════════════════════════════════════════════════
 # SIDEBAR — PERIODO
@@ -474,7 +442,6 @@ with st.sidebar:
                           index=3, label_visibility="collapsed")
 
 date_from = get_date_from(period)
-
 with st.spinner(f"Caricamento dati (periodo: {period})..."):
     sales_raw, stores, products, customers, load_errors = load_data(date_from)
 
@@ -511,14 +478,12 @@ if not products.empty:
 else:
     sales_raw["category"] = "N/D"
 
-
 # ════════════════════════════════════════════════════════════════════════════
 # SIDEBAR — FILTRI DIMENSIONALI
 # ════════════════════════════════════════════════════════════════════════════
 with st.sidebar:
     st.divider()
     st.markdown("### 🔍 Filtri")
-
     sel_stores   = st.multiselect("Store",
         sorted(sales_raw["store_name"].dropna().unique()),
         placeholder="Tutti gli store")
@@ -531,18 +496,15 @@ with st.sidebar:
     sel_channels = st.multiselect("Canale",
         sorted(sales_raw["channel"].dropna().unique()),
         placeholder="Tutti i canali")
-
     all_tiers = sorted(customers["loyalty_tier"].dropna().unique()) \
         if not customers.empty and "loyalty_tier" in customers.columns else []
     sel_tiers = st.multiselect("Loyalty tier", all_tiers,
                                placeholder="Tutti i tier")
-
     min_p = float(sales_raw["unit_price"].min())
     max_p = float(sales_raw["unit_price"].max())
     price_range = st.slider("Prezzo unitario (€)", min_p, max_p,
                             (min_p, max_p), format="€%.0f") \
         if max_p > min_p else (min_p, max_p)
-
     st.divider()
     st.markdown("### 📋 Report")
     sel_kpis   = st.multiselect("KPI",
@@ -553,14 +515,12 @@ with st.sidebar:
          "Performance store","Trend scontrino medio",
          "Vendite per giorno","% venduto per categoria"],
         default=[])
-
     st.divider()
     generate_btn = st.button("📄 Genera report PDF", use_container_width=True,
                              type="primary", disabled=not(sel_kpis or sel_charts))
     if st.button("🔄 Svuota cache", use_container_width=True):
         st.cache_data.clear()
         st.rerun()
-
 
 # ════════════════════════════════════════════════════════════════════════════
 # APPLICA FILTRI (manuali + AI)
@@ -596,7 +556,6 @@ if sales.empty:
     st.warning("Nessun dato con i filtri selezionati.")
     st.stop()
 
-
 # ════════════════════════════════════════════════════════════════════════════
 # KPI
 # ════════════════════════════════════════════════════════════════════════════
@@ -629,16 +588,15 @@ c3.metric("Transazioni",     f"{transactions:,}")
 c4.metric("Unità vendute",   f"{units:,}")
 c5.metric("Clienti unici",   f"{unique_cust:,}")
 
-
 # ════════════════════════════════════════════════════════════════════════════
 # TABS
 # ════════════════════════════════════════════════════════════════════════════
 tab_ov, tab_st, tab_pr, tab_cu = st.tabs(["📈 Overview","🏪 Store","📦 Prodotti","👥 Clienti"])
-
 PL = dict(margin=dict(l=0,r=0,t=28,b=0),
           plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
           font=dict(size=12), legend=dict(orientation="h", y=-0.2))
 
+# Overview
 with tab_ov:
     cl, cr = st.columns(2)
     with cl:
@@ -655,7 +613,6 @@ with tab_ov:
         fig = px.pie(ch, names="channel", values="total_amount", hole=0.45, color_discrete_sequence=COLORS)
         fig.update_layout(**PL, height=300)
         st.plotly_chart(fig, use_container_width=True)
-
     st.markdown("#### Mix categorie")
     cats = sales.groupby("category")["total_amount"].sum().reset_index()
     cats["pct"] = (cats["total_amount"]/cats["total_amount"].sum()*100).round(1)
@@ -666,7 +623,6 @@ with tab_ov:
     fig.update_traces(marker_cornerradius=4, texttemplate="%{text:.1f}%", textposition="outside")
     fig.update_layout(**PL, height=max(220,len(cats)*38), showlegend=False, xaxis=dict(gridcolor="#f0f0f0"))
     st.plotly_chart(fig, use_container_width=True)
-
     cl2, cr2 = st.columns(2)
     with cl2:
         st.markdown("#### Trend scontrino medio")
@@ -691,6 +647,7 @@ with tab_ov:
         fig.update_layout(**PL, height=260, yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
 
+# Store
 with tab_st:
     cl, cr = st.columns(2)
     with cl:
@@ -715,7 +672,6 @@ with tab_st:
                      .rename(columns={"store_name":"Store","transazioni":"Transaz.",
                                       "scontrino":"Scontrino €","clienti":"Clienti","revenue_fmt":"Revenue"}),
                      use_container_width=True, hide_index=True)
-
     cl2, cr2 = st.columns(2)
     with cl2:
         if sales["region"].notna().any():
@@ -735,6 +691,7 @@ with tab_st:
                               yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
             st.plotly_chart(fig, use_container_width=True)
 
+# Prodotti
 with tab_pr:
     cl, cr = st.columns(2)
     with cl:
@@ -752,7 +709,6 @@ with tab_pr:
         fig.update_layout(**PL, height=300, showlegend=False,
                           yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
-
     if not products.empty:
         st.markdown("#### Top 10 prodotti")
         tp = (sales.groupby("product_id")["total_amount"].sum().reset_index()
@@ -764,6 +720,7 @@ with tab_pr:
             "product_name":"Prodotto","category":"Categoria","revenue_fmt":"Revenue","quota_%":"Quota %"}),
             use_container_width=True, hide_index=True)
 
+# Clienti
 with tab_cu:
     cl, cr = st.columns(2)
     with cl:
@@ -788,14 +745,12 @@ with tab_cu:
             fig.update_layout(**PL, height=280)
             st.plotly_chart(fig, use_container_width=True)
 
-
 # ════════════════════════════════════════════════════════════════════════════
 # GENERA PDF
 # ════════════════════════════════════════════════════════════════════════════
 if generate_btn and (sel_kpis or sel_charts):
     with st.spinner("Generazione PDF in corso..."):
         chart_imgs = {}
-
         if "Fatturato mensile" in sel_charts:
             m = sales.groupby(["month","month_label"])["total_amount"].sum().reset_index().sort_values("month")
             chart_imgs["Fatturato mensile"] = chart_bar_v(m, "month_label", "total_amount", "Fatturato mensile")
@@ -826,7 +781,6 @@ if generate_btn and (sel_kpis or sel_charts):
             dw = dw.sort_values("ord")
             chart_imgs["Vendite per giorno"] = chart_bar_v_days(
                 dw, "lbl", "total_amount", "Vendite per giorno della settimana")
-
         store_table = None
         if "Performance store" in sel_charts:
             sd = sales.groupby("store_name").agg(
@@ -835,7 +789,6 @@ if generate_btn and (sel_kpis or sel_charts):
             sd["Scontrino €"] = (sd["Revenue"]/sd["Transazioni"]).apply(lambda x: f"€ {x:,.2f}")
             sd["Revenue"] = sd["Revenue"].apply(fmt_currency)
             store_table = sd.rename(columns={"store_name":"Store"})
-
         top_cust_table = None
         if "Top clienti" in sel_charts and not customers.empty:
             tc2 = customers.head(10).copy()
@@ -843,7 +796,6 @@ if generate_btn and (sel_kpis or sel_charts):
             tc2["Spesa totale"] = tc2["total_spend"].apply(fmt_currency)
             top_cust_table = tc2[["name","loyalty_tier","Spesa totale"]].rename(
                 columns={"name":"Cliente","loyalty_tier":"Tier"})
-
         try:
             pdf_bytes = build_pdf_report(
                 sel_kpis=sel_kpis, sel_charts=sel_charts, kpi_data=kpi_data,
@@ -862,13 +814,13 @@ if generate_btn and (sel_kpis or sel_charts):
         except Exception as e:
             st.sidebar.error(f"Errore generazione PDF: {e}")
 
-
 # ════════════════════════════════════════════════════════════════════════════
 # CHATBOT AI
 # ════════════════════════════════════════════════════════════════════════════
 st.divider()
 st.markdown("## 🤖 Assistente AI")
 
+# Badge filtro AI attivo
 if st.session_state.ai_filters.get("conditions"):
     n_filtered = len(apply_ai_filters(sales_raw, st.session_state.ai_filters["conditions"]))
     st.info(f"🎯 Filtro AI attivo: **{st.session_state.filter_summary}** — "
@@ -878,6 +830,7 @@ if st.session_state.ai_filters.get("conditions"):
         st.session_state.filter_summary = ""
         st.rerun()
 
+# Finestra chat
 chat_container = st.container(height=380, border=True)
 with chat_container:
     if not st.session_state.chat_history:
@@ -892,12 +845,17 @@ with chat_container:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
 
+# Input
 user_input = st.chat_input("Chiedi un insight o applica un filtro…")
 if user_input:
     st.session_state.chat_history.append({"role": "user", "content": user_input})
     with st.spinner("Elaborazione…"):
-        raw = call_claude(user_input, sales_raw)
-
+        try:
+            raw = call_claude(user_input, sales_raw)
+        except anthropic.AuthenticationError:
+            raw = "❌ Errore di autenticazione: verifica che `ANTHROPIC_API_KEY` nei secrets di Streamlit sia una chiave Anthropic valida (inizia con `sk-ant-`)."
+        except Exception as e:
+            raw = f"❌ Errore chiamata AI: {e}"
     parsed = None
     try:
         clean = raw.strip()
@@ -905,7 +863,6 @@ if user_input:
             parsed = json.loads(clean)
     except json.JSONDecodeError:
         pass
-
     if parsed and parsed.get("action") == "filter":
         st.session_state.ai_filters     = parsed
         st.session_state.filter_summary = parsed.get("summary", "Filtro applicato")
