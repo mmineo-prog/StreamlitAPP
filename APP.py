@@ -3,8 +3,8 @@ Retail Analytics Dashboard — Streamlit + Supabase + Chatbot AI (OpenRouter)
 ─────────────────────────────────────────────────────────────────────────────
 secrets.toml:
   SUPABASE_URL       = "https://ttnvaxeqbxtvulofeuqs.supabase.co"
-  SUPABASE_KEY       = "eyJhbGci..."
-  OPENROUTER_API_KEY = "sk-or-..."
+  SUPABASE_KEY       = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0bnZheGVxYnh0dnVsb2ZldXFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3MjAxNDUsImV4cCI6MjA5MTI5NjE0NX0.egdVHwUPY1xhVpeLks6ttyHKusDn94GOi31gPPgt0QQ"
+  OPENROUTER_API_KEY = "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"
 
 Avvio locale:
   pip install -r requirements.txt
@@ -38,6 +38,8 @@ SUPABASE_URL = st.secrets["SUPABASE_URL"]
 SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
 COLORS  = ["#378ADD","#1D9E75","#D85A30","#7F77DD","#BA7517","#D4537E"]
 MCOLORS = COLORS
+
+st.write("Key presente:", "OPENROUTER_API_KEY" in st.secrets)
 
 st.set_page_config(page_title="Retail Analytics", page_icon="📊",
                    layout="wide", initial_sidebar_state="expanded")
