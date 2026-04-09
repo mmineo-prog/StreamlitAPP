@@ -23,10 +23,13 @@ from reportlab.lib.units import cm
 from reportlab.lib import colors
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle,
-    HRFlowable, Image as RLImage, PageBreak
+    HRFlowable, Image as RLImage
 )
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
-import plotly.io as pio
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
 SUPABASE_URL = st.secrets["SUPABASE_URL"]
@@ -108,10 +111,74 @@ def fmt_currency(v: float) -> str:
     return f"€ {v:.2f}"
 
 
-def fig_to_image(fig, width=700, height=320) -> BytesIO:
-    """Converte figura Plotly in PNG bytes per ReportLab."""
-    img_bytes = pio.to_image(fig, format="png", width=width, height=height, scale=2)
-    return BytesIO(img_bytes)
+MCOLORS = ["#378ADD","#1D9E75","#D85A30","#7F77DD","#BA7517","#D4537E"]
+
+def mpl_fig_to_bytes(fig) -> BytesIO:
+    buf = BytesIO()
+    fig.savefig(buf, format="png", dpi=150, bbox_inches="tight",
+                facecolor="white", edgecolor="none")
+    plt.close(fig)
+    buf.seek(0)
+    return buf
+
+
+def chart_bar_h(df, x_col, y_col, title, color=None) -> BytesIO:
+    fig, ax = plt.subplots(figsize=(8, max(2.5, len(df)*0.45)))
+    clrs = [MCOLORS[i % len(MCOLORS)] for i in range(len(df))]
+    bars = ax.barh(df[y_col].astype(str), df[x_col], color=clrs, height=0.6)
+    ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
+    ax.set_xlabel(x_col, fontsize=9)
+    ax.xaxis.set_major_formatter(mticker.FuncFormatter(
+        lambda v, _: f"€{v/1000:.0f}K" if v >= 1000 else f"€{v:.0f}"))
+    ax.spines[["top","right","left"]].set_visible(False)
+    ax.tick_params(axis="y", labelsize=9)
+    ax.tick_params(axis="x", labelsize=8)
+    ax.grid(axis="x", linestyle="--", alpha=0.4)
+    fig.tight_layout()
+    return mpl_fig_to_bytes(fig)
+
+
+def chart_bar_v(df, x_col, y_col, title) -> BytesIO:
+    fig, ax = plt.subplots(figsize=(8, 3.5))
+    clrs = [MCOLORS[i % len(MCOLORS)] for i in range(len(df))]
+    ax.bar(df[x_col].astype(str), df[y_col], color=clrs, width=0.6)
+    ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(
+        lambda v, _: f"€{v/1000:.0f}K" if v >= 1000 else f"€{v:.0f}"))
+    ax.spines[["top","right"]].set_visible(False)
+    ax.tick_params(axis="x", labelsize=8, rotation=30)
+    ax.tick_params(axis="y", labelsize=8)
+    ax.grid(axis="y", linestyle="--", alpha=0.4)
+    fig.tight_layout()
+    return mpl_fig_to_bytes(fig)
+
+
+def chart_pie(labels, values, title) -> BytesIO:
+    fig, ax = plt.subplots(figsize=(6, 4))
+    wedges, texts, autotexts = ax.pie(
+        values, labels=labels, autopct="%1.1f%%",
+        colors=MCOLORS[:len(labels)], startangle=90,
+        wedgeprops=dict(width=0.55)
+    )
+    for t in texts:      t.set_fontsize(9)
+    for t in autotexts:  t.set_fontsize(8)
+    ax.set_title(title, fontsize=12, fontweight="bold", pad=12)
+    fig.tight_layout()
+    return mpl_fig_to_bytes(fig)
+
+
+def chart_line(df, x_col, y_col, title) -> BytesIO:
+    fig, ax = plt.subplots(figsize=(8, 3))
+    ax.plot(df[x_col].astype(str), df[y_col],
+            color="#7F77DD", linewidth=2, marker="o", markersize=4)
+    ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v,_: f"€{v:.0f}"))
+    ax.spines[["top","right"]].set_visible(False)
+    ax.tick_params(axis="x", labelsize=7, rotation=45)
+    ax.tick_params(axis="y", labelsize=8)
+    ax.grid(axis="y", linestyle="--", alpha=0.4)
+    fig.tight_layout()
+    return mpl_fig_to_bytes(fig)
 
 
 def build_pdf_report(
@@ -120,9 +187,8 @@ def build_pdf_report(
     kpi_data: dict,
     period: str,
     filters_summary: str,
-    chart_figures: dict,   # {"Fatturato mensile": fig_object, ...}
+    chart_images: dict,    # {"Fatturato mensile": BytesIO, ...}
     store_table: pd.DataFrame | None = None,
-    top_prod_table: pd.DataFrame | None = None,
     top_cust_table: pd.DataFrame | None = None,
 ) -> bytes:
     buf = BytesIO()
@@ -219,7 +285,7 @@ def build_pdf_report(
         story.append(HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=8))
 
         for chart_name in sel_charts:
-            if chart_name not in chart_figures:
+            if chart_name not in chart_images:
                 continue
             story.append(Paragraph(chart_name, ParagraphStyle(
                 "chart_title", parent=base["Normal"],
@@ -228,7 +294,8 @@ def build_pdf_report(
                 spaceBefore=10, spaceAfter=4
             )))
             try:
-                img_buf = fig_to_image(chart_figures[chart_name])
+                img_buf = chart_images[chart_name]
+                img_buf.seek(0)
                 img = RLImage(img_buf, width=W, height=W*0.42)
                 story.append(img)
             except Exception as e:
@@ -273,7 +340,6 @@ def build_pdf_report(
 
     if "Top clienti" in sel_charts and top_cust_table is not None:
         df_to_table(top_cust_table, "Top clienti per spesa")
-
     # ── Footer ────────────────────────────────────────────────────────────────
     story.append(Spacer(1, 0.5*cm))
     story.append(HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=6))
@@ -765,84 +831,51 @@ with tab_cu:
 if generate_btn and (sel_kpis or sel_charts):
     with st.spinner("Generazione PDF in corso..."):
 
-        # ── Costruisci i grafici selezionati ──────────────────────────────
-        chart_figures = {}
+        # ── Costruisci immagini matplotlib ────────────────────────────────
+        chart_images = {}
 
         if "Fatturato mensile" in sel_charts:
             monthly = (sales.groupby(["month","month_label"])["total_amount"]
                        .sum().reset_index().sort_values("month"))
-            chart_figures["Fatturato mensile"] = px.bar(
-                monthly, x="month_label", y="total_amount",
-                color_discrete_sequence=["#378ADD"],
-                labels={"month_label":"Mese","total_amount":"Revenue (€)"},
-                title="Fatturato mensile"
-            )
+            chart_images["Fatturato mensile"] = chart_bar_v(
+                monthly, "month_label", "total_amount", "Fatturato mensile")
 
         if "Mix canali" in sel_charts:
             ch = sales.groupby("channel")["total_amount"].sum().reset_index()
-            chart_figures["Mix canali"] = px.pie(
-                ch, names="channel", values="total_amount",
-                hole=0.45, color_discrete_sequence=COLORS,
-                title="Mix canali di vendita"
-            )
+            chart_images["Mix canali"] = chart_pie(
+                ch["channel"].tolist(), ch["total_amount"].tolist(),
+                "Mix canali di vendita")
 
         if "Mix categorie" in sel_charts:
-            cats = sales.groupby("category")["total_amount"].sum().reset_index()
-            cats["pct"] = (cats["total_amount"]/cats["total_amount"].sum()*100).round(1)
-            cats = cats.sort_values("pct", ascending=True)
-            chart_figures["Mix categorie"] = px.bar(
-                cats, x="pct", y="category", orientation="h",
-                color="category", color_discrete_sequence=COLORS,
-                labels={"pct":"% revenue","category":""},
-                title="Mix categorie merceologiche"
-            )
+            cats = (sales.groupby("category")["total_amount"]
+                    .sum().reset_index().sort_values("total_amount"))
+            chart_images["Mix categorie"] = chart_bar_h(
+                cats, "total_amount", "category", "Mix categorie merceologiche")
 
         if "Performance store" in sel_charts:
             by_store = (sales.groupby("store_name")["total_amount"]
                         .sum().reset_index()
-                        .sort_values("total_amount", ascending=True).tail(10))
-            chart_figures["Performance store"] = px.bar(
-                by_store, x="total_amount", y="store_name", orientation="h",
-                color="store_name", color_discrete_sequence=COLORS,
-                labels={"total_amount":"Revenue (€)","store_name":""},
-                title="Revenue per store"
-            )
+                        .sort_values("total_amount").tail(10))
+            chart_images["Performance store"] = chart_bar_h(
+                by_store, "total_amount", "store_name", "Revenue per store")
 
         if "Trend scontrino medio" in sel_charts:
             weekly = (sales.groupby("week")
                       .agg(rev=("total_amount","sum"), txn=("sale_id","count"))
                       .reset_index())
             weekly["basket"] = (weekly["rev"]/weekly["txn"]).round(2)
-            chart_figures["Trend scontrino medio"] = px.line(
-                weekly, x="week", y="basket", markers=True,
-                color_discrete_sequence=["#7F77DD"],
-                labels={"week":"Settimana","basket":"Scontrino medio (€)"},
-                title="Trend scontrino medio settimanale"
-            )
+            chart_images["Trend scontrino medio"] = chart_line(
+                weekly, "week", "basket", "Trend scontrino medio settimanale")
 
         if "Top clienti" in sel_charts and not customers.empty:
-            cust_chart = customers.head(10).copy()
-            cust_chart["total_spend"] = pd.to_numeric(
-                cust_chart["total_spend"], errors="coerce").fillna(0)
-            chart_figures["Top clienti"] = px.bar(
-                cust_chart.sort_values("total_spend"),
-                x="total_spend", y="name", orientation="h",
-                color="loyalty_tier", color_discrete_sequence=COLORS,
-                labels={"total_spend":"Spesa totale (€)","name":""},
-                title="Top clienti per spesa"
-            )
+            tc = customers.head(10).copy()
+            tc["total_spend"] = pd.to_numeric(
+                tc["total_spend"], errors="coerce").fillna(0)
+            tc = tc.sort_values("total_spend")
+            chart_images["Top clienti"] = chart_bar_h(
+                tc, "total_spend", "name", "Top clienti per spesa")
 
-        # Applica layout pulito a tutti i grafici
-        for fig in chart_figures.values():
-            fig.update_layout(
-                plot_bgcolor="rgba(255,255,255,1)",
-                paper_bgcolor="rgba(255,255,255,1)",
-                font=dict(family="Helvetica, Arial, sans-serif", size=12),
-                margin=dict(l=20,r=20,t=40,b=20),
-                showlegend=True,
-            )
-
-        # ── Tabelle per il PDF ─────────────────────────────────────────────
+        # ── Tabelle ───────────────────────────────────────────────────────
         store_table = None
         if "Performance store" in sel_charts:
             st_df = sales.groupby("store_name").agg(
@@ -856,14 +889,15 @@ if generate_btn and (sel_kpis or sel_charts):
 
         top_cust_table = None
         if "Top clienti" in sel_charts and not customers.empty:
-            tc = customers.head(10).copy()
-            tc["total_spend"] = pd.to_numeric(tc["total_spend"], errors="coerce").fillna(0)
-            tc["Spesa totale"] = tc["total_spend"].apply(fmt_currency)
-            top_cust_table = tc[["name","loyalty_tier","Spesa totale"]].rename(columns={
+            tc2 = customers.head(10).copy()
+            tc2["total_spend"] = pd.to_numeric(
+                tc2["total_spend"], errors="coerce").fillna(0)
+            tc2["Spesa totale"] = tc2["total_spend"].apply(fmt_currency)
+            top_cust_table = tc2[["name","loyalty_tier","Spesa totale"]].rename(columns={
                 "name":"Cliente","loyalty_tier":"Tier"
             })
 
-        # ── Genera PDF ─────────────────────────────────────────────────────
+        # ── Genera PDF ────────────────────────────────────────────────────
         try:
             pdf_bytes = build_pdf_report(
                 sel_kpis=sel_kpis,
@@ -871,7 +905,7 @@ if generate_btn and (sel_kpis or sel_charts):
                 kpi_data=kpi_data,
                 period=period,
                 filters_summary=filters_summary,
-                chart_figures=chart_figures,
+                chart_images=chart_images,
                 store_table=store_table,
                 top_cust_table=top_cust_table,
             )
