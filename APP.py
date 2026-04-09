@@ -15,6 +15,18 @@ import pandas as pd
 import plotly.express as px
 from supabase import create_client
 from datetime import datetime, timedelta
+import base64
+from io import BytesIO
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import cm
+from reportlab.lib import colors
+from reportlab.platypus import (
+    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle,
+    HRFlowable, Image as RLImage, PageBreak
+)
+from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
+import plotly.io as pio
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
 SUPABASE_URL = st.secrets["SUPABASE_URL"]
@@ -96,35 +108,184 @@ def fmt_currency(v: float) -> str:
     return f"€ {v:.2f}"
 
 
-def build_report(sel_kpis, sel_charts, kpi_data, period, filters_summary) -> str:
-    chart_labels = {
-        "Fatturato mensile":"Andamento fatturato mensile",
-        "Mix canali":"Mix canali di vendita",
-        "Mix categorie":"Mix categorie merceologiche",
-        "Performance store":"Revenue per punto vendita",
-        "Trend scontrino medio":"Evoluzione scontrino medio",
-        "Top clienti":"Top clienti per spesa totale",
-    }
-    lines = [
-        "RETAIL ANALYTICS REPORT",
-        f"Periodo: {period}  —  Generato il {datetime.now().strftime('%d %B %Y, %H:%M')}",
-        f"Sorgente: Supabase — {SUPABASE_URL}",
-        f"Filtri attivi: {filters_summary}",
-        "═"*54, "",
-    ]
+def fig_to_image(fig, width=700, height=320) -> BytesIO:
+    """Converte figura Plotly in PNG bytes per ReportLab."""
+    img_bytes = pio.to_image(fig, format="png", width=width, height=height, scale=2)
+    return BytesIO(img_bytes)
+
+
+def build_pdf_report(
+    sel_kpis: list,
+    sel_charts: list,
+    kpi_data: dict,
+    period: str,
+    filters_summary: str,
+    chart_figures: dict,   # {"Fatturato mensile": fig_object, ...}
+    store_table: pd.DataFrame | None = None,
+    top_prod_table: pd.DataFrame | None = None,
+    top_cust_table: pd.DataFrame | None = None,
+) -> bytes:
+    buf = BytesIO()
+    doc = SimpleDocTemplate(
+        buf, pagesize=A4,
+        leftMargin=2*cm, rightMargin=2*cm,
+        topMargin=2*cm, bottomMargin=2*cm
+    )
+
+    W = A4[0] - 4*cm   # larghezza utile
+
+    # ── Stili ────────────────────────────────────────────────────────────────
+    base = getSampleStyleSheet()
+    title_style = ParagraphStyle("title", parent=base["Normal"],
+        fontSize=22, fontName="Helvetica-Bold",
+        textColor=colors.HexColor("#1c1c1a"), spaceAfter=4)
+    subtitle_style = ParagraphStyle("subtitle", parent=base["Normal"],
+        fontSize=10, fontName="Helvetica",
+        textColor=colors.HexColor("#6b6b63"), spaceAfter=2)
+    section_style = ParagraphStyle("section", parent=base["Normal"],
+        fontSize=13, fontName="Helvetica-Bold",
+        textColor=colors.HexColor("#1c1c1a"),
+        spaceBefore=14, spaceAfter=6)
+    body_style = ParagraphStyle("body", parent=base["Normal"],
+        fontSize=9, fontName="Helvetica",
+        textColor=colors.HexColor("#3d3d3a"), spaceAfter=3)
+    kpi_label_style = ParagraphStyle("kpi_label", parent=base["Normal"],
+        fontSize=9, fontName="Helvetica",
+        textColor=colors.HexColor("#888780"))
+    kpi_value_style = ParagraphStyle("kpi_value", parent=base["Normal"],
+        fontSize=18, fontName="Helvetica-Bold",
+        textColor=colors.HexColor("#1c1c1a"))
+
+    BLUE   = colors.HexColor("#378ADD")
+    GRAY   = colors.HexColor("#f5f5f4")
+    BORDER = colors.HexColor("#e0e0dc")
+
+    story = []
+
+    # ── Cover ────────────────────────────────────────────────────────────────
+    story.append(Spacer(1, 0.5*cm))
+    story.append(Paragraph("Retail Analytics Report", title_style))
+    story.append(Paragraph(
+        f"Periodo: <b>{period}</b> &nbsp;·&nbsp; "
+        f"Generato il {datetime.now().strftime('%d %B %Y, %H:%M')} &nbsp;·&nbsp; "
+        f"Supabase",
+        subtitle_style
+    ))
+    if filters_summary != "Nessuno":
+        story.append(Paragraph(f"Filtri attivi: {filters_summary}", subtitle_style))
+    story.append(Spacer(1, 0.3*cm))
+    story.append(HRFlowable(width=W, thickness=2, color=BLUE, spaceAfter=16))
+
+    # ── KPI ──────────────────────────────────────────────────────────────────
     if sel_kpis:
-        lines += ["KPI SELEZIONATI","─"*36]
-        for k in sel_kpis:
-            if k in kpi_data:
-                lines.append(f"  {kpi_data[k]['label']:<24} {kpi_data[k]['value']}")
-        lines.append("")
-    if sel_charts:
-        lines += ["GRAFICI INCLUSI","─"*36]
-        for c in sel_charts:
-            lines.append(f"  • {chart_labels.get(c,c)}")
-        lines.append("")
-    lines += ["═"*54]
-    return "\n".join(lines)
+        story.append(Paragraph("KPI selezionati", section_style))
+
+        kpi_cells = []
+        row = []
+        for i, k in enumerate(sel_kpis):
+            if k not in kpi_data:
+                continue
+            cell = [
+                Paragraph(kpi_data[k]["label"], kpi_label_style),
+                Paragraph(kpi_data[k]["value"], kpi_value_style),
+            ]
+            row.append(cell)
+            if len(row) == 3 or i == len(sel_kpis)-1:
+                # padding celle mancanti
+                while len(row) < 3:
+                    row.append([""])
+                kpi_cells.append(row)
+                row = []
+
+        col_w = W / 3
+        for kpi_row in kpi_cells:
+            t = Table(kpi_row, colWidths=[col_w]*3)
+            t.setStyle(TableStyle([
+                ("BACKGROUND",  (0,0), (-1,-1), GRAY),
+                ("GRID",        (0,0), (-1,-1), 0.5, BORDER),
+                ("ROUNDEDCORNERS", [6]),
+                ("TOPPADDING",  (0,0), (-1,-1), 10),
+                ("BOTTOMPADDING",(0,0),(-1,-1), 10),
+                ("LEFTPADDING", (0,0), (-1,-1), 12),
+                ("RIGHTPADDING",(0,0), (-1,-1), 12),
+                ("VALIGN",      (0,0), (-1,-1), "TOP"),
+            ]))
+            story.append(t)
+            story.append(Spacer(1, 0.2*cm))
+
+    # ── Grafici ───────────────────────────────────────────────────────────────
+    if sel_charts and chart_figures:
+        story.append(Paragraph("Grafici", section_style))
+        story.append(HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=8))
+
+        for chart_name in sel_charts:
+            if chart_name not in chart_figures:
+                continue
+            story.append(Paragraph(chart_name, ParagraphStyle(
+                "chart_title", parent=base["Normal"],
+                fontSize=11, fontName="Helvetica-Bold",
+                textColor=colors.HexColor("#1c1c1a"),
+                spaceBefore=10, spaceAfter=4
+            )))
+            try:
+                img_buf = fig_to_image(chart_figures[chart_name])
+                img = RLImage(img_buf, width=W, height=W*0.42)
+                story.append(img)
+            except Exception as e:
+                story.append(Paragraph(f"[Grafico non disponibile: {e}]", body_style))
+            story.append(Spacer(1, 0.4*cm))
+
+    # ── Tabelle dati ──────────────────────────────────────────────────────────
+    def df_to_table(df: pd.DataFrame, title: str):
+        if df is None or df.empty:
+            return
+        story.append(Paragraph(title, section_style))
+        story.append(HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=6))
+
+        col_w = W / len(df.columns)
+        header = [[Paragraph(f"<b>{c}</b>", ParagraphStyle(
+            "th", parent=base["Normal"], fontSize=8,
+            fontName="Helvetica-Bold", textColor=colors.HexColor("#3d3d3a")
+        )) for c in df.columns]]
+        rows = [[Paragraph(str(v), ParagraphStyle(
+            "td", parent=base["Normal"], fontSize=8,
+            fontName="Helvetica", textColor=colors.HexColor("#1c1c1a")
+        )) for v in row] for _, row in df.iterrows()]
+
+        t = Table(header + rows, colWidths=[col_w]*len(df.columns), repeatRows=1)
+        t.setStyle(TableStyle([
+            ("BACKGROUND",   (0,0), (-1,0),  colors.HexColor("#378ADD")),
+            ("TEXTCOLOR",    (0,0), (-1,0),  colors.white),
+            ("BACKGROUND",   (0,1), (-1,-1), GRAY),
+            ("ROWBACKGROUNDS",(0,1),(-1,-1), [colors.white, GRAY]),
+            ("GRID",         (0,0), (-1,-1), 0.3, BORDER),
+            ("TOPPADDING",   (0,0), (-1,-1), 5),
+            ("BOTTOMPADDING",(0,0), (-1,-1), 5),
+            ("LEFTPADDING",  (0,0), (-1,-1), 8),
+            ("RIGHTPADDING", (0,0), (-1,-1), 8),
+            ("VALIGN",       (0,0), (-1,-1), "MIDDLE"),
+        ]))
+        story.append(t)
+        story.append(Spacer(1, 0.4*cm))
+
+    if "Performance store" in sel_charts and store_table is not None:
+        df_to_table(store_table, "Dettaglio performance store")
+
+    if "Top clienti" in sel_charts and top_cust_table is not None:
+        df_to_table(top_cust_table, "Top clienti per spesa")
+
+    # ── Footer ────────────────────────────────────────────────────────────────
+    story.append(Spacer(1, 0.5*cm))
+    story.append(HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=6))
+    story.append(Paragraph(
+        f"Report generato da Retail Analytics Dashboard · Supabase · {datetime.now().strftime('%d/%m/%Y %H:%M')}",
+        ParagraphStyle("footer", parent=base["Normal"], fontSize=7,
+                       fontName="Helvetica", textColor=colors.HexColor("#aaaaaa"),
+                       alignment=TA_CENTER)
+    ))
+
+    doc.build(story)
+    return buf.getvalue()
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -254,7 +415,7 @@ with st.sidebar:
     sel_charts = st.multiselect("Grafici", chart_options, default=[])
 
     st.divider()
-    generate_btn = st.button("📥 Genera report", use_container_width=True,
+    generate_btn = st.button("📄 Genera report PDF", use_container_width=True,
                              type="primary", disabled=not(sel_kpis or sel_charts))
     if st.button("🔄 Svuota cache", use_container_width=True):
         st.cache_data.clear()
@@ -599,15 +760,128 @@ with tab_cu:
 
 
 # ════════════════════════════════════════════════════════════════════════════
-# REPORT DOWNLOAD
+# REPORT PDF
 # ════════════════════════════════════════════════════════════════════════════
 if generate_btn and (sel_kpis or sel_charts):
-    report_txt = build_report(sel_kpis, sel_charts, kpi_data, period, filters_summary)
-    st.sidebar.success("✅ Report pronto!")
-    st.sidebar.download_button(
-        label="📥 Scarica report .txt",
-        data=report_txt,
-        file_name=f"retail_report_{datetime.now().strftime('%Y-%m-%d')}.txt",
-        mime="text/plain",
-        use_container_width=True
-    )
+    with st.spinner("Generazione PDF in corso..."):
+
+        # ── Costruisci i grafici selezionati ──────────────────────────────
+        chart_figures = {}
+
+        if "Fatturato mensile" in sel_charts:
+            monthly = (sales.groupby(["month","month_label"])["total_amount"]
+                       .sum().reset_index().sort_values("month"))
+            chart_figures["Fatturato mensile"] = px.bar(
+                monthly, x="month_label", y="total_amount",
+                color_discrete_sequence=["#378ADD"],
+                labels={"month_label":"Mese","total_amount":"Revenue (€)"},
+                title="Fatturato mensile"
+            )
+
+        if "Mix canali" in sel_charts:
+            ch = sales.groupby("channel")["total_amount"].sum().reset_index()
+            chart_figures["Mix canali"] = px.pie(
+                ch, names="channel", values="total_amount",
+                hole=0.45, color_discrete_sequence=COLORS,
+                title="Mix canali di vendita"
+            )
+
+        if "Mix categorie" in sel_charts:
+            cats = sales.groupby("category")["total_amount"].sum().reset_index()
+            cats["pct"] = (cats["total_amount"]/cats["total_amount"].sum()*100).round(1)
+            cats = cats.sort_values("pct", ascending=True)
+            chart_figures["Mix categorie"] = px.bar(
+                cats, x="pct", y="category", orientation="h",
+                color="category", color_discrete_sequence=COLORS,
+                labels={"pct":"% revenue","category":""},
+                title="Mix categorie merceologiche"
+            )
+
+        if "Performance store" in sel_charts:
+            by_store = (sales.groupby("store_name")["total_amount"]
+                        .sum().reset_index()
+                        .sort_values("total_amount", ascending=True).tail(10))
+            chart_figures["Performance store"] = px.bar(
+                by_store, x="total_amount", y="store_name", orientation="h",
+                color="store_name", color_discrete_sequence=COLORS,
+                labels={"total_amount":"Revenue (€)","store_name":""},
+                title="Revenue per store"
+            )
+
+        if "Trend scontrino medio" in sel_charts:
+            weekly = (sales.groupby("week")
+                      .agg(rev=("total_amount","sum"), txn=("sale_id","count"))
+                      .reset_index())
+            weekly["basket"] = (weekly["rev"]/weekly["txn"]).round(2)
+            chart_figures["Trend scontrino medio"] = px.line(
+                weekly, x="week", y="basket", markers=True,
+                color_discrete_sequence=["#7F77DD"],
+                labels={"week":"Settimana","basket":"Scontrino medio (€)"},
+                title="Trend scontrino medio settimanale"
+            )
+
+        if "Top clienti" in sel_charts and not customers.empty:
+            cust_chart = customers.head(10).copy()
+            cust_chart["total_spend"] = pd.to_numeric(
+                cust_chart["total_spend"], errors="coerce").fillna(0)
+            chart_figures["Top clienti"] = px.bar(
+                cust_chart.sort_values("total_spend"),
+                x="total_spend", y="name", orientation="h",
+                color="loyalty_tier", color_discrete_sequence=COLORS,
+                labels={"total_spend":"Spesa totale (€)","name":""},
+                title="Top clienti per spesa"
+            )
+
+        # Applica layout pulito a tutti i grafici
+        for fig in chart_figures.values():
+            fig.update_layout(
+                plot_bgcolor="rgba(255,255,255,1)",
+                paper_bgcolor="rgba(255,255,255,1)",
+                font=dict(family="Helvetica, Arial, sans-serif", size=12),
+                margin=dict(l=20,r=20,t=40,b=20),
+                showlegend=True,
+            )
+
+        # ── Tabelle per il PDF ─────────────────────────────────────────────
+        store_table = None
+        if "Performance store" in sel_charts:
+            st_df = sales.groupby("store_name").agg(
+                Transazioni=("sale_id","count"),
+                Revenue=("total_amount","sum"),
+                Clienti=("customer_id","nunique")
+            ).reset_index().sort_values("Revenue", ascending=False)
+            st_df["Scontrino €"] = (st_df["Revenue"]/st_df["Transazioni"]).round(2)
+            st_df["Revenue"] = st_df["Revenue"].apply(fmt_currency)
+            store_table = st_df.rename(columns={"store_name":"Store"})
+
+        top_cust_table = None
+        if "Top clienti" in sel_charts and not customers.empty:
+            tc = customers.head(10).copy()
+            tc["total_spend"] = pd.to_numeric(tc["total_spend"], errors="coerce").fillna(0)
+            tc["Spesa totale"] = tc["total_spend"].apply(fmt_currency)
+            top_cust_table = tc[["name","loyalty_tier","Spesa totale"]].rename(columns={
+                "name":"Cliente","loyalty_tier":"Tier"
+            })
+
+        # ── Genera PDF ─────────────────────────────────────────────────────
+        try:
+            pdf_bytes = build_pdf_report(
+                sel_kpis=sel_kpis,
+                sel_charts=sel_charts,
+                kpi_data=kpi_data,
+                period=period,
+                filters_summary=filters_summary,
+                chart_figures=chart_figures,
+                store_table=store_table,
+                top_cust_table=top_cust_table,
+            )
+            st.sidebar.success("✅ PDF pronto!")
+            st.sidebar.download_button(
+                label="📥 Scarica report PDF",
+                data=pdf_bytes,
+                file_name=f"retail_report_{datetime.now().strftime('%Y-%m-%d')}.pdf",
+                mime="application/pdf",
+                use_container_width=True
+            )
+        except Exception as e:
+            st.sidebar.error(f"Errore generazione PDF: {e}")
