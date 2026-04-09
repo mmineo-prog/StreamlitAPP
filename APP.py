@@ -95,13 +95,13 @@ def load_data(date_from: str):
 
 def get_date_from(period: str) -> str:
     d = datetime.now()
-    offsets = {"1 mese": 30, "3 mesi": 90, "6 mesi": 180, "12 mesi": 365}
+    offsets = {"1 mese":30,"3 mesi":90,"6 mesi":180,"12 mesi":365}
     return (d - timedelta(days=offsets.get(period, 365))).strftime("%Y-%m-%d")
 
 
 def fmt_currency(v: float) -> str:
-    if v >= 1_000_000: return f"€ {v/1_000_000:,.2f}M"
-    if v >= 1_000:     return f"€ {v:,.0f}"
+    if v >= 1_000_000: return f"€ {v/1_000_000:.2f}M"
+    if v >= 1_000:     return f"€ {v/1_000:.1f}K"
     return f"€ {v:.2f}"
 
 
@@ -117,56 +117,41 @@ def mpl_to_bytes(fig) -> BytesIO:
 def chart_bar_v(df, x_col, y_col, title) -> BytesIO:
     fig, ax = plt.subplots(figsize=(8, 3.5))
     clrs = [MCOLORS[i % len(MCOLORS)] for i in range(len(df))]
-    bars = ax.bar(df[x_col].astype(str), df[y_col], color=clrs, width=0.6)
+    ax.bar(df[x_col].astype(str), df[y_col], color=clrs, width=0.6)
     ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
     ax.yaxis.set_major_formatter(mticker.FuncFormatter(
-        lambda v, _: f"€{v/1000:.0f}K" if v >= 1000 else f"€{v:,.0f}"))
+        lambda v, _: f"€{v/1000:.0f}K" if v >= 1000 else f"€{v:.0f}"))
     ax.spines[["top","right"]].set_visible(False)
     ax.tick_params(axis="x", labelsize=8, rotation=30)
     ax.tick_params(axis="y", labelsize=8)
     ax.grid(axis="y", linestyle="--", alpha=0.4)
-    max_v = df[y_col].max()
-    for bar in bars:
-        h = bar.get_height()
-        if h > max_v * 0.15:
-            ax.text(bar.get_x() + bar.get_width()/2, h * 0.97,
-                    f"€{h:,.0f}", ha="center", va="top",
-                    fontsize=7, color="white", fontweight="bold")
     fig.tight_layout()
     return mpl_to_bytes(fig)
 
 def chart_bar_h(df, x_col, y_col, title) -> BytesIO:
     fig, ax = plt.subplots(figsize=(8, max(2.5, len(df)*0.45)))
     clrs = [MCOLORS[i % len(MCOLORS)] for i in range(len(df))]
-    bars = ax.barh(df[y_col].astype(str), df[x_col], color=clrs, height=0.6)
+    ax.barh(df[y_col].astype(str), df[x_col], color=clrs, height=0.6)
     ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
     ax.xaxis.set_major_formatter(mticker.FuncFormatter(
-        lambda v, _: f"€{v/1000:.0f}K" if v >= 1000 else f"€{v:,.0f}"))
+        lambda v, _: f"€{v/1000:.0f}K" if v >= 1000 else f"€{v:.0f}"))
     ax.spines[["top","right","left"]].set_visible(False)
     ax.tick_params(axis="y", labelsize=9)
     ax.tick_params(axis="x", labelsize=8)
     ax.grid(axis="x", linestyle="--", alpha=0.4)
-    max_v = df[x_col].max()
-    for bar in bars:
-        w = bar.get_width()
-        if w > max_v * 0.25:
-            ax.text(w * 0.97, bar.get_y() + bar.get_height()/2,
-                    f"€{w:,.0f}", ha="right", va="center",
-                    fontsize=7, color="white", fontweight="bold")
     fig.tight_layout()
     return mpl_to_bytes(fig)
 
 def chart_pie(labels, values, title) -> BytesIO:
-    fig, ax = plt.subplots(figsize=(5, 3.8))
+    fig, ax = plt.subplots(figsize=(5, 5))
     ax.pie(values, labels=labels, autopct="%1.1f%%",
            colors=MCOLORS[:len(labels)], startangle=90,
-           wedgeprops=dict(width=0.55), pctdistance=0.75,
-           labeldistance=1.1)
-    for t in ax.texts:
-        t.set_fontsize(8)
-    ax.set_title(title, fontsize=11, fontweight="bold", pad=8)
+           wedgeprops=dict(width=0.55), pctdistance=0.75)
+    for txt in ax.texts:
+        txt.set_fontsize(9)
+    ax.set_title(title, fontsize=12, fontweight="bold", pad=14)
     ax.set_aspect("equal")
-    fig.subplots_adjust(left=0.08, right=0.92, top=0.88, bottom=0.05)
+    fig.subplots_adjust(left=0.15, right=0.85, top=0.88, bottom=0.05)
     return mpl_to_bytes(fig)
 
 def chart_line(df, x_col, y_col, title) -> BytesIO:
@@ -174,32 +159,11 @@ def chart_line(df, x_col, y_col, title) -> BytesIO:
     ax.plot(df[x_col].astype(str), df[y_col],
             color="#7F77DD", linewidth=2, marker="o", markersize=4)
     ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
-    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"€{v:,.0f}"))
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v,_: f"€{v:.0f}"))
     ax.spines[["top","right"]].set_visible(False)
     ax.tick_params(axis="x", labelsize=7, rotation=45)
     ax.tick_params(axis="y", labelsize=8)
     ax.grid(axis="y", linestyle="--", alpha=0.4)
-    fig.tight_layout()
-    return mpl_to_bytes(fig)
-
-def chart_bar_v_days(df, x_col, y_col, title) -> BytesIO:
-    fig, ax = plt.subplots(figsize=(7, 3.2))
-    clrs = [MCOLORS[i % len(MCOLORS)] for i in range(len(df))]
-    bars = ax.bar(df[x_col].astype(str), df[y_col], color=clrs, width=0.6)
-    ax.set_title(title, fontsize=12, fontweight="bold", pad=10)
-    ax.yaxis.set_major_formatter(mticker.FuncFormatter(
-        lambda v, _: f"€{v/1000:.0f}K" if v >= 1000 else f"€{v:,.0f}"))
-    ax.spines[["top","right"]].set_visible(False)
-    ax.tick_params(axis="x", labelsize=9)
-    ax.tick_params(axis="y", labelsize=8)
-    ax.grid(axis="y", linestyle="--", alpha=0.4)
-    max_v = df[y_col].max()
-    for bar in bars:
-        h = bar.get_height()
-        if h > max_v * 0.15:
-            ax.text(bar.get_x() + bar.get_width()/2, h * 0.97,
-                    f"€{h:,.0f}", ha="center", va="top",
-                    fontsize=7, color="white", fontweight="bold")
     fig.tight_layout()
     return mpl_to_bytes(fig)
 
@@ -211,7 +175,7 @@ def build_pdf_report(
     kpi_data: dict,
     period: str,
     filters_summary: str,
-    chart_imgs: dict,
+    chart_imgs: dict,          # ← unico nome usato ovunque
     store_table=None,
     top_cust_table=None,
 ) -> bytes:
@@ -230,32 +194,33 @@ def build_pdf_report(
     def sty(name, **kw):
         return ParagraphStyle(name, parent=base["Normal"], **kw)
 
-    title_sty     = sty("t",  fontSize=22, fontName="Helvetica-Bold",
-                         textColor=colors.HexColor("#1c1c1a"), spaceAfter=10, spaceBefore=6)
-    sub_sty       = sty("s",  fontSize=10, fontName="Helvetica",
-                         textColor=colors.HexColor("#6b6b63"), spaceAfter=6, leading=16)
-    section_sty   = sty("se", fontSize=13, fontName="Helvetica-Bold",
-                         textColor=colors.HexColor("#1c1c1a"), spaceBefore=14, spaceAfter=6)
-    body_sty      = sty("b",  fontSize=9,  fontName="Helvetica",
-                         textColor=colors.HexColor("#3d3d3a"), spaceAfter=3)
-    kpi_lbl_sty   = sty("kl", fontSize=9,  fontName="Helvetica",
-                         textColor=colors.HexColor("#888780"))
-    kpi_val_sty   = sty("kv", fontSize=18, fontName="Helvetica-Bold",
-                         textColor=colors.HexColor("#1c1c1a"))
-    footer_sty    = sty("f",  fontSize=7,  fontName="Helvetica",
-                         textColor=colors.HexColor("#aaaaaa"), alignment=TA_CENTER)
+    title_sty    = sty("t",  fontSize=22, fontName="Helvetica-Bold",
+                        textColor=colors.HexColor("#1c1c1a"), spaceAfter=10, spaceBefore=6)
+    sub_sty      = sty("s",  fontSize=10, fontName="Helvetica",
+                        textColor=colors.HexColor("#6b6b63"), spaceAfter=6, leading=16)
+    section_sty  = sty("se", fontSize=13, fontName="Helvetica-Bold",
+                        textColor=colors.HexColor("#1c1c1a"),
+                        spaceBefore=14, spaceAfter=6)
+    body_sty     = sty("b",  fontSize=9,  fontName="Helvetica",
+                        textColor=colors.HexColor("#3d3d3a"), spaceAfter=3)
+    kpi_lbl_sty  = sty("kl", fontSize=9,  fontName="Helvetica",
+                        textColor=colors.HexColor("#888780"))
+    kpi_val_sty  = sty("kv", fontSize=18, fontName="Helvetica-Bold",
+                        textColor=colors.HexColor("#1c1c1a"))
+    footer_sty   = sty("f",  fontSize=7,  fontName="Helvetica",
+                        textColor=colors.HexColor("#aaaaaa"),
+                        alignment=TA_CENTER)
     chart_tit_sty = sty("ct", fontSize=11, fontName="Helvetica-Bold",
-                         textColor=colors.HexColor("#1c1c1a"), spaceBefore=10, spaceAfter=4)
-    th_sty        = sty("th", fontSize=8,  fontName="Helvetica-Bold",
-                         textColor=colors.HexColor("#ffffff"))
-    td_sty        = sty("td", fontSize=8,  fontName="Helvetica",
-                         textColor=colors.HexColor("#1c1c1a"))
-    note_sty      = sty("nt", fontSize=8,  fontName="Helvetica",
-                         textColor=colors.HexColor("#888780"), spaceAfter=4)
+                         textColor=colors.HexColor("#1c1c1a"),
+                         spaceBefore=10, spaceAfter=4)
+    th_sty = sty("th", fontSize=8, fontName="Helvetica-Bold",
+                 textColor=colors.HexColor("#3d3d3a"))
+    td_sty = sty("td", fontSize=8, fontName="Helvetica",
+                 textColor=colors.HexColor("#1c1c1a"))
 
     story = []
 
-    # ── Cover ─────────────────────────────────────────────────────────────────
+    # Cover
     story += [
         Spacer(1, 0.5*cm),
         Paragraph("Retail Analytics Report", title_sty),
@@ -266,107 +231,102 @@ def build_pdf_report(
             sub_sty),
     ]
     if filters_summary != "Nessuno":
-        story += [Spacer(1, 0.1*cm),
-                  Paragraph(f"Filtri attivi: {filters_summary}", sub_sty)]
+        story.append(Spacer(1, 0.1*cm))
+        story.append(Paragraph(f"Filtri attivi: {filters_summary}", sub_sty))
     story += [Spacer(1, 0.4*cm),
               HRFlowable(width=W, thickness=2, color=BLUE, spaceAfter=16)]
 
-    # ── KPI — layout adattivo, nessuna cella vuota ────────────────────────────
+    # KPI
     if sel_kpis:
         story.append(Paragraph("KPI selezionati", section_sty))
-        valid = [k for k in sel_kpis if k in kpi_data]
-        n = len(valid)
-        # 1→1col, 2→2col, 3→3col, 4→2x2, 5→3+2, 6→2x3
-        ncols = 3 if n % 3 == 0 else (2 if n % 2 == 0 else 3)
-        if n == 1: ncols = 1
-
-        for i in range(0, n, ncols):
-            chunk = valid[i:i+ncols]
-            c = len(chunk)
-            row = [[Paragraph(kpi_data[k]["label"], kpi_lbl_sty),
-                    Paragraph(kpi_data[k]["value"], kpi_val_sty)]
-                   for k in chunk]
-            t = Table(row, colWidths=[W/c]*c)
+        row, kpi_cells = [], []
+        for i, k in enumerate(sel_kpis):
+            if k not in kpi_data:
+                continue
+            row.append([Paragraph(kpi_data[k]["label"], kpi_lbl_sty),
+                        Paragraph(kpi_data[k]["value"], kpi_val_sty)])
+            if len(row) == 3 or i == len(sel_kpis)-1:
+                while len(row) < 3:
+                    row.append([""])
+                kpi_cells.append(row)
+                row = []
+        col_w = W / 3
+        for kpi_row in kpi_cells:
+            t = Table(kpi_row, colWidths=[col_w]*3)
             t.setStyle(TableStyle([
-                ("BACKGROUND",    (0,0),(-1,-1), GRAY),
-                ("GRID",          (0,0),(-1,-1), 0.5, BORDER),
-                ("TOPPADDING",    (0,0),(-1,-1), 10),
-                ("BOTTOMPADDING", (0,0),(-1,-1), 10),
-                ("LEFTPADDING",   (0,0),(-1,-1), 12),
-                ("RIGHTPADDING",  (0,0),(-1,-1), 12),
-                ("VALIGN",        (0,0),(-1,-1), "TOP"),
+                ("BACKGROUND",   (0,0),(-1,-1), GRAY),
+                ("GRID",         (0,0),(-1,-1), 0.5, BORDER),
+                ("TOPPADDING",   (0,0),(-1,-1), 10),
+                ("BOTTOMPADDING",(0,0),(-1,-1), 10),
+                ("LEFTPADDING",  (0,0),(-1,-1), 12),
+                ("RIGHTPADDING", (0,0),(-1,-1), 12),
+                ("VALIGN",       (0,0),(-1,-1), "TOP"),
             ]))
             story += [t, Spacer(1, 0.2*cm)]
 
-    # ── Grafici ───────────────────────────────────────────────────────────────
+    # Grafici — usa SOLO chart_imgs
     if sel_charts and chart_imgs:
         story += [Paragraph("Grafici", section_sty),
                   HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=8)]
 
+        # Altezze native per tipo di grafico
         chart_heights = {
-            "Fatturato mensile":       W * 0.38,
-            "Mix canali":              W * 0.32,
-            "Mix categorie":           W * 0.38,
-            "Performance store":       W * 0.48,
-            "Trend scontrino medio":   W * 0.33,
-            "Vendite per giorno":      W * 0.35,
-            "% venduto per categoria": W * 0.32,
+            "Fatturato mensile":     W * 0.40,
+            "Mix canali":            W * 0.42,   # torta 5x5 — mantieni proporzione quadrata
+            "Mix categorie":         W * 0.38,
+            "Performance store":     W * 0.50,
+            "Trend scontrino medio": W * 0.35,
+            "Top clienti":           W * 0.45,
         }
 
         for name in sel_charts:
             if name not in chart_imgs:
                 continue
             try:
-                img_buf = chart_imgs[name]
-                img_buf.seek(0)
-                h = chart_heights.get(name, W * 0.38)
+                buf_img = chart_imgs[name]
+                buf_img.seek(0)
+                h = chart_heights.get(name, W * 0.40)
+                # KeepTogether impedisce lo split titolo/grafico tra pagine
                 block = KeepTogether([
                     Paragraph(name, chart_tit_sty),
                     Spacer(1, 0.15*cm),
-                    RLImage(img_buf, width=W, height=h),
+                    RLImage(buf_img, width=W, height=h),
                     Spacer(1, 0.5*cm),
                 ])
                 story.append(block)
             except Exception as ex:
                 story.append(Paragraph(f"[{name} — errore: {ex}]", body_sty))
 
-    # ── Tabelle ───────────────────────────────────────────────────────────────
-    def add_table(df, title, note=None):
-        """Aggiunge titolo + nota + tabella allo story. Definita dentro build_pdf_report."""
+    # Tabelle
+    def df_to_table(s, df, title):
         if df is None or df.empty:
             return
-        items = [Paragraph(title, section_sty),
-                 HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=4)]
-        if note:
-            items.append(Paragraph(note, note_sty))
+        s += [Paragraph(title, section_sty),
+              HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=6)]
         col_w = W / len(df.columns)
-        header = [[Paragraph(c, th_sty) for c in df.columns]]
+        header = [[Paragraph(f"<b>{c}</b>", th_sty) for c in df.columns]]
         rows   = [[Paragraph(str(v), td_sty) for v in r]
                   for _, r in df.iterrows()]
         t = Table(header + rows, colWidths=[col_w]*len(df.columns), repeatRows=1)
         t.setStyle(TableStyle([
-            ("BACKGROUND",    (0,0), (-1,0),  BLUE),
-            ("TEXTCOLOR",     (0,0), (-1,0),  colors.white),
-            ("ROWBACKGROUNDS",(0,1), (-1,-1), [colors.white, GRAY]),
-            ("GRID",          (0,0), (-1,-1), 0.3, BORDER),
-            ("TOPPADDING",    (0,0), (-1,-1), 5),
-            ("BOTTOMPADDING", (0,0), (-1,-1), 5),
-            ("LEFTPADDING",   (0,0), (-1,-1), 8),
-            ("RIGHTPADDING",  (0,0), (-1,-1), 8),
-            ("VALIGN",        (0,0), (-1,-1), "MIDDLE"),
+            ("BACKGROUND",    (0,0),(-1,0),  BLUE),
+            ("TEXTCOLOR",     (0,0),(-1,0),  colors.white),
+            ("ROWBACKGROUNDS",(0,1),(-1,-1), [colors.white, GRAY]),
+            ("GRID",          (0,0),(-1,-1), 0.3, BORDER),
+            ("TOPPADDING",    (0,0),(-1,-1), 5),
+            ("BOTTOMPADDING", (0,0),(-1,-1), 5),
+            ("LEFTPADDING",   (0,0),(-1,-1), 8),
+            ("RIGHTPADDING",  (0,0),(-1,-1), 8),
+            ("VALIGN",        (0,0),(-1,-1), "MIDDLE"),
         ]))
-        items += [t, Spacer(1, 0.4*cm)]
-        story.extend(items)
+        s += [t, Spacer(1, 0.4*cm)]
 
     if "Performance store" in sel_charts:
-        add_table(store_table,
-                  "Dettaglio performance store",
-                  note="* Top 15 store per revenue nel periodo selezionato")
-
+        df_to_table(story, store_table, "Dettaglio performance store")
     if "Top clienti" in sel_charts:
-        add_table(top_cust_table, "Top clienti per spesa")
+        df_to_table(story, top_cust_table, "Top clienti per spesa")
 
-    # ── Footer ────────────────────────────────────────────────────────────────
+    # Footer
     story += [
         Spacer(1, 0.5*cm),
         HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=6),
@@ -403,7 +363,7 @@ if sales_raw.empty:
     st.warning("Nessuna vendita trovata. Verifica RLS policies o il range di date.")
     st.stop()
 
-# ── Pulizia ───────────────────────────────────────────────────────────────────
+# ── Pulizia ────────────────────────────────────────────────────────────────────
 for col in ["total_amount","unit_price","quantity"]:
     sales_raw[col] = pd.to_numeric(sales_raw[col], errors="coerce").fillna(0)
 sales_raw["sale_date"]   = pd.to_datetime(sales_raw["sale_date"], utc=True)
@@ -416,7 +376,7 @@ if not stores.empty:
     sales_raw = sales_raw.merge(
         stores[["store_id","store_name","region","city"]], on="store_id", how="left")
     for c in ["store_name","region","city"]:
-        sales_raw[c] = sales_raw[c].fillna("N/D")
+        sales_raw[c] = sales_raw[c].fillna(sales_raw.get("store_id","N/D"))
 else:
     sales_raw["store_name"] = sales_raw["store_id"]
     sales_raw["region"]     = "N/D"
@@ -431,24 +391,29 @@ else:
 
 
 # ════════════════════════════════════════════════════════════════════════════
-# SIDEBAR — FILTRI + REPORT
+# SIDEBAR — FILTRI DIMENSIONALI
 # ════════════════════════════════════════════════════════════════════════════
 with st.sidebar:
     st.divider()
     st.markdown("### 🔍 Filtri")
 
     sel_stores   = st.multiselect("Store",
-        sorted(sales_raw["store_name"].dropna().unique()), placeholder="Tutti gli store")
+        sorted(sales_raw["store_name"].dropna().unique()),
+        placeholder="Tutti gli store")
     sel_regions  = st.multiselect("Regione",
-        sorted(sales_raw["region"].dropna().unique()), placeholder="Tutte le regioni")
+        sorted(sales_raw["region"].dropna().unique()),
+        placeholder="Tutte le regioni")
     sel_cats     = st.multiselect("Categoria",
-        sorted(sales_raw["category"].dropna().unique()), placeholder="Tutte le categorie")
+        sorted(sales_raw["category"].dropna().unique()),
+        placeholder="Tutte le categorie")
     sel_channels = st.multiselect("Canale",
-        sorted(sales_raw["channel"].dropna().unique()), placeholder="Tutti i canali")
+        sorted(sales_raw["channel"].dropna().unique()),
+        placeholder="Tutti i canali")
 
     all_tiers = sorted(customers["loyalty_tier"].dropna().unique()) \
         if not customers.empty and "loyalty_tier" in customers.columns else []
-    sel_tiers = st.multiselect("Loyalty tier", all_tiers, placeholder="Tutti i tier")
+    sel_tiers = st.multiselect("Loyalty tier", all_tiers,
+                               placeholder="Tutti i tier")
 
     min_p = float(sales_raw["unit_price"].min())
     max_p = float(sales_raw["unit_price"].max())
@@ -458,32 +423,20 @@ with st.sidebar:
 
     st.divider()
     st.markdown("### 📋 Report")
-    sel_kpis = st.multiselect("KPI",
-        ["Fatturato netto","Scontrino medio","Transazioni","Unità vendute"], default=[])
+    sel_kpis   = st.multiselect("KPI",
+        ["Fatturato netto","Scontrino medio","Transazioni","Unità vendute"],
+        default=[])
     sel_charts = st.multiselect("Grafici",
-        ["Fatturato mensile","Mix canali","Mix categorie","Performance store",
-         "Trend scontrino medio","Vendite per giorno","% venduto per categoria"],
+        ["Fatturato mensile","Mix canali","Mix categorie",
+         "Performance store","Trend scontrino medio","Top clienti"],
         default=[])
 
     st.divider()
-    if st.button("📄 Genera report PDF", use_container_width=True,
-                 type="primary", disabled=not(sel_kpis or sel_charts)):
-        st.session_state["trigger_pdf"] = True
-
+    generate_btn = st.button("📄 Genera report PDF", use_container_width=True,
+                             type="primary", disabled=not(sel_kpis or sel_charts))
     if st.button("🔄 Svuota cache", use_container_width=True):
         st.cache_data.clear()
         st.rerun()
-
-    # Download persiste tra rerun grazie a session_state
-    if st.session_state.get("pdf_bytes"):
-        st.success("✅ PDF pronto!")
-        st.download_button(
-            label="📥 Scarica report PDF",
-            data=st.session_state["pdf_bytes"],
-            file_name=f"retail_report_{datetime.now().strftime('%Y-%m-%d')}.pdf",
-            mime="application/pdf",
-            use_container_width=True,
-        )
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -518,11 +471,11 @@ if sales.empty:
 # ════════════════════════════════════════════════════════════════════════════
 # KPI
 # ════════════════════════════════════════════════════════════════════════════
-revenue     = sales["total_amount"].sum()
+revenue      = sales["total_amount"].sum()
 transactions = len(sales)
-avg_basket  = revenue / transactions if transactions else 0
-units       = int(sales["quantity"].sum())
-unique_cust = sales["customer_id"].nunique()
+avg_basket   = revenue / transactions if transactions else 0
+units        = int(sales["quantity"].sum())
+unique_cust  = sales["customer_id"].nunique()
 
 kpi_data = {
     "Fatturato netto": {"label":"Fatturato netto", "value":fmt_currency(revenue)},
@@ -557,6 +510,7 @@ PL = dict(margin=dict(l=0,r=0,t=28,b=0),
           plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
           font=dict(size=12), legend=dict(orientation="h", y=-0.2))
 
+# Overview
 with tab_ov:
     cl, cr = st.columns(2)
     with cl:
@@ -609,12 +563,12 @@ with tab_ov:
         fig.update_layout(**PL, height=260, yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
 
+# Store
 with tab_st:
     cl, cr = st.columns(2)
     with cl:
         st.markdown("#### Revenue per store")
-        bs = sales.groupby("store_name")["total_amount"].sum().reset_index()\
-               .sort_values("total_amount", ascending=True).tail(10)
+        bs = sales.groupby("store_name")["total_amount"].sum().reset_index().sort_values("total_amount", ascending=True).tail(10)
         fig = px.bar(bs, x="total_amount", y="store_name", orientation="h",
                      color="store_name", color_discrete_sequence=COLORS,
                      labels={"total_amount":"Revenue (€)","store_name":""})
@@ -627,13 +581,12 @@ with tab_st:
         bst = sales.groupby("store_name").agg(
             transazioni=("sale_id","count"), revenue=("total_amount","sum"),
             clienti=("customer_id","nunique")).reset_index()
-        bst["scontrino"]   = (bst["revenue"]/bst["transazioni"]).round(2)
+        bst["scontrino"] = (bst["revenue"]/bst["transazioni"]).round(2)
         bst["revenue_fmt"] = bst["revenue"].apply(fmt_currency)
         st.dataframe(bst[["store_name","transazioni","scontrino","clienti","revenue_fmt"]]
-                     .sort_values("revenue", ascending=False)
+                     .sort_values("revenue_fmt", ascending=False)
                      .rename(columns={"store_name":"Store","transazioni":"Transaz.",
-                                      "scontrino":"Scontrino €","clienti":"Clienti",
-                                      "revenue_fmt":"Revenue"}),
+                                      "scontrino":"Scontrino €","clienti":"Clienti","revenue_fmt":"Revenue"}),
                      use_container_width=True, hide_index=True)
 
     cl2, cr2 = st.columns(2)
@@ -641,38 +594,33 @@ with tab_st:
         if sales["region"].notna().any():
             st.markdown("#### Per regione")
             br = sales.groupby("region")["total_amount"].sum().reset_index()
-            fig = px.pie(br, names="region", values="total_amount",
-                         hole=0.4, color_discrete_sequence=COLORS)
+            fig = px.pie(br, names="region", values="total_amount", hole=0.4, color_discrete_sequence=COLORS)
             fig.update_layout(**PL, height=280)
             st.plotly_chart(fig, use_container_width=True)
     with cr2:
         if sales["city"].notna().any():
             st.markdown("#### Top città")
-            bc = sales.groupby("city")["total_amount"].sum().reset_index()\
-                   .sort_values("total_amount", ascending=False).head(8)
-            fig = px.bar(bc, x="city", y="total_amount", color="city",
-                         color_discrete_sequence=COLORS,
+            bc = sales.groupby("city")["total_amount"].sum().reset_index().sort_values("total_amount", ascending=False).head(8)
+            fig = px.bar(bc, x="city", y="total_amount", color="city", color_discrete_sequence=COLORS,
                          labels={"city":"","total_amount":"Revenue (€)"})
             fig.update_traces(marker_cornerradius=4)
             fig.update_layout(**PL, height=280, showlegend=False,
                               yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
             st.plotly_chart(fig, use_container_width=True)
 
+# Prodotti
 with tab_pr:
     cl, cr = st.columns(2)
     with cl:
         st.markdown("#### Venduto per categoria")
         c2 = sales.groupby("category")["total_amount"].sum().reset_index()
-        fig = px.pie(c2, names="category", values="total_amount",
-                     hole=0.45, color_discrete_sequence=COLORS)
+        fig = px.pie(c2, names="category", values="total_amount", hole=0.45, color_discrete_sequence=COLORS)
         fig.update_layout(**PL, height=300)
         st.plotly_chart(fig, use_container_width=True)
     with cr:
         st.markdown("#### Unità per categoria")
-        cq = sales.groupby("category")["quantity"].sum().reset_index()\
-               .sort_values("quantity", ascending=False)
-        fig = px.bar(cq, x="category", y="quantity", color="category",
-                     color_discrete_sequence=COLORS,
+        cq = sales.groupby("category")["quantity"].sum().reset_index().sort_values("quantity", ascending=False)
+        fig = px.bar(cq, x="category", y="quantity", color="category", color_discrete_sequence=COLORS,
                      labels={"quantity":"Unità","category":""})
         fig.update_traces(marker_cornerradius=4)
         fig.update_layout(**PL, height=300, showlegend=False,
@@ -687,17 +635,16 @@ with tab_pr:
         tp["revenue_fmt"] = tp["total_amount"].apply(fmt_currency)
         tp["quota_%"] = (tp["total_amount"]/tp["total_amount"].sum()*100).round(1)
         st.dataframe(tp[["product_name","category","revenue_fmt","quota_%"]].rename(columns={
-            "product_name":"Prodotto","category":"Categoria",
-            "revenue_fmt":"Revenue","quota_%":"Quota %"}),
+            "product_name":"Prodotto","category":"Categoria","revenue_fmt":"Revenue","quota_%":"Quota %"}),
             use_container_width=True, hide_index=True)
 
+# Clienti
 with tab_cu:
     cl, cr = st.columns(2)
     with cl:
         st.markdown("#### Top 10 clienti")
         if not customers.empty:
-            customers["total_spend"] = pd.to_numeric(
-                customers["total_spend"], errors="coerce").fillna(0)
+            customers["total_spend"] = pd.to_numeric(customers["total_spend"], errors="coerce").fillna(0)
             cv = customers[customers["loyalty_tier"].isin(sel_tiers)] if sel_tiers else customers
             tc = cv.head(10).copy()
             tc["spesa_fmt"] = tc["total_spend"].apply(fmt_currency)
@@ -712,90 +659,66 @@ with tab_cu:
             cv2 = customers[customers["loyalty_tier"].isin(sel_tiers)] if sel_tiers else customers
             tr = cv2.groupby("loyalty_tier")["total_spend"].agg(["count","sum"]).reset_index()
             tr.columns = ["tier","clienti","spesa"]
-            fig = px.pie(tr, names="tier", values="spesa",
-                         hole=0.4, color_discrete_sequence=COLORS)
+            fig = px.pie(tr, names="tier", values="spesa", hole=0.4, color_discrete_sequence=COLORS)
             fig.update_layout(**PL, height=280)
             st.plotly_chart(fig, use_container_width=True)
 
 
 # ════════════════════════════════════════════════════════════════════════════
-# GENERA PDF — trigger via session_state, risultato salvato in session_state
+# GENERA PDF
 # ════════════════════════════════════════════════════════════════════════════
-if st.session_state.get("trigger_pdf") and (sel_kpis or sel_charts):
-    st.session_state["trigger_pdf"] = False   # consuma il trigger
-
+if generate_btn and (sel_kpis or sel_charts):
     with st.spinner("Generazione PDF in corso..."):
+
+        # Costruisci immagini matplotlib
         chart_imgs = {}
 
         if "Fatturato mensile" in sel_charts:
-            m = sales.groupby(["month","month_label"])["total_amount"]\
-                     .sum().reset_index().sort_values("month")
-            chart_imgs["Fatturato mensile"] = chart_bar_v(
-                m, "month_label", "total_amount", "Fatturato mensile")
+            m = sales.groupby(["month","month_label"])["total_amount"].sum().reset_index().sort_values("month")
+            chart_imgs["Fatturato mensile"] = chart_bar_v(m, "month_label", "total_amount", "Fatturato mensile")
 
         if "Mix canali" in sel_charts:
             ch = sales.groupby("channel")["total_amount"].sum().reset_index()
-            chart_imgs["Mix canali"] = chart_pie(
-                ch["channel"].tolist(), ch["total_amount"].tolist(), "Mix canali")
+            chart_imgs["Mix canali"] = chart_pie(ch["channel"].tolist(), ch["total_amount"].tolist(), "Mix canali")
 
         if "Mix categorie" in sel_charts:
-            ct = sales.groupby("category")["total_amount"]\
-                      .sum().reset_index().sort_values("total_amount")
-            chart_imgs["Mix categorie"] = chart_bar_h(
-                ct, "total_amount", "category", "Mix categorie")
-
-        if "% venduto per categoria" in sel_charts:
-            cp = sales.groupby("category")["total_amount"].sum().reset_index()
-            chart_imgs["% venduto per categoria"] = chart_pie(
-                cp["category"].tolist(), cp["total_amount"].tolist(),
-                "% venduto per categoria")
+            cats = sales.groupby("category")["total_amount"].sum().reset_index().sort_values("total_amount")
+            chart_imgs["Mix categorie"] = chart_bar_h(cats, "total_amount", "category", "Mix categorie")
 
         if "Performance store" in sel_charts:
-            bs2 = sales.groupby("store_name")["total_amount"]\
-                       .sum().reset_index().sort_values("total_amount").tail(10)
-            chart_imgs["Performance store"] = chart_bar_h(
-                bs2, "total_amount", "store_name", "Revenue per store")
+            bs = sales.groupby("store_name")["total_amount"].sum().reset_index().sort_values("total_amount").tail(10)
+            chart_imgs["Performance store"] = chart_bar_h(bs, "total_amount", "store_name", "Revenue per store")
 
         if "Trend scontrino medio" in sel_charts:
-            w2 = sales.groupby("week").agg(
-                rev=("total_amount","sum"), txn=("sale_id","count")).reset_index()
-            w2["basket"] = (w2["rev"]/w2["txn"]).round(2)
-            chart_imgs["Trend scontrino medio"] = chart_line(
-                w2, "week", "basket", "Trend scontrino medio")
+            w = sales.groupby("week").agg(rev=("total_amount","sum"),txn=("sale_id","count")).reset_index()
+            w["basket"] = (w["rev"]/w["txn"]).round(2)
+            chart_imgs["Trend scontrino medio"] = chart_line(w, "week", "basket", "Trend scontrino medio")
 
-        if "Vendite per giorno" in sel_charts:
-            dow_ord2 = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-            dow_lbl2 = {"Monday":"Lun","Tuesday":"Mar","Wednesday":"Mer","Thursday":"Gio",
-                        "Friday":"Ven","Saturday":"Sab","Sunday":"Dom"}
-            dw2 = sales.groupby("day_of_week")["total_amount"].sum().reset_index()
-            dw2["ord"] = dw2["day_of_week"].map({d:i for i,d in enumerate(dow_ord2)})
-            dw2["lbl"] = dw2["day_of_week"].map(dow_lbl2)
-            dw2 = dw2.sort_values("ord")
-            chart_imgs["Vendite per giorno"] = chart_bar_v_days(
-                dw2, "lbl", "total_amount", "Vendite per giorno della settimana")
+        if "Top clienti" in sel_charts and not customers.empty:
+            tc = customers.head(10).copy()
+            tc["total_spend"] = pd.to_numeric(tc["total_spend"], errors="coerce").fillna(0)
+            chart_imgs["Top clienti"] = chart_bar_h(
+                tc.sort_values("total_spend"), "total_spend", "name", "Top clienti per spesa")
 
         # Tabelle
         store_table = None
         if "Performance store" in sel_charts:
             sd = sales.groupby("store_name").agg(
-                Transazioni=("sale_id","count"),
-                Revenue=("total_amount","sum"),
-                Clienti=("customer_id","nunique")
-            ).reset_index().sort_values("Revenue", ascending=False).head(15)
-            sd["Scontrino €"] = (sd["Revenue"]/sd["Transazioni"])\
-                                 .apply(lambda x: f"€ {x:,.2f}")
+                Transazioni=("sale_id","count"), Revenue=("total_amount","sum"),
+                Clienti=("customer_id","nunique")).reset_index().sort_values("Revenue", ascending=False)
+            sd["Scontrino €"] = (sd["Revenue"]/sd["Transazioni"]).round(2)
             sd["Revenue"] = sd["Revenue"].apply(fmt_currency)
             store_table = sd.rename(columns={"store_name":"Store"})
 
         top_cust_table = None
         if "Top clienti" in sel_charts and not customers.empty:
             tc2 = customers.head(10).copy()
-            tc2["total_spend"] = pd.to_numeric(
-                tc2["total_spend"], errors="coerce").fillna(0)
+            tc2["total_spend"] = pd.to_numeric(tc2["total_spend"], errors="coerce").fillna(0)
             tc2["Spesa totale"] = tc2["total_spend"].apply(fmt_currency)
-            top_cust_table = tc2[["name","loyalty_tier","Spesa totale"]]\
-                               .rename(columns={"name":"Cliente","loyalty_tier":"Tier"})
+            top_cust_table = tc2[["name","loyalty_tier","Spesa totale"]].rename(
+                columns={"name":"Cliente","loyalty_tier":"Tier"})
 
+        # Genera PDF
         try:
             pdf_bytes = build_pdf_report(
                 sel_kpis=sel_kpis,
@@ -803,11 +726,17 @@ if st.session_state.get("trigger_pdf") and (sel_kpis or sel_charts):
                 kpi_data=kpi_data,
                 period=period,
                 filters_summary=filters_summary,
-                chart_imgs=chart_imgs,
+                chart_imgs=chart_imgs,       # ← unico nome, nessuna ambiguità
                 store_table=store_table,
                 top_cust_table=top_cust_table,
             )
-            st.session_state["pdf_bytes"] = pdf_bytes  # ← persiste tra rerun
-            st.rerun()                                  # ← mostra il download button
+            st.sidebar.success("✅ PDF pronto!")
+            st.sidebar.download_button(
+                label="📥 Scarica report PDF",
+                data=pdf_bytes,
+                file_name=f"retail_report_{datetime.now().strftime('%Y-%m-%d')}.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+            )
         except Exception as e:
-            st.error(f"Errore generazione PDF: {e}")
+            st.sidebar.error(f"Errore generazione PDF: {e}")
