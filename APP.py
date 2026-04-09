@@ -706,6 +706,13 @@ with tab_cu:
             st.plotly_chart(fig, use_container_width=True)
 
 
+
+def chart_pie(labels, values, title, figsize=(8, 6)):
+    fig, ax = plt.subplots(figsize=figsize)
+    ax.pie(values, labels=labels, autopct='%1.1f%%')
+    ax.set_title(title)
+    return fig
+ 
 # ════════════════════════════════════════════════════════════════════════════
 # GENERA PDF
 # ════════════════════════════════════════════════════════════════════════════
