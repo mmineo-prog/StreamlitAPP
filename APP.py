@@ -276,11 +276,11 @@ def build_pdf_report(
             story.append(Spacer(1, 0.4*cm))
 
     # Tabelle
-    def df_to_table(df, title):
+    def df_to_table(s, df, title):
         if df is None or df.empty:
             return
-        story += [Paragraph(title, section_sty),
-                  HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=6)]
+        s += [Paragraph(title, section_sty),
+              HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=6)]
         col_w = W / len(df.columns)
         header = [[Paragraph(f"<b>{c}</b>", th_sty) for c in df.columns]]
         rows   = [[Paragraph(str(v), td_sty) for v in r]
@@ -297,12 +297,12 @@ def build_pdf_report(
             ("RIGHTPADDING",  (0,0),(-1,-1), 8),
             ("VALIGN",        (0,0),(-1,-1), "MIDDLE"),
         ]))
-        story += [t, Spacer(1, 0.4*cm)]
+        s += [t, Spacer(1, 0.4*cm)]
 
     if "Performance store" in sel_charts:
-        df_to_table(store_table, "Dettaglio performance store")
+        df_to_table(story, store_table, "Dettaglio performance store")
     if "Top clienti" in sel_charts:
-        df_to_table(top_cust_table, "Top clienti per spesa")
+        df_to_table(story, top_cust_table, "Top clienti per spesa")
 
     # Footer
     story += [
