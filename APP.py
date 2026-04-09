@@ -483,9 +483,21 @@ with st.sidebar:
     if st.button("📄 Genera report PDF", use_container_width=True,
                  type="primary", disabled=not(sel_kpis or sel_charts)):
         st.session_state["generate_pdf"] = True
+        st.session_state["pdf_bytes"]    = None  # reset pdf precedente
     if st.button("🔄 Svuota cache", use_container_width=True):
         st.cache_data.clear()
         st.rerun()
+
+    # Bottone download — persiste tra rerun
+    if st.session_state.get("pdf_bytes"):
+        st.success("✅ PDF pronto!")
+        st.download_button(
+            label="📥 Scarica report PDF",
+            data=st.session_state["pdf_bytes"],
+            file_name=f"retail_report_{datetime.now().strftime('%Y-%m-%d')}.pdf",
+            mime="application/pdf",
+            use_container_width=True,
+        )
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -717,7 +729,7 @@ with tab_cu:
 # GENERA PDF
 # ════════════════════════════════════════════════════════════════════════════
 if st.session_state.get("generate_pdf") and (sel_kpis or sel_charts):
-    st.session_state["generate_pdf"] = False  # reset subito per evitare loop
+    st.session_state["generate_pdf"] = False
     with st.spinner("Generazione PDF in corso..."):
 
         # Costruisci immagini matplotlib
