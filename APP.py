@@ -143,12 +143,18 @@ def chart_bar_h(df, x_col, y_col, title) -> BytesIO:
     return mpl_to_bytes(fig)
 
 def chart_pie(labels, values, title) -> BytesIO:
-    fig, ax = plt.subplots(figsize=(6, 4))
-    ax.pie(values, labels=labels, autopct="%1.1f%%",
-           colors=MCOLORS[:len(labels)], startangle=90,
-           wedgeprops=dict(width=0.55))
-    ax.set_title(title, fontsize=12, fontweight="bold", pad=12)
-    fig.tight_layout()
+    fig, ax = plt.subplots(figsize=(6, 5))   # quasi quadrato per non schiacciare
+    wedges, texts, autotexts = ax.pie(
+        values, labels=labels, autopct="%1.1f%%",
+        colors=MCOLORS[:len(labels)], startangle=90,
+        wedgeprops=dict(width=0.55),
+        pctdistance=0.75
+    )
+    for t in texts:     t.set_fontsize(9)
+    for t in autotexts: t.set_fontsize(8)
+    ax.set_title(title, fontsize=12, fontweight="bold", pad=14)
+    ax.set_aspect("equal")   # forza cerchio perfetto
+    fig.tight_layout(pad=1.5)
     return mpl_to_bytes(fig)
 
 def chart_line(df, x_col, y_col, title) -> BytesIO:
@@ -192,9 +198,9 @@ def build_pdf_report(
         return ParagraphStyle(name, parent=base["Normal"], **kw)
 
     title_sty    = sty("t",  fontSize=22, fontName="Helvetica-Bold",
-                        textColor=colors.HexColor("#1c1c1a"), spaceAfter=4)
+                        textColor=colors.HexColor("#1c1c1a"), spaceAfter=10, spaceBefore=6)
     sub_sty      = sty("s",  fontSize=10, fontName="Helvetica",
-                        textColor=colors.HexColor("#6b6b63"), spaceAfter=2)
+                        textColor=colors.HexColor("#6b6b63"), spaceAfter=6, leading=16)
     section_sty  = sty("se", fontSize=13, fontName="Helvetica-Bold",
                         textColor=colors.HexColor("#1c1c1a"),
                         spaceBefore=14, spaceAfter=6)
@@ -221,14 +227,16 @@ def build_pdf_report(
     story += [
         Spacer(1, 0.5*cm),
         Paragraph("Retail Analytics Report", title_sty),
+        Spacer(1, 0.15*cm),
         Paragraph(
             f"Periodo: <b>{period}</b> &nbsp;·&nbsp; "
             f"Generato il {datetime.now().strftime('%d %B %Y, %H:%M')}",
             sub_sty),
     ]
     if filters_summary != "Nessuno":
+        story.append(Spacer(1, 0.1*cm))
         story.append(Paragraph(f"Filtri attivi: {filters_summary}", sub_sty))
-    story += [Spacer(1, 0.3*cm),
+    story += [Spacer(1, 0.4*cm),
               HRFlowable(width=W, thickness=2, color=BLUE, spaceAfter=16)]
 
     # KPI
@@ -263,6 +271,17 @@ def build_pdf_report(
     if sel_charts and chart_imgs:
         story += [Paragraph("Grafici", section_sty),
                   HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=8)]
+
+        # Altezze native per tipo di grafico (evita deformazioni)
+        chart_heights = {
+            "Fatturato mensile":     W * 0.40,
+            "Mix canali":            W * 0.55,   # torta — più alta
+            "Mix categorie":         W * 0.38,
+            "Performance store":     W * 0.50,
+            "Trend scontrino medio": W * 0.35,
+            "Top clienti":           W * 0.45,
+        }
+
         for name in sel_charts:
             if name not in chart_imgs:
                 continue
@@ -270,10 +289,11 @@ def build_pdf_report(
             try:
                 buf_img = chart_imgs[name]
                 buf_img.seek(0)
-                story.append(RLImage(buf_img, width=W, height=W*0.42))
+                h = chart_heights.get(name, W * 0.40)
+                story.append(RLImage(buf_img, width=W, height=h))
             except Exception as ex:
                 story.append(Paragraph(f"[Grafico non disponibile: {ex}]", body_sty))
-            story.append(Spacer(1, 0.4*cm))
+            story.append(Spacer(1, 0.5*cm))
 
     # Tabelle
     def df_to_table(s, df, title):
