@@ -22,7 +22,7 @@ from reportlab.lib.units import cm
 from reportlab.lib import colors
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle,
-    HRFlowable, Image as RLImage
+    HRFlowable, Image as RLImage, KeepTogether
 )
 from reportlab.lib.enums import TA_CENTER
 import matplotlib
@@ -143,18 +143,15 @@ def chart_bar_h(df, x_col, y_col, title) -> BytesIO:
     return mpl_to_bytes(fig)
 
 def chart_pie(labels, values, title) -> BytesIO:
-    fig, ax = plt.subplots(figsize=(6, 5))   # quasi quadrato per non schiacciare
-    wedges, texts, autotexts = ax.pie(
-        values, labels=labels, autopct="%1.1f%%",
-        colors=MCOLORS[:len(labels)], startangle=90,
-        wedgeprops=dict(width=0.55),
-        pctdistance=0.75
-    )
-    for t in texts:     t.set_fontsize(9)
-    for t in autotexts: t.set_fontsize(8)
+    fig, ax = plt.subplots(figsize=(5, 5))
+    ax.pie(values, labels=labels, autopct="%1.1f%%",
+           colors=MCOLORS[:len(labels)], startangle=90,
+           wedgeprops=dict(width=0.55), pctdistance=0.75)
+    for txt in ax.texts:
+        txt.set_fontsize(9)
     ax.set_title(title, fontsize=12, fontweight="bold", pad=14)
-    ax.set_aspect("equal")   # forza cerchio perfetto
-    fig.tight_layout(pad=1.5)
+    ax.set_aspect("equal")
+    fig.subplots_adjust(left=0.15, right=0.85, top=0.88, bottom=0.05)
     return mpl_to_bytes(fig)
 
 def chart_line(df, x_col, y_col, title) -> BytesIO:
@@ -272,10 +269,10 @@ def build_pdf_report(
         story += [Paragraph("Grafici", section_sty),
                   HRFlowable(width=W, thickness=0.5, color=BORDER, spaceAfter=8)]
 
-        # Altezze native per tipo di grafico (evita deformazioni)
+        # Altezze native per tipo di grafico
         chart_heights = {
             "Fatturato mensile":     W * 0.40,
-            "Mix canali":            W * 0.55,   # torta — più alta
+            "Mix canali":            W * 0.42,   # torta 5x5 — mantieni proporzione quadrata
             "Mix categorie":         W * 0.38,
             "Performance store":     W * 0.50,
             "Trend scontrino medio": W * 0.35,
@@ -285,15 +282,20 @@ def build_pdf_report(
         for name in sel_charts:
             if name not in chart_imgs:
                 continue
-            story.append(Paragraph(name, chart_tit_sty))
             try:
                 buf_img = chart_imgs[name]
                 buf_img.seek(0)
                 h = chart_heights.get(name, W * 0.40)
-                story.append(RLImage(buf_img, width=W, height=h))
+                # KeepTogether impedisce lo split titolo/grafico tra pagine
+                block = KeepTogether([
+                    Paragraph(name, chart_tit_sty),
+                    Spacer(1, 0.15*cm),
+                    RLImage(buf_img, width=W, height=h),
+                    Spacer(1, 0.5*cm),
+                ])
+                story.append(block)
             except Exception as ex:
-                story.append(Paragraph(f"[Grafico non disponibile: {ex}]", body_sty))
-            story.append(Spacer(1, 0.5*cm))
+                story.append(Paragraph(f"[{name} — errore: {ex}]", body_sty))
 
     # Tabelle
     def df_to_table(s, df, title):
