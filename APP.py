@@ -19,7 +19,6 @@ from datetime import datetime, timedelta
 # ── CONFIG ────────────────────────────────────────────────────────────────────
 SUPABASE_URL = st.secrets["SUPABASE_URL"]
 SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
-
 COLORS = ["#378ADD","#1D9E75","#D85A30","#7F77DD","#BA7517","#D4537E"]
 
 st.set_page_config(
@@ -32,10 +31,14 @@ st.set_page_config(
 st.markdown("""
 <style>
   [data-testid="metric-container"] {
-    background: #f8f9fa; border-radius: 12px;
-    padding: 14px 18px; border: 1px solid #e9ecef;
+    background:#f8f9fa; border-radius:12px;
+    padding:14px 18px; border:1px solid #e9ecef;
   }
-  [data-testid="stSidebar"] { background: #fafafa; }
+  [data-testid="stSidebar"] { background:#fafafa; }
+  .filter-tag {
+    display:inline-block; background:#e8f4fd; color:#185fa5;
+    border-radius:20px; padding:2px 10px; font-size:12px; margin:2px;
+  }
 </style>
 """, unsafe_allow_html=True)
 
@@ -83,7 +86,7 @@ def load_data(date_from: str):
 
 def get_date_from(period: str) -> str:
     d = datetime.now()
-    offsets = {"1 mese": 30, "3 mesi": 90, "6 mesi": 180, "12 mesi": 365}
+    offsets = {"1 mese":30,"3 mesi":90,"6 mesi":180,"12 mesi":365}
     return (d - timedelta(days=offsets.get(period, 365))).strftime("%Y-%m-%d")
 
 
@@ -93,110 +96,204 @@ def fmt_currency(v: float) -> str:
     return f"€ {v:.2f}"
 
 
-def build_report(sel_kpis, sel_charts, kpi_data, period) -> str:
+def build_report(sel_kpis, sel_charts, kpi_data, period, filters_summary) -> str:
     chart_labels = {
-        "Fatturato mensile":     "Andamento fatturato mensile",
-        "Mix canali":            "Mix canali di vendita",
-        "Mix categorie":         "Mix categorie merceologiche",
-        "Performance store":     "Revenue per punto vendita",
-        "Trend scontrino medio": "Evoluzione scontrino medio",
-        "Top clienti":           "Top clienti per spesa totale",
+        "Fatturato mensile":"Andamento fatturato mensile",
+        "Mix canali":"Mix canali di vendita",
+        "Mix categorie":"Mix categorie merceologiche",
+        "Performance store":"Revenue per punto vendita",
+        "Trend scontrino medio":"Evoluzione scontrino medio",
+        "Top clienti":"Top clienti per spesa totale",
     }
     lines = [
         "RETAIL ANALYTICS REPORT",
         f"Periodo: {period}  —  Generato il {datetime.now().strftime('%d %B %Y, %H:%M')}",
         f"Sorgente: Supabase — {SUPABASE_URL}",
-        "═" * 54, "",
+        f"Filtri attivi: {filters_summary}",
+        "═"*54, "",
     ]
     if sel_kpis:
-        lines += ["KPI SELEZIONATI", "─" * 36]
+        lines += ["KPI SELEZIONATI","─"*36]
         for k in sel_kpis:
             if k in kpi_data:
                 lines.append(f"  {kpi_data[k]['label']:<24} {kpi_data[k]['value']}")
         lines.append("")
     if sel_charts:
-        lines += ["GRAFICI INCLUSI", "─" * 36]
+        lines += ["GRAFICI INCLUSI","─"*36]
         for c in sel_charts:
-            lines.append(f"  • {chart_labels.get(c, c)}")
+            lines.append(f"  • {chart_labels.get(c,c)}")
         lines.append("")
-    lines += ["═" * 54]
+    lines += ["═"*54]
     return "\n".join(lines)
 
 
 # ════════════════════════════════════════════════════════════════════════════
-# SIDEBAR
+# CARICAMENTO BASE (solo periodo — i filtri dimensionali vengono dopo)
 # ════════════════════════════════════════════════════════════════════════════
 with st.sidebar:
     st.markdown("## 📊 Retail Analytics")
     st.caption(f"Supabase · {datetime.now().strftime('%d/%m/%Y %H:%M')}")
     st.divider()
-
+    st.markdown("### ⏱ Periodo")
     period = st.selectbox("Periodo di analisi",
-                          ["1 mese","3 mesi","6 mesi","12 mesi"], index=3)
+                          ["1 mese","3 mesi","6 mesi","12 mesi"], index=3,
+                          label_visibility="collapsed")
+
+date_from = get_date_from(period)
+
+with st.spinner(f"Caricamento dati (periodo: {period})..."):
+    sales_raw, stores, products, customers, load_errors = load_data(date_from)
+
+for err in load_errors:
+    st.error(f"⚠ {err}")
+
+if sales_raw.empty:
+    st.warning(
+        f"Nessuna vendita con `sale_date >= {date_from}`.\n\n"
+        "Cause: tabelle vuote · RLS attiva · date fuori range"
+    )
+    st.stop()
+
+# ── Pulizia e join ─────────────────────────────────────────────────────────────
+sales_raw["total_amount"] = pd.to_numeric(sales_raw["total_amount"], errors="coerce").fillna(0)
+sales_raw["unit_price"]   = pd.to_numeric(sales_raw["unit_price"],   errors="coerce").fillna(0)
+sales_raw["quantity"]     = pd.to_numeric(sales_raw["quantity"],     errors="coerce").fillna(0)
+sales_raw["sale_date"]    = pd.to_datetime(sales_raw["sale_date"], utc=True)
+sales_raw["month"]        = sales_raw["sale_date"].dt.to_period("M").astype(str)
+sales_raw["month_label"]  = sales_raw["sale_date"].dt.strftime("%b %y")
+sales_raw["week"]         = sales_raw["sale_date"].dt.to_period("W").astype(str)
+sales_raw["day_of_week"]  = sales_raw["sale_date"].dt.day_name()
+
+if not stores.empty:
+    sales_raw = sales_raw.merge(
+        stores[["store_id","store_name","region","city"]], on="store_id", how="left")
+    sales_raw["store_name"] = sales_raw["store_name"].fillna(sales_raw["store_id"])
+    sales_raw["region"]     = sales_raw["region"].fillna("N/D")
+    sales_raw["city"]       = sales_raw["city"].fillna("N/D")
+else:
+    sales_raw["store_name"] = sales_raw["store_id"]
+    sales_raw["region"]     = "N/D"
+    sales_raw["city"]       = "N/D"
+
+if not products.empty:
+    sales_raw = sales_raw.merge(
+        products[["product_id","category"]], on="product_id", how="left")
+    sales_raw["category"] = sales_raw["category"].fillna("N/D")
+else:
+    sales_raw["category"] = "N/D"
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# SIDEBAR — FILTRI DIMENSIONALI (dopo il caricamento)
+# ════════════════════════════════════════════════════════════════════════════
+with st.sidebar:
+    st.divider()
+    st.markdown("### 🔍 Filtri dimensionali")
+
+    # Store
+    all_stores = sorted(sales_raw["store_name"].dropna().unique().tolist())
+    sel_stores = st.multiselect(
+        "Store", all_stores,
+        placeholder="Tutti gli store",
+        help="Filtra per uno o più punti vendita"
+    )
+
+    # Regione
+    all_regions = sorted(sales_raw["region"].dropna().unique().tolist())
+    sel_regions = st.multiselect(
+        "Regione", all_regions,
+        placeholder="Tutte le regioni",
+        help="Filtra per area geografica"
+    )
+
+    # Categoria prodotto
+    all_cats = sorted(sales_raw["category"].dropna().unique().tolist())
+    sel_cats = st.multiselect(
+        "Categoria prodotto", all_cats,
+        placeholder="Tutte le categorie",
+        help="Filtra per categoria merceologica"
+    )
+
+    # Canale
+    all_channels = sorted(sales_raw["channel"].dropna().unique().tolist())
+    sel_channels = st.multiselect(
+        "Canale di vendita", all_channels,
+        placeholder="Tutti i canali",
+        help="POS · eCommerce · Marketplace"
+    )
+
+    # Loyalty tier
+    all_tiers = []
+    if not customers.empty and "loyalty_tier" in customers.columns:
+        all_tiers = sorted(customers["loyalty_tier"].dropna().unique().tolist())
+    sel_tiers = st.multiselect(
+        "Loyalty tier", all_tiers,
+        placeholder="Tutti i tier",
+        help="Filtra per tier fidelizzazione cliente"
+    )
+
+    # Fascia di prezzo
+    min_price = float(sales_raw["unit_price"].min())
+    max_price = float(sales_raw["unit_price"].max())
+    if max_price > min_price:
+        price_range = st.slider(
+            "Fascia prezzo unitario (€)",
+            min_value=min_price, max_value=max_price,
+            value=(min_price, max_price),
+            format="€%.0f"
+        )
+    else:
+        price_range = (min_price, max_price)
 
     st.divider()
-    st.markdown("### Composizione report")
-    st.caption("Seleziona cosa includere")
-
+    st.markdown("### 📋 Composizione report")
     kpi_options   = ["Fatturato netto","Scontrino medio","Transazioni","Unità vendute"]
     chart_options = ["Fatturato mensile","Mix canali","Mix categorie",
                      "Performance store","Trend scontrino medio","Top clienti"]
-
-    sel_kpis   = st.multiselect("KPI",    kpi_options,   default=[])
+    sel_kpis   = st.multiselect("KPI",     kpi_options,   default=[])
     sel_charts = st.multiselect("Grafici", chart_options, default=[])
 
     st.divider()
     generate_btn = st.button("📥 Genera report", use_container_width=True,
                              type="primary", disabled=not(sel_kpis or sel_charts))
-
-    st.divider()
     if st.button("🔄 Svuota cache", use_container_width=True):
         st.cache_data.clear()
         st.rerun()
 
 
 # ════════════════════════════════════════════════════════════════════════════
-# LOAD DATA
+# APPLICA FILTRI
 # ════════════════════════════════════════════════════════════════════════════
-date_from = get_date_from(period)
+sales = sales_raw.copy()
 
-with st.spinner(f"Caricamento dati (periodo: {period})..."):
-    sales, stores, products, customers, load_errors = load_data(date_from)
+if sel_stores:   sales = sales[sales["store_name"].isin(sel_stores)]
+if sel_regions:  sales = sales[sales["region"].isin(sel_regions)]
+if sel_cats:     sales = sales[sales["category"].isin(sel_cats)]
+if sel_channels: sales = sales[sales["channel"].isin(sel_channels)]
+sales = sales[
+    (sales["unit_price"] >= price_range[0]) &
+    (sales["unit_price"] <= price_range[1])
+]
 
-for err in load_errors:
-    st.error(f"⚠ {err}")
+# Filtro loyalty tier — tramite customer_id
+if sel_tiers and not customers.empty:
+    cust_filtered = customers[customers["loyalty_tier"].isin(sel_tiers)]["customer_id"].tolist()
+    sales = sales[sales["customer_id"].isin(cust_filtered)]
+
+# Riepilogo filtri attivi
+active_filters = []
+if sel_stores:   active_filters.append(f"Store: {', '.join(sel_stores)}")
+if sel_regions:  active_filters.append(f"Regione: {', '.join(sel_regions)}")
+if sel_cats:     active_filters.append(f"Categoria: {', '.join(sel_cats)}")
+if sel_channels: active_filters.append(f"Canale: {', '.join(sel_channels)}")
+if sel_tiers:    active_filters.append(f"Tier: {', '.join(sel_tiers)}")
+if price_range != (min_price, max_price):
+    active_filters.append(f"Prezzo: €{price_range[0]:.0f}–€{price_range[1]:.0f}")
+filters_summary = " · ".join(active_filters) if active_filters else "Nessuno"
 
 if sales.empty:
-    st.warning(
-        f"Nessuna vendita trovata con `sale_date >= {date_from}`.\n\n"
-        "Cause possibili:\n"
-        "- Tabelle vuote\n"
-        "- RLS attiva senza policy `anon_read`\n"
-        "- Date fuori dal range selezionato"
-    )
+    st.warning("Nessun dato corrisponde ai filtri selezionati. Prova ad allargare la selezione.")
     st.stop()
-
-# ── Pulizia ───────────────────────────────────────────────────────────────────
-sales["total_amount"] = pd.to_numeric(sales["total_amount"], errors="coerce").fillna(0)
-sales["unit_price"]   = pd.to_numeric(sales["unit_price"],   errors="coerce").fillna(0)
-sales["quantity"]     = pd.to_numeric(sales["quantity"],     errors="coerce").fillna(0)
-sales["sale_date"]    = pd.to_datetime(sales["sale_date"], utc=True)
-sales["month"]        = sales["sale_date"].dt.to_period("M").astype(str)
-sales["month_label"]  = sales["sale_date"].dt.strftime("%b %y")
-sales["week"]         = sales["sale_date"].dt.to_period("W").astype(str)
-
-if not stores.empty:
-    sales = sales.merge(stores[["store_id","store_name","region"]], on="store_id", how="left")
-    sales["store_name"] = sales["store_name"].fillna(sales["store_id"])
-else:
-    sales["store_name"] = sales["store_id"]
-    sales["region"]     = "N/D"
-
-if not products.empty:
-    sales = sales.merge(products[["product_id","category"]], on="product_id", how="left")
-    sales["category"] = sales["category"].fillna("N/D")
-else:
-    sales["category"] = "N/D"
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -215,14 +312,26 @@ kpi_data = {
     "Unità vendute":   {"label":"Unità vendute",    "value":f"{units:,}"},
 }
 
+# Header
 st.markdown(f"## Retail analytics — {period}")
-st.caption(
-    f"{transactions:,} transazioni · {unique_cust:,} clienti unici · "
-    f"aggiornato {datetime.now().strftime('%d/%m/%Y %H:%M')}"
-)
 
+# Badge filtri attivi
+if active_filters:
+    badges = " ".join([f'<span class="filter-tag">{f}</span>' for f in active_filters])
+    st.markdown(f"Filtri attivi: {badges}", unsafe_allow_html=True)
+else:
+    st.caption(f"{transactions:,} transazioni · {unique_cust:,} clienti unici · tutti gli store e canali")
+
+# Confronto con totale non filtrato
+if active_filters:
+    tot_rev = sales_raw["total_amount"].sum()
+    pct = revenue / tot_rev * 100 if tot_rev else 0
+    st.caption(f"Selezione: {pct:.1f}% del fatturato totale del periodo · {transactions:,} transazioni · {unique_cust:,} clienti")
+
+st.markdown("")
 c1, c2, c3, c4, c5 = st.columns(5)
-c1.metric("Fatturato netto", fmt_currency(revenue))
+c1.metric("Fatturato netto", fmt_currency(revenue),
+          delta=f"{revenue/sales_raw['total_amount'].sum()*100:.0f}% del totale" if active_filters else None)
 c2.metric("Scontrino medio", f"€ {avg_basket:.2f}")
 c3.metric("Transazioni",     f"{transactions:,}")
 c4.metric("Unità vendute",   f"{units:,}")
@@ -233,11 +342,11 @@ c5.metric("Clienti unici",   f"{unique_cust:,}")
 # TABS
 # ════════════════════════════════════════════════════════════════════════════
 tab_ov, tab_st, tab_pr, tab_cu = st.tabs([
-    "📈 Overview", "🏪 Store", "📦 Prodotti", "👥 Clienti"
+    "📈 Overview","🏪 Store","📦 Prodotti","👥 Clienti"
 ])
 
 PLOT_LAYOUT = dict(
-    margin=dict(l=0, r=0, t=28, b=0),
+    margin=dict(l=0,r=0,t=28,b=0),
     plot_bgcolor="rgba(0,0,0,0)",
     paper_bgcolor="rgba(0,0,0,0)",
     font=dict(size=12),
@@ -254,11 +363,10 @@ with tab_ov:
                    .sum().reset_index().sort_values("month"))
         fig = px.bar(monthly, x="month_label", y="total_amount",
                      color_discrete_sequence=["#378ADD"],
-                     labels={"month_label":"", "total_amount":"Revenue (€)"})
+                     labels={"month_label":"","total_amount":"Revenue (€)"})
         fig.update_traces(marker_cornerradius=4)
         fig.update_layout(**PLOT_LAYOUT, height=300,
-                          yaxis=dict(gridcolor="#f0f0f0"),
-                          xaxis=dict(showgrid=False))
+                          yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
 
     with col_r:
@@ -271,29 +379,48 @@ with tab_ov:
 
     st.markdown("#### Mix categorie merceologiche")
     cats = sales.groupby("category")["total_amount"].sum().reset_index()
-    cats["pct"] = (cats["total_amount"] / cats["total_amount"].sum() * 100).round(1)
+    cats["pct"] = (cats["total_amount"]/cats["total_amount"].sum()*100).round(1)
     cats = cats.sort_values("pct", ascending=True)
     fig = px.bar(cats, x="pct", y="category", orientation="h",
                  color="category", color_discrete_sequence=COLORS,
-                 labels={"pct":"% revenue", "category":""}, text="pct")
+                 labels={"pct":"% revenue","category":""}, text="pct")
     fig.update_traces(marker_cornerradius=4,
                       texttemplate="%{text:.1f}%", textposition="outside")
-    fig.update_layout(**PLOT_LAYOUT, height=max(220, len(cats)*38),
+    fig.update_layout(**PLOT_LAYOUT, height=max(220,len(cats)*38),
                       showlegend=False, xaxis=dict(gridcolor="#f0f0f0"))
     st.plotly_chart(fig, use_container_width=True)
 
-    st.markdown("#### Trend scontrino medio settimanale")
-    weekly = (sales.groupby("week")
-              .agg(rev=("total_amount","sum"), txn=("sale_id","count"))
-              .reset_index())
-    weekly["basket"] = (weekly["rev"] / weekly["txn"]).round(2)
-    fig = px.line(weekly, x="week", y="basket", markers=True,
-                  color_discrete_sequence=["#7F77DD"],
-                  labels={"week":"Settimana", "basket":"Scontrino medio (€)"})
-    fig.update_layout(**PLOT_LAYOUT, height=250,
-                      yaxis=dict(gridcolor="#f0f0f0"),
-                      xaxis=dict(showgrid=False))
-    st.plotly_chart(fig, use_container_width=True)
+    col_l2, col_r2 = st.columns(2)
+
+    with col_l2:
+        st.markdown("#### Trend scontrino medio settimanale")
+        weekly = (sales.groupby("week")
+                  .agg(rev=("total_amount","sum"), txn=("sale_id","count"))
+                  .reset_index())
+        weekly["basket"] = (weekly["rev"]/weekly["txn"]).round(2)
+        fig = px.line(weekly, x="week", y="basket", markers=True,
+                      color_discrete_sequence=["#7F77DD"],
+                      labels={"week":"Settimana","basket":"Scontrino (€)"})
+        fig.update_layout(**PLOT_LAYOUT, height=260,
+                          yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
+        st.plotly_chart(fig, use_container_width=True)
+
+    with col_r2:
+        st.markdown("#### Vendite per giorno della settimana")
+        dow_order = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+        dow_labels = {"Monday":"Lun","Tuesday":"Mar","Wednesday":"Mer",
+                      "Thursday":"Gio","Friday":"Ven","Saturday":"Sab","Sunday":"Dom"}
+        dow = sales.groupby("day_of_week")["total_amount"].sum().reset_index()
+        dow["order"] = dow["day_of_week"].map({d:i for i,d in enumerate(dow_order)})
+        dow["label"] = dow["day_of_week"].map(dow_labels)
+        dow = dow.sort_values("order")
+        fig = px.bar(dow, x="label", y="total_amount",
+                     color_discrete_sequence=["#1D9E75"],
+                     labels={"label":"","total_amount":"Revenue (€)"})
+        fig.update_traces(marker_cornerradius=4)
+        fig.update_layout(**PLOT_LAYOUT, height=260,
+                          yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
+        st.plotly_chart(fig, use_container_width=True)
 
 # ── Store ─────────────────────────────────────────────────────────────────────
 with tab_st:
@@ -306,11 +433,10 @@ with tab_st:
                     .sort_values("total_amount", ascending=True).tail(10))
         fig = px.bar(by_store, x="total_amount", y="store_name", orientation="h",
                      color="store_name", color_discrete_sequence=COLORS,
-                     labels={"total_amount":"Revenue (€)", "store_name":""})
+                     labels={"total_amount":"Revenue (€)","store_name":""})
         fig.update_traces(marker_cornerradius=4)
         fig.update_layout(**PLOT_LAYOUT, height=340, showlegend=False,
-                          xaxis=dict(gridcolor="#f0f0f0"),
-                          yaxis=dict(showgrid=False))
+                          xaxis=dict(gridcolor="#f0f0f0"), yaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
 
     with col_r:
@@ -318,30 +444,44 @@ with tab_st:
         by_store_t = sales.groupby("store_name").agg(
             transazioni=("sale_id","count"),
             revenue=("total_amount","sum"),
-            clienti=("customer_id","nunique")
+            clienti=("customer_id","nunique"),
+            unita=("quantity","sum")
         ).reset_index()
-        by_store_t["scontrino"] = (
-            by_store_t["revenue"] / by_store_t["transazioni"]
-        ).round(2)
+        by_store_t["scontrino"] = (by_store_t["revenue"]/by_store_t["transazioni"]).round(2)
         by_store_t["revenue_fmt"] = by_store_t["revenue"].apply(fmt_currency)
         by_store_t = by_store_t.sort_values("revenue", ascending=False)
         st.dataframe(
-            by_store_t[["store_name","transazioni","scontrino",
-                        "clienti","revenue_fmt"]].rename(columns={
-                "store_name":"Store", "transazioni":"Transaz.",
-                "scontrino":"Scontrino €", "clienti":"Clienti",
-                "revenue_fmt":"Revenue"
+            by_store_t[["store_name","transazioni","scontrino","clienti","revenue_fmt"]].rename(columns={
+                "store_name":"Store","transazioni":"Transaz.",
+                "scontrino":"Scontrino €","clienti":"Clienti","revenue_fmt":"Revenue"
             }),
             use_container_width=True, hide_index=True
         )
 
-    if "region" in sales.columns and sales["region"].notna().any():
-        st.markdown("#### Revenue per regione")
-        by_region = sales.groupby("region")["total_amount"].sum().reset_index()
-        fig = px.pie(by_region, names="region", values="total_amount",
-                     hole=0.4, color_discrete_sequence=COLORS)
-        fig.update_layout(**PLOT_LAYOUT, height=280)
-        st.plotly_chart(fig, use_container_width=True)
+    col_l2, col_r2 = st.columns(2)
+
+    with col_l2:
+        if "region" in sales.columns and sales["region"].notna().any():
+            st.markdown("#### Revenue per regione")
+            by_region = sales.groupby("region")["total_amount"].sum().reset_index()
+            fig = px.pie(by_region, names="region", values="total_amount",
+                         hole=0.4, color_discrete_sequence=COLORS)
+            fig.update_layout(**PLOT_LAYOUT, height=280)
+            st.plotly_chart(fig, use_container_width=True)
+
+    with col_r2:
+        if "city" in sales.columns and sales["city"].notna().any():
+            st.markdown("#### Top città per revenue")
+            by_city = (sales.groupby("city")["total_amount"]
+                       .sum().reset_index()
+                       .sort_values("total_amount", ascending=False).head(8))
+            fig = px.bar(by_city, x="city", y="total_amount",
+                         color="city", color_discrete_sequence=COLORS,
+                         labels={"city":"","total_amount":"Revenue (€)"})
+            fig.update_traces(marker_cornerradius=4)
+            fig.update_layout(**PLOT_LAYOUT, height=280, showlegend=False,
+                              yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
+            st.plotly_chart(fig, use_container_width=True)
 
 # ── Prodotti ──────────────────────────────────────────────────────────────────
 with tab_pr:
@@ -358,15 +498,13 @@ with tab_pr:
     with col_r:
         st.markdown("#### Unità vendute per categoria")
         cats_q = (sales.groupby("category")["quantity"]
-                  .sum().reset_index()
-                  .sort_values("quantity", ascending=False))
+                  .sum().reset_index().sort_values("quantity", ascending=False))
         fig = px.bar(cats_q, x="category", y="quantity",
                      color="category", color_discrete_sequence=COLORS,
-                     labels={"quantity":"Unità", "category":""})
+                     labels={"quantity":"Unità","category":""})
         fig.update_traces(marker_cornerradius=4)
         fig.update_layout(**PLOT_LAYOUT, height=300, showlegend=False,
-                          yaxis=dict(gridcolor="#f0f0f0"),
-                          xaxis=dict(showgrid=False))
+                          yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("#### Top 10 prodotti per revenue")
@@ -378,18 +516,30 @@ with tab_pr:
                     .sort_values("total_amount", ascending=False)
                     .head(10))
         top_prod["revenue_fmt"] = top_prod["total_amount"].apply(fmt_currency)
-        top_prod["quota_%"] = (
-            top_prod["total_amount"] / top_prod["total_amount"].sum() * 100
-        ).round(1)
+        top_prod["quota_%"] = (top_prod["total_amount"]/top_prod["total_amount"].sum()*100).round(1)
         st.dataframe(
             top_prod[["product_name","category","revenue_fmt","quota_%"]].rename(columns={
-                "product_name":"Prodotto", "category":"Categoria",
-                "revenue_fmt":"Revenue",   "quota_%":"Quota %"
+                "product_name":"Prodotto","category":"Categoria",
+                "revenue_fmt":"Revenue","quota_%":"Quota %"
             }),
             use_container_width=True, hide_index=True
         )
     else:
         st.info("Dati prodotti non disponibili — verifica dim_products")
+
+    st.markdown("#### Prezzo medio per categoria")
+    avg_price = (sales.groupby("category")["unit_price"]
+                 .mean().reset_index()
+                 .sort_values("unit_price", ascending=False))
+    avg_price["unit_price"] = avg_price["unit_price"].round(2)
+    fig = px.bar(avg_price, x="category", y="unit_price",
+                 color="category", color_discrete_sequence=COLORS,
+                 labels={"unit_price":"Prezzo medio (€)","category":""},
+                 text="unit_price")
+    fig.update_traces(marker_cornerradius=4, texttemplate="€%{text:.2f}", textposition="outside")
+    fig.update_layout(**PLOT_LAYOUT, height=280, showlegend=False,
+                      yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
+    st.plotly_chart(fig, use_container_width=True)
 
 # ── Clienti ───────────────────────────────────────────────────────────────────
 with tab_cu:
@@ -400,12 +550,15 @@ with tab_cu:
         if not customers.empty:
             customers["total_spend"] = pd.to_numeric(
                 customers["total_spend"], errors="coerce").fillna(0)
-            top_cust = customers.head(10).copy()
+            # se filtro tier attivo, filtra anche qui
+            cust_view = customers.copy()
+            if sel_tiers:
+                cust_view = cust_view[cust_view["loyalty_tier"].isin(sel_tiers)]
+            top_cust = cust_view.head(10).copy()
             top_cust["spesa_fmt"] = top_cust["total_spend"].apply(fmt_currency)
             st.dataframe(
                 top_cust[["name","loyalty_tier","spesa_fmt"]].rename(columns={
-                    "name":"Cliente", "loyalty_tier":"Tier",
-                    "spesa_fmt":"Spesa totale"
+                    "name":"Cliente","loyalty_tier":"Tier","spesa_fmt":"Spesa totale"
                 }),
                 use_container_width=True, hide_index=True
             )
@@ -415,7 +568,10 @@ with tab_cu:
     with col_r:
         st.markdown("#### Mix loyalty tier")
         if not customers.empty and "loyalty_tier" in customers.columns:
-            tier = (customers.groupby("loyalty_tier")["total_spend"]
+            cust_view2 = customers.copy()
+            if sel_tiers:
+                cust_view2 = cust_view2[cust_view2["loyalty_tier"].isin(sel_tiers)]
+            tier = (cust_view2.groupby("loyalty_tier")["total_spend"]
                     .agg(["count","sum"]).reset_index())
             tier.columns = ["tier","clienti","spesa"]
             fig = px.pie(tier, names="tier", values="spesa",
@@ -423,16 +579,22 @@ with tab_cu:
             fig.update_layout(**PLOT_LAYOUT, height=280)
             st.plotly_chart(fig, use_container_width=True)
 
-    if not customers.empty:
-        st.markdown("#### Distribuzione spesa clienti")
-        customers["total_spend"] = pd.to_numeric(
-            customers["total_spend"], errors="coerce").fillna(0)
-        fig = px.histogram(customers, x="total_spend", nbins=20,
-                           color_discrete_sequence=["#378ADD"],
-                           labels={"total_spend":"Spesa totale (€)",
-                                   "count":"Clienti"})
-        fig.update_layout(**PLOT_LAYOUT, height=240,
-                          yaxis=dict(gridcolor="#f0f0f0"), bargap=0.06)
+    st.markdown("#### Spesa clienti per canale di acquisto")
+    if not sales[sales["customer_id"].notna()].empty:
+        cust_ch = (sales[sales["customer_id"].notna()]
+                   .groupby("channel")
+                   .agg(clienti=("customer_id","nunique"),
+                        spesa_media=("total_amount","mean"))
+                   .reset_index())
+        cust_ch["spesa_media"] = cust_ch["spesa_media"].round(2)
+        fig = px.bar(cust_ch, x="channel", y="spesa_media",
+                     color="channel", color_discrete_sequence=COLORS,
+                     labels={"channel":"Canale","spesa_media":"Spesa media per transazione (€)"},
+                     text="spesa_media")
+        fig.update_traces(marker_cornerradius=4,
+                          texttemplate="€%{text:.2f}", textposition="outside")
+        fig.update_layout(**PLOT_LAYOUT, height=260, showlegend=False,
+                          yaxis=dict(gridcolor="#f0f0f0"), xaxis=dict(showgrid=False))
         st.plotly_chart(fig, use_container_width=True)
 
 
@@ -440,7 +602,7 @@ with tab_cu:
 # REPORT DOWNLOAD
 # ════════════════════════════════════════════════════════════════════════════
 if generate_btn and (sel_kpis or sel_charts):
-    report_txt = build_report(sel_kpis, sel_charts, kpi_data, period)
+    report_txt = build_report(sel_kpis, sel_charts, kpi_data, period, filters_summary)
     st.sidebar.success("✅ Report pronto!")
     st.sidebar.download_button(
         label="📥 Scarica report .txt",
