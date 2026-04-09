@@ -1,0 +1,6402 @@
+[
+  {
+    "item_code": "ITEM00001",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4038,
+    "last_updated": 1731888000,
+    "category": "Casa",
+    "supplier_id": "SUP880"
+  },
+  {
+    "item_code": "ITEM00002",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2115,
+    "last_updated": 1725148800,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP871"
+  },
+  {
+    "item_code": "ITEM00003",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1718,
+    "last_updated": 1713571200,
+    "category": "Beauty",
+    "supplier_id": "SUP245"
+  },
+  {
+    "item_code": "ITEM00004",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4164,
+    "last_updated": "2024-02-24",
+    "category": "Giocattoli",
+    "supplier_id": "SUP359"
+  },
+  {
+    "item_code": "ITEM00005",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4637,
+    "last_updated": "2025-02-21",
+    "category": "Beauty",
+    "supplier_id": "SUP746"
+  },
+  {
+    "item_code": "ITEM00006",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2897,
+    "last_updated": 1720742400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP732"
+  },
+  {
+    "item_code": "ITEM00007",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 403,
+    "last_updated": 1714780800,
+    "category": "Giocattoli",
+    "supplier_id": "SUP909"
+  },
+  {
+    "item_code": "ITEM00008",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2004,
+    "last_updated": "2024-11-27",
+    "category": "Elettronica",
+    "supplier_id": "SUP378"
+  },
+  {
+    "item_code": "ITEM00009",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4028,
+    "last_updated": "2025-02-27",
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00010",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4578,
+    "last_updated": 1738195200,
+    "category": "Elettronica",
+    "supplier_id": "SUP431"
+  },
+  {
+    "item_code": "ITEM00011",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "337",
+    "last_updated": "2025-01-31",
+    "category": "Casa",
+    "supplier_id": "SUP776"
+  },
+  {
+    "item_code": "ITEM00012",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2349,
+    "last_updated": 1714176000,
+    "category": "Sport",
+    "supplier_id": "SUP584"
+  },
+  {
+    "item_code": "ITEM00013",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2570,
+    "last_updated": 1725062400,
+    "category": "Elettronica",
+    "supplier_id": "SUP357"
+  },
+  {
+    "item_code": "ITEM00014",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 551,
+    "last_updated": "2024-08-07",
+    "category": "Beauty",
+    "supplier_id": "SUP179"
+  },
+  {
+    "item_code": "ITEM00015",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2225,
+    "last_updated": "2024-12-09",
+    "category": "Elettronica",
+    "supplier_id": "SUP484"
+  },
+  {
+    "item_code": "ITEM00016",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3693,
+    "last_updated": 1719878400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP588"
+  },
+  {
+    "item_code": "ITEM00017",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 148,
+    "last_updated": "2024-08-10",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP172"
+  },
+  {
+    "item_code": "ITEM00018",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 735,
+    "last_updated": "2024-02-07",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP869"
+  },
+  {
+    "item_code": "ITEM00019",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3305,
+    "last_updated": 1729123200,
+    "category": "Beauty",
+    "supplier_id": "SUP137"
+  },
+  {
+    "item_code": "ITEM00020",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1351,
+    "last_updated": 1725408000,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00021",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3189,
+    "last_updated": 1705276800,
+    "category": "Casa",
+    "supplier_id": "SUP812"
+  },
+  {
+    "item_code": "ITEM00022",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3443,
+    "last_updated": "2025-03-06",
+    "category": "Beauty",
+    "supplier_id": "SUP746"
+  },
+  {
+    "item_code": "ITEM00023",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4936,
+    "last_updated": "2025-01-29",
+    "category": "Casa",
+    "supplier_id": "SUP292"
+  },
+  {
+    "item_code": "ITEM00024",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4736,
+    "last_updated": 1712102400,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00025",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4801,
+    "last_updated": "2025-03-07",
+    "category": "Elettronica",
+    "supplier_id": "SUP597"
+  },
+  {
+    "item_code": "ITEM00026",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2316,
+    "last_updated": 1724198400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP591"
+  },
+  {
+    "item_code": "ITEM00027",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 9,
+    "last_updated": "2024-10-14",
+    "category": "Casa",
+    "supplier_id": "SUP416"
+  },
+  {
+    "item_code": "ITEM00028",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2439,
+    "last_updated": 1730246400,
+    "category": "Casa",
+    "supplier_id": "SUP191"
+  },
+  {
+    "item_code": "ITEM00029",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3159,
+    "last_updated": 1722902400,
+    "category": "Beauty",
+    "supplier_id": "SUP363"
+  },
+  {
+    "item_code": "ITEM00030",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": "208",
+    "last_updated": "2024-06-10",
+    "category": "Beauty",
+    "supplier_id": "SUP303"
+  },
+  {
+    "item_code": "ITEM00031",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3163,
+    "last_updated": 1729036800,
+    "category": "Casa",
+    "supplier_id": "SUP575"
+  },
+  {
+    "item_code": "ITEM00032",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4632,
+    "last_updated": 1710115200,
+    "category": "Sport",
+    "supplier_id": "SUP328"
+  },
+  {
+    "item_code": "ITEM00033",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3038,
+    "last_updated": 1735862400,
+    "category": "Elettronica",
+    "supplier_id": "SUP458"
+  },
+  {
+    "item_code": "ITEM00034",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1319,
+    "last_updated": 1733875200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP340"
+  },
+  {
+    "item_code": "ITEM00035",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2375,
+    "last_updated": 1731456000,
+    "category": "Giocattoli",
+    "supplier_id": "SUP683"
+  },
+  {
+    "item_code": "ITEM00036",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2856,
+    "last_updated": 1722297600,
+    "category": "Beauty",
+    "supplier_id": "SUP405"
+  },
+  {
+    "item_code": "ITEM00037",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2393,
+    "last_updated": 1717632000,
+    "category": "Beauty",
+    "supplier_id": "SUP174"
+  },
+  {
+    "item_code": "ITEM00038",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3240,
+    "last_updated": 1730678400,
+    "category": "Sport",
+    "supplier_id": "SUP722"
+  },
+  {
+    "item_code": "ITEM00039",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2117,
+    "last_updated": "2024-08-18",
+    "category": "Alimentari",
+    "supplier_id": "SUP376"
+  },
+  {
+    "item_code": "ITEM00040",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4307,
+    "last_updated": 1733097600,
+    "category": "Beauty",
+    "supplier_id": "SUP249"
+  },
+  {
+    "item_code": "ITEM00041",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "168",
+    "last_updated": 1709683200,
+    "category": "Sport",
+    "supplier_id": "SUP840"
+  },
+  {
+    "item_code": "ITEM00042",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4367,
+    "last_updated": 1727136000,
+    "category": "Sport",
+    "supplier_id": "SUP376"
+  },
+  {
+    "item_code": "ITEM00043",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 848,
+    "last_updated": 1737676800,
+    "category": "Sport",
+    "supplier_id": "SUP162"
+  },
+  {
+    "item_code": "ITEM00044",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3921,
+    "last_updated": 1725235200,
+    "category": "Alimentari",
+    "supplier_id": "SUP972"
+  },
+  {
+    "item_code": "ITEM00045",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3381,
+    "last_updated": "2024-08-29",
+    "category": "Giocattoli",
+    "supplier_id": "SUP979"
+  },
+  {
+    "item_code": "ITEM00046",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "5",
+    "last_updated": "2024-05-22",
+    "category": "Sport",
+    "supplier_id": "SUP411"
+  },
+  {
+    "item_code": "ITEM00047",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1215,
+    "last_updated": 1713916800,
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00048",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2914,
+    "last_updated": "2025-02-02",
+    "category": "Elettronica",
+    "supplier_id": "SUP984"
+  },
+  {
+    "item_code": "ITEM00049",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3223,
+    "last_updated": 1727395200,
+    "category": "Beauty",
+    "supplier_id": "SUP294"
+  },
+  {
+    "item_code": "ITEM00050",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3861,
+    "last_updated": 1728604800,
+    "category": "Casa",
+    "supplier_id": "SUP180"
+  },
+  {
+    "item_code": "ITEM00051",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2138,
+    "last_updated": 1728432000,
+    "category": "Alimentari",
+    "supplier_id": "SUP812"
+  },
+  {
+    "item_code": "ITEM00052",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1812,
+    "last_updated": "2024-04-24",
+    "category": "Sport",
+    "supplier_id": "SUP149"
+  },
+  {
+    "item_code": "ITEM00053",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1503,
+    "last_updated": "2024-07-27",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP858"
+  },
+  {
+    "item_code": "ITEM00054",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "127",
+    "last_updated": "2024-08-22",
+    "category": "Alimentari",
+    "supplier_id": "SUP516"
+  },
+  {
+    "item_code": "ITEM00055",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 153,
+    "last_updated": "2024-12-05",
+    "category": "Casa",
+    "supplier_id": "SUP525"
+  },
+  {
+    "item_code": "ITEM00056",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4425,
+    "last_updated": 1705449600,
+    "category": "Sport",
+    "supplier_id": "SUP766"
+  },
+  {
+    "item_code": "ITEM00057",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1153,
+    "last_updated": 1716422400,
+    "category": "Casa",
+    "supplier_id": "SUP151"
+  },
+  {
+    "item_code": "ITEM00058",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 734,
+    "last_updated": 1725580800,
+    "category": "Casa",
+    "supplier_id": "SUP165"
+  },
+  {
+    "item_code": "ITEM00059",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 307,
+    "last_updated": "2025-03-06",
+    "category": "Alimentari",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00060",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3003,
+    "last_updated": 1711238400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP724"
+  },
+  {
+    "item_code": "ITEM00061",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2771,
+    "last_updated": "2025-01-19",
+    "category": "Alimentari",
+    "supplier_id": "SUP871"
+  },
+  {
+    "item_code": "ITEM00062",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1093,
+    "last_updated": 1710806400,
+    "category": "Sport",
+    "supplier_id": "SUP109"
+  },
+  {
+    "item_code": "ITEM00063",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "169",
+    "last_updated": 1708819200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP110"
+  },
+  {
+    "item_code": "ITEM00064",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "101",
+    "last_updated": "2024-08-27",
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00065",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3504,
+    "last_updated": 1720137600,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00066",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3918,
+    "last_updated": 1719360000,
+    "category": "Giocattoli",
+    "supplier_id": "SUP355"
+  },
+  {
+    "item_code": "ITEM00067",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3032,
+    "last_updated": "2024-02-10",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP852"
+  },
+  {
+    "item_code": "ITEM00068",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1397,
+    "last_updated": "2024-04-20",
+    "category": "Alimentari",
+    "supplier_id": "SUP911"
+  },
+  {
+    "item_code": "ITEM00069",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "276",
+    "last_updated": "2024-02-04",
+    "category": "Giocattoli",
+    "supplier_id": "SUP859"
+  },
+  {
+    "item_code": "ITEM00070",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1335,
+    "last_updated": 1733270400,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00071",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 479,
+    "last_updated": 1735948800,
+    "category": "Casa",
+    "supplier_id": "SUP365"
+  },
+  {
+    "item_code": "ITEM00072",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 832,
+    "last_updated": 1725062400,
+    "category": "Beauty",
+    "supplier_id": "SUP607"
+  },
+  {
+    "item_code": "ITEM00073",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3390,
+    "last_updated": "2025-02-06",
+    "category": "Giocattoli",
+    "supplier_id": "SUP982"
+  },
+  {
+    "item_code": "ITEM00074",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 409,
+    "last_updated": "2024-11-23",
+    "category": "Sport",
+    "supplier_id": "SUP993"
+  },
+  {
+    "item_code": "ITEM00075",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3843,
+    "last_updated": 1719014400,
+    "category": "Sport",
+    "supplier_id": "SUP165"
+  },
+  {
+    "item_code": "ITEM00076",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4905,
+    "last_updated": "2024-10-26",
+    "category": "Giocattoli",
+    "supplier_id": "SUP494"
+  },
+  {
+    "item_code": "ITEM00077",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2308,
+    "last_updated": 1726444800,
+    "category": "Beauty",
+    "supplier_id": "SUP353"
+  },
+  {
+    "item_code": "ITEM00078",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1537,
+    "last_updated": 1738022400,
+    "category": "Elettronica",
+    "supplier_id": "SUP202"
+  },
+  {
+    "item_code": "ITEM00079",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 386,
+    "last_updated": "2024-08-22",
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00080",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4528,
+    "last_updated": 1736899200,
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00081",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 405,
+    "last_updated": 1725494400,
+    "category": "Alimentari",
+    "supplier_id": "SUP917"
+  },
+  {
+    "item_code": "ITEM00082",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2887,
+    "last_updated": "2024-11-13",
+    "category": "Sport",
+    "supplier_id": "SUP463"
+  },
+  {
+    "item_code": "ITEM00083",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 896,
+    "last_updated": 1711670400,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00084",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2085,
+    "last_updated": "2024-10-12",
+    "category": "Casa",
+    "supplier_id": "SUP121"
+  },
+  {
+    "item_code": "ITEM00085",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1225,
+    "last_updated": "2024-07-11",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP428"
+  },
+  {
+    "item_code": "ITEM00086",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3133,
+    "last_updated": 1712534400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP101"
+  },
+  {
+    "item_code": "ITEM00087",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2374,
+    "last_updated": "2024-08-14",
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00088",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4752,
+    "last_updated": 1704585600,
+    "category": "Alimentari",
+    "supplier_id": "SUP923"
+  },
+  {
+    "item_code": "ITEM00089",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "191",
+    "last_updated": 1720742400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP457"
+  },
+  {
+    "item_code": "ITEM00090",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2565,
+    "last_updated": "2024-12-15",
+    "category": "Casa",
+    "supplier_id": "SUP738"
+  },
+  {
+    "item_code": "ITEM00091",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1713,
+    "last_updated": "2025-03-25",
+    "category": "Sport",
+    "supplier_id": "SUP524"
+  },
+  {
+    "item_code": "ITEM00092",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3705,
+    "last_updated": 1724976000,
+    "category": "Alimentari",
+    "supplier_id": "SUP263"
+  },
+  {
+    "item_code": "ITEM00093",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 143,
+    "last_updated": 1721692800,
+    "category": "Alimentari",
+    "supplier_id": "SUP245"
+  },
+  {
+    "item_code": "ITEM00094",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "188",
+    "last_updated": 1710979200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP219"
+  },
+  {
+    "item_code": "ITEM00095",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3362,
+    "last_updated": "2024-03-18",
+    "category": "Sport",
+    "supplier_id": "SUP875"
+  },
+  {
+    "item_code": "ITEM00096",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2001,
+    "last_updated": 1735862400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP518"
+  },
+  {
+    "item_code": "ITEM00097",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2430,
+    "last_updated": 1712016000,
+    "category": "Elettronica",
+    "supplier_id": "SUP177"
+  },
+  {
+    "item_code": "ITEM00098",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4213,
+    "last_updated": "2024-12-08",
+    "category": "Sport",
+    "supplier_id": "SUP299"
+  },
+  {
+    "item_code": "ITEM00099",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1827,
+    "last_updated": 1737676800,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00100",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1838,
+    "last_updated": 1710979200,
+    "category": "Elettronica",
+    "supplier_id": "SUP185"
+  },
+  {
+    "item_code": "ITEM00101",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 773,
+    "last_updated": 1711670400,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00102",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 922,
+    "last_updated": 1727827200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP656"
+  },
+  {
+    "item_code": "ITEM00103",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3288,
+    "last_updated": "2024-01-05",
+    "category": "Elettronica",
+    "supplier_id": "SUP212"
+  },
+  {
+    "item_code": "ITEM00104",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4401,
+    "last_updated": "2024-06-07",
+    "category": "Alimentari",
+    "supplier_id": "SUP957"
+  },
+  {
+    "item_code": "ITEM00105",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "198",
+    "last_updated": "2024-09-14",
+    "category": "Casa",
+    "supplier_id": "SUP637"
+  },
+  {
+    "item_code": "ITEM00106",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2569,
+    "last_updated": 1738368000,
+    "category": "Beauty",
+    "supplier_id": "SUP753"
+  },
+  {
+    "item_code": "ITEM00107",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3271,
+    "last_updated": 1738281600,
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00108",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1783,
+    "last_updated": "2024-04-02",
+    "category": "Elettronica",
+    "supplier_id": "SUP832"
+  },
+  {
+    "item_code": "ITEM00109",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1466,
+    "last_updated": "2024-04-03",
+    "category": "Elettronica",
+    "supplier_id": "SUP165"
+  },
+  {
+    "item_code": "ITEM00110",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2072,
+    "last_updated": 1708992000,
+    "category": "Alimentari",
+    "supplier_id": "SUP623"
+  },
+  {
+    "item_code": "ITEM00111",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3657,
+    "last_updated": "2025-01-24",
+    "category": "Casa",
+    "supplier_id": "SUP708"
+  },
+  {
+    "item_code": "ITEM00112",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4315,
+    "last_updated": "2024-03-23",
+    "category": "Sport",
+    "supplier_id": "SUP213"
+  },
+  {
+    "item_code": "ITEM00113",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "448",
+    "last_updated": 1722124800,
+    "category": "Elettronica",
+    "supplier_id": "SUP863"
+  },
+  {
+    "item_code": "ITEM00114",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 511,
+    "last_updated": "2024-04-10",
+    "category": "Beauty",
+    "supplier_id": "SUP444"
+  },
+  {
+    "item_code": "ITEM00115",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1544,
+    "last_updated": 1704153600,
+    "category": "Alimentari",
+    "supplier_id": "SUP434"
+  },
+  {
+    "item_code": "ITEM00116",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4337,
+    "last_updated": 1728345600,
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00117",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1325,
+    "last_updated": 1731283200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP678"
+  },
+  {
+    "item_code": "ITEM00118",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "203",
+    "last_updated": 1723161600,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP874"
+  },
+  {
+    "item_code": "ITEM00119",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1860,
+    "last_updated": "2024-10-11",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP613"
+  },
+  {
+    "item_code": "ITEM00120",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1669,
+    "last_updated": "2024-09-04",
+    "category": "Casa",
+    "supplier_id": "SUP185"
+  },
+  {
+    "item_code": "ITEM00121",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4442,
+    "last_updated": 1737244800,
+    "category": "Giocattoli",
+    "supplier_id": "SUP281"
+  },
+  {
+    "item_code": "ITEM00122",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2030,
+    "last_updated": 1717545600,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00123",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4143,
+    "last_updated": 1712880000,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP256"
+  },
+  {
+    "item_code": "ITEM00124",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4162,
+    "last_updated": 1713916800,
+    "category": "Alimentari",
+    "supplier_id": "SUP572"
+  },
+  {
+    "item_code": "ITEM00125",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2665,
+    "last_updated": 1737849600,
+    "category": "Beauty",
+    "supplier_id": "SUP120"
+  },
+  {
+    "item_code": "ITEM00126",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3950,
+    "last_updated": 1708214400,
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00127",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1368,
+    "last_updated": "2024-10-02",
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00128",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 614,
+    "last_updated": 1724716800,
+    "category": "Sport",
+    "supplier_id": "SUP519"
+  },
+  {
+    "item_code": "ITEM00129",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4121,
+    "last_updated": 1719619200,
+    "category": "Sport",
+    "supplier_id": "SUP973"
+  },
+  {
+    "item_code": "ITEM00130",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2448,
+    "last_updated": "2024-09-11",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP117"
+  },
+  {
+    "item_code": "ITEM00131",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3087,
+    "last_updated": "2025-02-24",
+    "category": "Casa",
+    "supplier_id": "SUP882"
+  },
+  {
+    "item_code": "ITEM00132",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2899,
+    "last_updated": 1708214400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP309"
+  },
+  {
+    "item_code": "ITEM00133",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4859,
+    "last_updated": 1711238400,
+    "category": "Alimentari",
+    "supplier_id": "SUP716"
+  },
+  {
+    "item_code": "ITEM00134",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 73,
+    "last_updated": 1736640000,
+    "category": "Alimentari",
+    "supplier_id": "SUP693"
+  },
+  {
+    "item_code": "ITEM00135",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3892,
+    "last_updated": "2024-11-12",
+    "category": "Casa",
+    "supplier_id": "SUP411"
+  },
+  {
+    "item_code": "ITEM00136",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4702,
+    "last_updated": 1725494400,
+    "category": "Elettronica",
+    "supplier_id": "SUP666"
+  },
+  {
+    "item_code": "ITEM00137",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4079,
+    "last_updated": "2024-06-29",
+    "category": "Beauty",
+    "supplier_id": "SUP684"
+  },
+  {
+    "item_code": "ITEM00138",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 616,
+    "last_updated": 1712620800,
+    "category": "Giocattoli",
+    "supplier_id": "SUP616"
+  },
+  {
+    "item_code": "ITEM00139",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3785,
+    "last_updated": "2025-03-05",
+    "category": "Casa",
+    "supplier_id": "SUP745"
+  },
+  {
+    "item_code": "ITEM00140",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4763,
+    "last_updated": 1727654400,
+    "category": "Elettronica",
+    "supplier_id": "SUP399"
+  },
+  {
+    "item_code": "ITEM00141",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2588,
+    "last_updated": "2024-11-05",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP627"
+  },
+  {
+    "item_code": "ITEM00142",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2676,
+    "last_updated": 1709251200,
+    "category": "Giocattoli",
+    "supplier_id": "SUP132"
+  },
+  {
+    "item_code": "ITEM00143",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3757,
+    "last_updated": "2024-07-23",
+    "category": "Alimentari",
+    "supplier_id": "SUP162"
+  },
+  {
+    "item_code": "ITEM00144",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1467,
+    "last_updated": "2025-03-02",
+    "category": "Alimentari",
+    "supplier_id": "SUP206"
+  },
+  {
+    "item_code": "ITEM00145",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "449",
+    "last_updated": 1728604800,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP923"
+  },
+  {
+    "item_code": "ITEM00146",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2499,
+    "last_updated": 1727913600,
+    "category": "Sport",
+    "supplier_id": "SUP709"
+  },
+  {
+    "item_code": "ITEM00147",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 868,
+    "last_updated": 1722384000,
+    "category": "Giocattoli",
+    "supplier_id": "SUP252"
+  },
+  {
+    "item_code": "ITEM00148",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 104,
+    "last_updated": "2024-04-18",
+    "category": "Elettronica",
+    "supplier_id": "SUP837"
+  },
+  {
+    "item_code": "ITEM00149",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3303,
+    "last_updated": "2025-03-21",
+    "category": "Giocattoli",
+    "supplier_id": "SUP760"
+  },
+  {
+    "item_code": "ITEM00150",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "495",
+    "last_updated": 1721174400,
+    "category": "Alimentari",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00151",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1569,
+    "last_updated": 1728000000,
+    "category": "Beauty",
+    "supplier_id": "SUP401"
+  },
+  {
+    "item_code": "ITEM00152",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 424,
+    "last_updated": 1725235200,
+    "category": "Beauty",
+    "supplier_id": "SUP769"
+  },
+  {
+    "item_code": "ITEM00153",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1327,
+    "last_updated": 1732492800,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00154",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1671,
+    "last_updated": 1734480000,
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00155",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2482,
+    "last_updated": 1715212800,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP144"
+  },
+  {
+    "item_code": "ITEM00156",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2809,
+    "last_updated": 1728777600,
+    "category": "Casa",
+    "supplier_id": "SUP483"
+  },
+  {
+    "item_code": "ITEM00157",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 316,
+    "last_updated": "2025-02-07",
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00158",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4893,
+    "last_updated": 1725148800,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP535"
+  },
+  {
+    "item_code": "ITEM00159",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1481,
+    "last_updated": "2024-01-05",
+    "category": "Alimentari",
+    "supplier_id": "SUP750"
+  },
+  {
+    "item_code": "ITEM00160",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 240,
+    "last_updated": "2024-06-06",
+    "category": "Casa",
+    "supplier_id": "SUP410"
+  },
+  {
+    "item_code": "ITEM00161",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2667,
+    "last_updated": "2024-04-24",
+    "category": "Sport",
+    "supplier_id": "SUP274"
+  },
+  {
+    "item_code": "ITEM00162",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1898,
+    "last_updated": 1717891200,
+    "category": "Elettronica",
+    "supplier_id": "SUP183"
+  },
+  {
+    "item_code": "ITEM00163",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2848,
+    "last_updated": "2024-03-26",
+    "category": "Beauty",
+    "supplier_id": "SUP710"
+  },
+  {
+    "item_code": "ITEM00164",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "127",
+    "last_updated": "2024-12-03",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP989"
+  },
+  {
+    "item_code": "ITEM00165",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3869,
+    "last_updated": "2025-02-02",
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00166",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3486,
+    "last_updated": 1727740800,
+    "category": "Beauty",
+    "supplier_id": "SUP352"
+  },
+  {
+    "item_code": "ITEM00167",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2631,
+    "last_updated": 1711584000,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP412"
+  },
+  {
+    "item_code": "ITEM00168",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2836,
+    "last_updated": "2025-03-15",
+    "category": "Alimentari",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00169",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2684,
+    "last_updated": 1731196800,
+    "category": "Elettronica",
+    "supplier_id": "SUP156"
+  },
+  {
+    "item_code": "ITEM00170",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4334,
+    "last_updated": 1706140800,
+    "category": "Alimentari",
+    "supplier_id": "SUP194"
+  },
+  {
+    "item_code": "ITEM00171",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2517,
+    "last_updated": "2024-04-27",
+    "category": "Giocattoli",
+    "supplier_id": "SUP319"
+  },
+  {
+    "item_code": "ITEM00172",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2437,
+    "last_updated": 1727395200,
+    "category": "Beauty",
+    "supplier_id": "SUP849"
+  },
+  {
+    "item_code": "ITEM00173",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3778,
+    "last_updated": "2024-10-24",
+    "category": "Alimentari",
+    "supplier_id": "SUP684"
+  },
+  {
+    "item_code": "ITEM00174",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2370,
+    "last_updated": 1730678400,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00175",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4377,
+    "last_updated": "2024-04-09",
+    "category": "Elettronica",
+    "supplier_id": "SUP531"
+  },
+  {
+    "item_code": "ITEM00176",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 562,
+    "last_updated": 1714608000,
+    "category": "Giocattoli",
+    "supplier_id": "SUP715"
+  },
+  {
+    "item_code": "ITEM00177",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 306,
+    "last_updated": 1726444800,
+    "category": "Sport",
+    "supplier_id": "SUP931"
+  },
+  {
+    "item_code": "ITEM00178",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1426,
+    "last_updated": 1725062400,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00179",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 512,
+    "last_updated": "2024-03-03",
+    "category": "Casa",
+    "supplier_id": "SUP518"
+  },
+  {
+    "item_code": "ITEM00180",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1742,
+    "last_updated": 1736294400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP925"
+  },
+  {
+    "item_code": "ITEM00181",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4624,
+    "last_updated": 1719792000,
+    "category": "Casa",
+    "supplier_id": "SUP292"
+  },
+  {
+    "item_code": "ITEM00182",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3125,
+    "last_updated": 1736553600,
+    "category": "Casa",
+    "supplier_id": "SUP487"
+  },
+  {
+    "item_code": "ITEM00183",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3256,
+    "last_updated": 1706918400,
+    "category": "Alimentari",
+    "supplier_id": "SUP933"
+  },
+  {
+    "item_code": "ITEM00184",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4952,
+    "last_updated": 1720656000,
+    "category": "Beauty",
+    "supplier_id": "SUP368"
+  },
+  {
+    "item_code": "ITEM00185",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": "300",
+    "last_updated": 1705276800,
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00186",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4539,
+    "last_updated": "2024-04-26",
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00187",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2788,
+    "last_updated": "2024-12-26",
+    "category": "Elettronica",
+    "supplier_id": "SUP519"
+  },
+  {
+    "item_code": "ITEM00188",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1394,
+    "last_updated": 1721260800,
+    "category": "Alimentari",
+    "supplier_id": "SUP626"
+  },
+  {
+    "item_code": "ITEM00189",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3750,
+    "last_updated": 1723420800,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP997"
+  },
+  {
+    "item_code": "ITEM00190",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4016,
+    "last_updated": "2024-12-29",
+    "category": "Sport",
+    "supplier_id": "SUP632"
+  },
+  {
+    "item_code": "ITEM00191",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 910,
+    "last_updated": 1706313600,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00192",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3790,
+    "last_updated": 1730937600,
+    "category": "Beauty",
+    "supplier_id": "SUP966"
+  },
+  {
+    "item_code": "ITEM00193",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2451,
+    "last_updated": 1712361600,
+    "category": "Beauty",
+    "supplier_id": "SUP980"
+  },
+  {
+    "item_code": "ITEM00194",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3785,
+    "last_updated": "2024-06-17",
+    "category": "Giocattoli",
+    "supplier_id": "SUP406"
+  },
+  {
+    "item_code": "ITEM00195",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 810,
+    "last_updated": 1713139200,
+    "category": "Casa",
+    "supplier_id": "SUP994"
+  },
+  {
+    "item_code": "ITEM00196",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3204,
+    "last_updated": 1708646400,
+    "category": "Elettronica",
+    "supplier_id": "SUP322"
+  },
+  {
+    "item_code": "ITEM00197",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4118,
+    "last_updated": "2024-08-10",
+    "category": "Giocattoli",
+    "supplier_id": "SUP893"
+  },
+  {
+    "item_code": "ITEM00198",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4995,
+    "last_updated": 1725753600,
+    "category": "Giocattoli",
+    "supplier_id": "SUP381"
+  },
+  {
+    "item_code": "ITEM00199",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 185,
+    "last_updated": 1731369600,
+    "category": "Beauty",
+    "supplier_id": "SUP963"
+  },
+  {
+    "item_code": "ITEM00200",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3647,
+    "last_updated": 1706140800,
+    "category": "Alimentari",
+    "supplier_id": "SUP673"
+  },
+  {
+    "item_code": "ITEM00201",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4793,
+    "last_updated": "2025-02-25",
+    "category": "Giocattoli",
+    "supplier_id": "SUP743"
+  },
+  {
+    "item_code": "ITEM00202",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4411,
+    "last_updated": 1737417600,
+    "category": "Beauty",
+    "supplier_id": "SUP866"
+  },
+  {
+    "item_code": "ITEM00203",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2608,
+    "last_updated": "2024-12-10",
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00204",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1975,
+    "last_updated": 1707523200,
+    "category": "Elettronica",
+    "supplier_id": "SUP978"
+  },
+  {
+    "item_code": "ITEM00205",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3885,
+    "last_updated": "2024-11-26",
+    "category": "Giocattoli",
+    "supplier_id": "SUP224"
+  },
+  {
+    "item_code": "ITEM00206",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 346,
+    "last_updated": 1734566400,
+    "category": "Sport",
+    "supplier_id": "SUP647"
+  },
+  {
+    "item_code": "ITEM00207",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1007,
+    "last_updated": "2024-06-16",
+    "category": "Elettronica",
+    "supplier_id": "SUP406"
+  },
+  {
+    "item_code": "ITEM00208",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1692,
+    "last_updated": 1719187200,
+    "category": "Beauty",
+    "supplier_id": "SUP643"
+  },
+  {
+    "item_code": "ITEM00209",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3293,
+    "last_updated": "2024-08-13",
+    "category": "Elettronica",
+    "supplier_id": "SUP457"
+  },
+  {
+    "item_code": "ITEM00210",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1712,
+    "last_updated": "2025-02-12",
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00211",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4460,
+    "last_updated": "2025-03-23",
+    "category": "Giocattoli",
+    "supplier_id": "SUP540"
+  },
+  {
+    "item_code": "ITEM00212",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2391,
+    "last_updated": 1714953600,
+    "category": "Elettronica",
+    "supplier_id": "SUP981"
+  },
+  {
+    "item_code": "ITEM00213",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1961,
+    "last_updated": 1729123200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP908"
+  },
+  {
+    "item_code": "ITEM00214",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2377,
+    "last_updated": "2024-12-13",
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00215",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1965,
+    "last_updated": 1712102400,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00216",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3455,
+    "last_updated": 1732752000,
+    "category": "Casa",
+    "supplier_id": "SUP451"
+  },
+  {
+    "item_code": "ITEM00217",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4269,
+    "last_updated": "2025-02-17",
+    "category": "Alimentari",
+    "supplier_id": "SUP936"
+  },
+  {
+    "item_code": "ITEM00218",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 858,
+    "last_updated": 1734825600,
+    "category": "Casa",
+    "supplier_id": "SUP431"
+  },
+  {
+    "item_code": "ITEM00219",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2454,
+    "last_updated": 1715731200,
+    "category": "Elettronica",
+    "supplier_id": "SUP227"
+  },
+  {
+    "item_code": "ITEM00220",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4589,
+    "last_updated": 1710028800,
+    "category": "Casa",
+    "supplier_id": "SUP108"
+  },
+  {
+    "item_code": "ITEM00221",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3438,
+    "last_updated": "2024-03-09",
+    "category": "Giocattoli",
+    "supplier_id": "SUP204"
+  },
+  {
+    "item_code": "ITEM00222",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2216,
+    "last_updated": 1727395200,
+    "category": "Giocattoli",
+    "supplier_id": "SUP706"
+  },
+  {
+    "item_code": "ITEM00223",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 177,
+    "last_updated": 1729468800,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00224",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4971,
+    "last_updated": 1734652800,
+    "category": "Elettronica",
+    "supplier_id": "SUP277"
+  },
+  {
+    "item_code": "ITEM00225",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4170,
+    "last_updated": 1715990400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP459"
+  },
+  {
+    "item_code": "ITEM00226",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1942,
+    "last_updated": 1737936000,
+    "category": "Alimentari",
+    "supplier_id": "SUP564"
+  },
+  {
+    "item_code": "ITEM00227",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1009,
+    "last_updated": 1712707200,
+    "category": "Elettronica",
+    "supplier_id": "SUP535"
+  },
+  {
+    "item_code": "ITEM00228",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3143,
+    "last_updated": 1715990400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP948"
+  },
+  {
+    "item_code": "ITEM00229",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1706,
+    "last_updated": 1737676800,
+    "category": "Sport",
+    "supplier_id": "SUP619"
+  },
+  {
+    "item_code": "ITEM00230",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3849,
+    "last_updated": 1737072000,
+    "category": "Alimentari",
+    "supplier_id": "SUP327"
+  },
+  {
+    "item_code": "ITEM00231",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2326,
+    "last_updated": 1723939200,
+    "category": "Elettronica",
+    "supplier_id": "SUP196"
+  },
+  {
+    "item_code": "ITEM00232",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4956,
+    "last_updated": "2024-02-27",
+    "category": "Alimentari",
+    "supplier_id": "SUP945"
+  },
+  {
+    "item_code": "ITEM00233",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1526,
+    "last_updated": 1721520000,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP906"
+  },
+  {
+    "item_code": "ITEM00234",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2146,
+    "last_updated": "2025-03-09",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP338"
+  },
+  {
+    "item_code": "ITEM00235",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2917,
+    "last_updated": 1709942400,
+    "category": "Elettronica",
+    "supplier_id": "SUP386"
+  },
+  {
+    "item_code": "ITEM00236",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "362",
+    "last_updated": 1734566400,
+    "category": "Sport",
+    "supplier_id": "SUP378"
+  },
+  {
+    "item_code": "ITEM00237",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1307,
+    "last_updated": "2025-02-03",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP758"
+  },
+  {
+    "item_code": "ITEM00238",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "247",
+    "last_updated": 1717718400,
+    "category": "Elettronica",
+    "supplier_id": "SUP247"
+  },
+  {
+    "item_code": "ITEM00239",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4456,
+    "last_updated": 1705276800,
+    "category": "Sport",
+    "supplier_id": "SUP671"
+  },
+  {
+    "item_code": "ITEM00240",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3193,
+    "last_updated": 1729468800,
+    "category": "Casa",
+    "supplier_id": "SUP281"
+  },
+  {
+    "item_code": "ITEM00241",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4063,
+    "last_updated": 1710374400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP371"
+  },
+  {
+    "item_code": "ITEM00242",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 816,
+    "last_updated": "2025-02-28",
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00243",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4307,
+    "last_updated": 1734480000,
+    "category": "Casa",
+    "supplier_id": "SUP586"
+  },
+  {
+    "item_code": "ITEM00244",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3271,
+    "last_updated": 1732924800,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00245",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 260,
+    "last_updated": 1738540800,
+    "category": "Giocattoli",
+    "supplier_id": "SUP921"
+  },
+  {
+    "item_code": "ITEM00246",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 574,
+    "last_updated": 1712707200,
+    "category": "Casa",
+    "supplier_id": "SUP697"
+  },
+  {
+    "item_code": "ITEM00247",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "238",
+    "last_updated": 1717891200,
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00248",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2732,
+    "last_updated": 1728950400,
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00249",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3780,
+    "last_updated": "2025-01-20",
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00250",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 766,
+    "last_updated": "2024-10-03",
+    "category": "Giocattoli",
+    "supplier_id": "SUP142"
+  },
+  {
+    "item_code": "ITEM00251",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3193,
+    "last_updated": 1712275200,
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00252",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2288,
+    "last_updated": 1708992000,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00253",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 560,
+    "last_updated": 1704326400,
+    "category": "Casa",
+    "supplier_id": "SUP350"
+  },
+  {
+    "item_code": "ITEM00254",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": "500",
+    "last_updated": "2024-04-25",
+    "category": "Giocattoli",
+    "supplier_id": "SUP977"
+  },
+  {
+    "item_code": "ITEM00255",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1181,
+    "last_updated": "2024-07-22",
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00256",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4814,
+    "last_updated": "2024-02-12",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP780"
+  },
+  {
+    "item_code": "ITEM00257",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2499,
+    "last_updated": 1723766400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP284"
+  },
+  {
+    "item_code": "ITEM00258",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1705,
+    "last_updated": 1722643200,
+    "category": "Beauty",
+    "supplier_id": "SUP423"
+  },
+  {
+    "item_code": "ITEM00259",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1069,
+    "last_updated": 1707523200,
+    "category": "Beauty",
+    "supplier_id": "SUP937"
+  },
+  {
+    "item_code": "ITEM00260",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 197,
+    "last_updated": 1733961600,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP453"
+  },
+  {
+    "item_code": "ITEM00261",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2873,
+    "last_updated": "2024-01-19",
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00262",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4399,
+    "last_updated": 1708041600,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP653"
+  },
+  {
+    "item_code": "ITEM00263",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2339,
+    "last_updated": 1727740800,
+    "category": "Casa",
+    "supplier_id": "SUP669"
+  },
+  {
+    "item_code": "ITEM00264",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4208,
+    "last_updated": 1709596800,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP160"
+  },
+  {
+    "item_code": "ITEM00265",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2205,
+    "last_updated": "2024-05-12",
+    "category": "Elettronica",
+    "supplier_id": "SUP336"
+  },
+  {
+    "item_code": "ITEM00266",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4566,
+    "last_updated": 1729036800,
+    "category": "Elettronica",
+    "supplier_id": "SUP602"
+  },
+  {
+    "item_code": "ITEM00267",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4646,
+    "last_updated": "2024-08-11",
+    "category": "Alimentari",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00268",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4334,
+    "last_updated": 1738022400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP847"
+  },
+  {
+    "item_code": "ITEM00269",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2670,
+    "last_updated": 1716336000,
+    "category": "Sport",
+    "supplier_id": "SUP547"
+  },
+  {
+    "item_code": "ITEM00270",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 320,
+    "last_updated": 1709251200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP640"
+  },
+  {
+    "item_code": "ITEM00271",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3536,
+    "last_updated": "2024-12-31",
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00272",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1632,
+    "last_updated": 1725753600,
+    "category": "Beauty",
+    "supplier_id": "SUP251"
+  },
+  {
+    "item_code": "ITEM00273",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2693,
+    "last_updated": "2024-04-16",
+    "category": "Giocattoli",
+    "supplier_id": "SUP162"
+  },
+  {
+    "item_code": "ITEM00274",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "265",
+    "last_updated": "2025-02-10",
+    "category": "Alimentari",
+    "supplier_id": "SUP512"
+  },
+  {
+    "item_code": "ITEM00275",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 911,
+    "last_updated": 1704153600,
+    "category": "Sport",
+    "supplier_id": "SUP886"
+  },
+  {
+    "item_code": "ITEM00276",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 975,
+    "last_updated": 1704153600,
+    "category": "Elettronica",
+    "supplier_id": "SUP976"
+  },
+  {
+    "item_code": "ITEM00277",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1247,
+    "last_updated": 1710201600,
+    "category": "Beauty",
+    "supplier_id": "SUP567"
+  },
+  {
+    "item_code": "ITEM00278",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 366,
+    "last_updated": "2024-10-04",
+    "category": "Giocattoli",
+    "supplier_id": "SUP407"
+  },
+  {
+    "item_code": "ITEM00279",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4486,
+    "last_updated": 1715472000,
+    "category": "Casa",
+    "supplier_id": "SUP151"
+  },
+  {
+    "item_code": "ITEM00280",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4829,
+    "last_updated": 1734307200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP221"
+  },
+  {
+    "item_code": "ITEM00281",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2001,
+    "last_updated": 1707696000,
+    "category": "Elettronica",
+    "supplier_id": "SUP187"
+  },
+  {
+    "item_code": "ITEM00282",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4949,
+    "last_updated": 1720396800,
+    "category": "Beauty",
+    "supplier_id": "SUP613"
+  },
+  {
+    "item_code": "ITEM00283",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2531,
+    "last_updated": "2024-01-10",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP924"
+  },
+  {
+    "item_code": "ITEM00284",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1666,
+    "last_updated": "2024-05-02",
+    "category": "Alimentari",
+    "supplier_id": "SUP130"
+  },
+  {
+    "item_code": "ITEM00285",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4708,
+    "last_updated": 1715126400,
+    "category": "Alimentari",
+    "supplier_id": "SUP820"
+  },
+  {
+    "item_code": "ITEM00286",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3538,
+    "last_updated": 1735689600,
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00287",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 131,
+    "last_updated": 1735257600,
+    "category": "Giocattoli",
+    "supplier_id": "SUP193"
+  },
+  {
+    "item_code": "ITEM00288",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1822,
+    "last_updated": 1730419200,
+    "category": "Giocattoli",
+    "supplier_id": "SUP101"
+  },
+  {
+    "item_code": "ITEM00289",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3203,
+    "last_updated": "2024-09-28",
+    "category": "Alimentari",
+    "supplier_id": "SUP171"
+  },
+  {
+    "item_code": "ITEM00290",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2660,
+    "last_updated": 1724716800,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP467"
+  },
+  {
+    "item_code": "ITEM00291",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1308,
+    "last_updated": 1713830400,
+    "category": "Alimentari",
+    "supplier_id": "SUP117"
+  },
+  {
+    "item_code": "ITEM00292",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1306,
+    "last_updated": 1738195200,
+    "category": "Sport",
+    "supplier_id": "SUP664"
+  },
+  {
+    "item_code": "ITEM00293",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 951,
+    "last_updated": 1707091200,
+    "category": "Beauty",
+    "supplier_id": "SUP746"
+  },
+  {
+    "item_code": "ITEM00294",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 146,
+    "last_updated": "2025-03-19",
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00295",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4928,
+    "last_updated": "2024-01-29",
+    "category": "Alimentari",
+    "supplier_id": "SUP124"
+  },
+  {
+    "item_code": "ITEM00296",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4600,
+    "last_updated": "2024-03-14",
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00297",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1439,
+    "last_updated": "2024-03-06",
+    "category": "Sport",
+    "supplier_id": "SUP742"
+  },
+  {
+    "item_code": "ITEM00298",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 733,
+    "last_updated": "2024-12-01",
+    "category": "Alimentari",
+    "supplier_id": "SUP832"
+  },
+  {
+    "item_code": "ITEM00299",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": "376",
+    "last_updated": 1737244800,
+    "category": "Alimentari",
+    "supplier_id": "SUP934"
+  },
+  {
+    "item_code": "ITEM00300",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 376,
+    "last_updated": 1717545600,
+    "category": "Beauty",
+    "supplier_id": "SUP247"
+  },
+  {
+    "item_code": "ITEM00301",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1792,
+    "last_updated": 1717286400,
+    "category": "Casa",
+    "supplier_id": "SUP125"
+  },
+  {
+    "item_code": "ITEM00302",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2727,
+    "last_updated": "2024-07-06",
+    "category": "Casa",
+    "supplier_id": "SUP917"
+  },
+  {
+    "item_code": "ITEM00303",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2532,
+    "last_updated": 1710633600,
+    "category": "Alimentari",
+    "supplier_id": "SUP671"
+  },
+  {
+    "item_code": "ITEM00304",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3357,
+    "last_updated": 1711238400,
+    "category": "Alimentari",
+    "supplier_id": "SUP867"
+  },
+  {
+    "item_code": "ITEM00305",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1501,
+    "last_updated": "2024-01-02",
+    "category": "Sport",
+    "supplier_id": "SUP528"
+  },
+  {
+    "item_code": "ITEM00306",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3278,
+    "last_updated": 1709769600,
+    "category": "Alimentari",
+    "supplier_id": "SUP736"
+  },
+  {
+    "item_code": "ITEM00307",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3348,
+    "last_updated": 1723593600,
+    "category": "Sport",
+    "supplier_id": "SUP376"
+  },
+  {
+    "item_code": "ITEM00308",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 659,
+    "last_updated": 1729641600,
+    "category": "Elettronica",
+    "supplier_id": "SUP470"
+  },
+  {
+    "item_code": "ITEM00309",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "499",
+    "last_updated": 1726617600,
+    "category": "Alimentari",
+    "supplier_id": "SUP594"
+  },
+  {
+    "item_code": "ITEM00310",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1028,
+    "last_updated": "2025-03-18",
+    "category": "Alimentari",
+    "supplier_id": "SUP414"
+  },
+  {
+    "item_code": "ITEM00311",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3434,
+    "last_updated": 1737331200,
+    "category": "Casa",
+    "supplier_id": "SUP213"
+  },
+  {
+    "item_code": "ITEM00312",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3545,
+    "last_updated": 1730764800,
+    "category": "Beauty",
+    "supplier_id": "SUP267"
+  },
+  {
+    "item_code": "ITEM00313",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1409,
+    "last_updated": "2024-07-23",
+    "category": "Beauty",
+    "supplier_id": "SUP920"
+  },
+  {
+    "item_code": "ITEM00314",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 720,
+    "last_updated": 1708473600,
+    "category": "Beauty",
+    "supplier_id": "SUP604"
+  },
+  {
+    "item_code": "ITEM00315",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 657,
+    "last_updated": 1724544000,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00316",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1846,
+    "last_updated": "2024-10-27",
+    "category": "Giocattoli",
+    "supplier_id": "SUP995"
+  },
+  {
+    "item_code": "ITEM00317",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4327,
+    "last_updated": 1729987200,
+    "category": "Giocattoli",
+    "supplier_id": "SUP123"
+  },
+  {
+    "item_code": "ITEM00318",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 149,
+    "last_updated": "2024-02-20",
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00319",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1318,
+    "last_updated": 1720396800,
+    "category": "Alimentari",
+    "supplier_id": "SUP867"
+  },
+  {
+    "item_code": "ITEM00320",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1527,
+    "last_updated": "2024-01-16",
+    "category": "Elettronica",
+    "supplier_id": "SUP152"
+  },
+  {
+    "item_code": "ITEM00321",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4324,
+    "last_updated": 1714608000,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00322",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": "29",
+    "last_updated": "2024-02-01",
+    "category": "Beauty",
+    "supplier_id": "SUP708"
+  },
+  {
+    "item_code": "ITEM00323",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4851,
+    "last_updated": 1706227200,
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00324",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": "6",
+    "last_updated": "2024-08-31",
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00325",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4066,
+    "last_updated": 1730073600,
+    "category": "Giocattoli",
+    "supplier_id": "SUP767"
+  },
+  {
+    "item_code": "ITEM00326",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": "383",
+    "last_updated": "2024-11-18",
+    "category": "Giocattoli",
+    "supplier_id": "SUP259"
+  },
+  {
+    "item_code": "ITEM00327",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 417,
+    "last_updated": 1715472000,
+    "category": "Elettronica",
+    "supplier_id": "SUP391"
+  },
+  {
+    "item_code": "ITEM00328",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2692,
+    "last_updated": 1704412800,
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00329",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2791,
+    "last_updated": "2024-09-28",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP123"
+  },
+  {
+    "item_code": "ITEM00330",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4572,
+    "last_updated": 1723680000,
+    "category": "Sport",
+    "supplier_id": "SUP582"
+  },
+  {
+    "item_code": "ITEM00331",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4904,
+    "last_updated": 1735689600,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP525"
+  },
+  {
+    "item_code": "ITEM00332",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4526,
+    "last_updated": 1708905600,
+    "category": "Giocattoli",
+    "supplier_id": "SUP954"
+  },
+  {
+    "item_code": "ITEM00333",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1661,
+    "last_updated": 1737590400,
+    "category": "Sport",
+    "supplier_id": "SUP493"
+  },
+  {
+    "item_code": "ITEM00334",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 988,
+    "last_updated": 1725494400,
+    "category": "Alimentari",
+    "supplier_id": "SUP141"
+  },
+  {
+    "item_code": "ITEM00335",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4584,
+    "last_updated": 1704326400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP660"
+  },
+  {
+    "item_code": "ITEM00336",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4497,
+    "last_updated": "2024-06-29",
+    "category": "Casa",
+    "supplier_id": "SUP612"
+  },
+  {
+    "item_code": "ITEM00337",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "333",
+    "last_updated": "2025-03-20",
+    "category": "Alimentari",
+    "supplier_id": "SUP886"
+  },
+  {
+    "item_code": "ITEM00338",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3237,
+    "last_updated": 1711238400,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00339",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3149,
+    "last_updated": 1737763200,
+    "category": "Casa",
+    "supplier_id": "SUP967"
+  },
+  {
+    "item_code": "ITEM00340",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3867,
+    "last_updated": "2025-02-14",
+    "category": "Casa",
+    "supplier_id": "SUP465"
+  },
+  {
+    "item_code": "ITEM00341",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 969,
+    "last_updated": "2025-03-11",
+    "category": "Alimentari",
+    "supplier_id": "SUP998"
+  },
+  {
+    "item_code": "ITEM00342",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 449,
+    "last_updated": 1722038400,
+    "category": "Alimentari",
+    "supplier_id": "SUP497"
+  },
+  {
+    "item_code": "ITEM00343",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "475",
+    "last_updated": "2024-04-11",
+    "category": "Alimentari",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00344",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1282,
+    "last_updated": "2024-04-18",
+    "category": "Beauty",
+    "supplier_id": "SUP215"
+  },
+  {
+    "item_code": "ITEM00345",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2363,
+    "last_updated": 1716940800,
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00346",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "467",
+    "last_updated": "2024-08-05",
+    "category": "Sport",
+    "supplier_id": "SUP176"
+  },
+  {
+    "item_code": "ITEM00347",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1872,
+    "last_updated": "2024-02-21",
+    "category": "Alimentari",
+    "supplier_id": "SUP486"
+  },
+  {
+    "item_code": "ITEM00348",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4506,
+    "last_updated": 1734912000,
+    "category": "Alimentari",
+    "supplier_id": "SUP913"
+  },
+  {
+    "item_code": "ITEM00349",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2703,
+    "last_updated": "2024-10-08",
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00350",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": "60",
+    "last_updated": 1716249600,
+    "category": "Casa",
+    "supplier_id": "SUP887"
+  },
+  {
+    "item_code": "ITEM00351",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4794,
+    "last_updated": 1709424000,
+    "category": "Alimentari",
+    "supplier_id": "SUP665"
+  },
+  {
+    "item_code": "ITEM00352",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 910,
+    "last_updated": "2025-01-29",
+    "category": "Elettronica",
+    "supplier_id": "SUP604"
+  },
+  {
+    "item_code": "ITEM00353",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1097,
+    "last_updated": "2024-07-09",
+    "category": "Giocattoli",
+    "supplier_id": "SUP618"
+  },
+  {
+    "item_code": "ITEM00354",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2126,
+    "last_updated": "2025-03-13",
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00355",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3140,
+    "last_updated": "2024-05-31",
+    "category": "Giocattoli",
+    "supplier_id": "SUP876"
+  },
+  {
+    "item_code": "ITEM00356",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3463,
+    "last_updated": 1724716800,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00357",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 223,
+    "last_updated": 1706745600,
+    "category": "Giocattoli",
+    "supplier_id": "SUP225"
+  },
+  {
+    "item_code": "ITEM00358",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2159,
+    "last_updated": 1725321600,
+    "category": "Sport",
+    "supplier_id": "SUP870"
+  },
+  {
+    "item_code": "ITEM00359",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 501,
+    "last_updated": "2024-09-06",
+    "category": "Alimentari",
+    "supplier_id": "SUP333"
+  },
+  {
+    "item_code": "ITEM00360",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3623,
+    "last_updated": "2024-02-07",
+    "category": "Giocattoli",
+    "supplier_id": "SUP966"
+  },
+  {
+    "item_code": "ITEM00361",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1483,
+    "last_updated": "2024-03-23",
+    "category": "Sport",
+    "supplier_id": "SUP365"
+  },
+  {
+    "item_code": "ITEM00362",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3299,
+    "last_updated": 1723939200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP953"
+  },
+  {
+    "item_code": "ITEM00363",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3675,
+    "last_updated": 1715126400,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00364",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1178,
+    "last_updated": 1707004800,
+    "category": "Giocattoli",
+    "supplier_id": "SUP311"
+  },
+  {
+    "item_code": "ITEM00365",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4493,
+    "last_updated": 1721779200,
+    "category": "Casa",
+    "supplier_id": "SUP241"
+  },
+  {
+    "item_code": "ITEM00366",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1784,
+    "last_updated": 1723075200,
+    "category": "Beauty",
+    "supplier_id": "SUP586"
+  },
+  {
+    "item_code": "ITEM00367",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 247,
+    "last_updated": 1726876800,
+    "category": "Sport",
+    "supplier_id": "SUP705"
+  },
+  {
+    "item_code": "ITEM00368",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2741,
+    "last_updated": 1738454400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP455"
+  },
+  {
+    "item_code": "ITEM00369",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4947,
+    "last_updated": 1724976000,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP860"
+  },
+  {
+    "item_code": "ITEM00370",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2681,
+    "last_updated": 1723939200,
+    "category": "Casa",
+    "supplier_id": "SUP895"
+  },
+  {
+    "item_code": "ITEM00371",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2635,
+    "last_updated": 1706572800,
+    "category": "Beauty",
+    "supplier_id": "SUP709"
+  },
+  {
+    "item_code": "ITEM00372",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2777,
+    "last_updated": "2024-03-22",
+    "category": "Casa",
+    "supplier_id": "SUP700"
+  },
+  {
+    "item_code": "ITEM00373",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4316,
+    "last_updated": "2025-03-08",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP980"
+  },
+  {
+    "item_code": "ITEM00374",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1066,
+    "last_updated": 1713139200,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00375",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1206,
+    "last_updated": 1708732800,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00376",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4014,
+    "last_updated": 1709337600,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00377",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "150",
+    "last_updated": "2024-10-05",
+    "category": "Alimentari",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00378",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3310,
+    "last_updated": 1714348800,
+    "category": "Elettronica",
+    "supplier_id": "SUP206"
+  },
+  {
+    "item_code": "ITEM00379",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 64,
+    "last_updated": "2025-03-14",
+    "category": "Giocattoli",
+    "supplier_id": "SUP130"
+  },
+  {
+    "item_code": "ITEM00380",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4658,
+    "last_updated": 1704672000,
+    "category": "Elettronica",
+    "supplier_id": "SUP372"
+  },
+  {
+    "item_code": "ITEM00381",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2200,
+    "last_updated": 1707436800,
+    "category": "Elettronica",
+    "supplier_id": "SUP125"
+  },
+  {
+    "item_code": "ITEM00382",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 158,
+    "last_updated": 1707609600,
+    "category": "Casa",
+    "supplier_id": "SUP556"
+  },
+  {
+    "item_code": "ITEM00383",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 88,
+    "last_updated": 1716940800,
+    "category": "Sport",
+    "supplier_id": "SUP289"
+  },
+  {
+    "item_code": "ITEM00384",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1503,
+    "last_updated": "2024-05-23",
+    "category": "Casa",
+    "supplier_id": "SUP973"
+  },
+  {
+    "item_code": "ITEM00385",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3609,
+    "last_updated": "2024-05-22",
+    "category": "Giocattoli",
+    "supplier_id": "SUP347"
+  },
+  {
+    "item_code": "ITEM00386",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4610,
+    "last_updated": "2024-07-22",
+    "category": "Giocattoli",
+    "supplier_id": "SUP366"
+  },
+  {
+    "item_code": "ITEM00387",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2865,
+    "last_updated": 1731110400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP432"
+  },
+  {
+    "item_code": "ITEM00388",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1793,
+    "last_updated": 1714003200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP261"
+  },
+  {
+    "item_code": "ITEM00389",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 712,
+    "last_updated": "2024-10-20",
+    "category": "Elettronica",
+    "supplier_id": "SUP327"
+  },
+  {
+    "item_code": "ITEM00390",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2445,
+    "last_updated": 1728950400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP228"
+  },
+  {
+    "item_code": "ITEM00391",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3707,
+    "last_updated": "2024-06-18",
+    "category": "Giocattoli",
+    "supplier_id": "SUP983"
+  },
+  {
+    "item_code": "ITEM00392",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2488,
+    "last_updated": "2024-04-15",
+    "category": "Sport",
+    "supplier_id": "SUP738"
+  },
+  {
+    "item_code": "ITEM00393",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": "370",
+    "last_updated": "2025-03-15",
+    "category": "Sport",
+    "supplier_id": "SUP935"
+  },
+  {
+    "item_code": "ITEM00394",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4056,
+    "last_updated": 1737331200,
+    "category": "Casa",
+    "supplier_id": "SUP122"
+  },
+  {
+    "item_code": "ITEM00395",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "5",
+    "last_updated": 1708560000,
+    "category": "Sport",
+    "supplier_id": "SUP964"
+  },
+  {
+    "item_code": "ITEM00396",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1359,
+    "last_updated": "2024-02-09",
+    "category": "Alimentari",
+    "supplier_id": "SUP406"
+  },
+  {
+    "item_code": "ITEM00397",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2289,
+    "last_updated": "2024-10-20",
+    "category": "Elettronica",
+    "supplier_id": "SUP277"
+  },
+  {
+    "item_code": "ITEM00398",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1576,
+    "last_updated": "2024-03-29",
+    "category": "Elettronica",
+    "supplier_id": "SUP350"
+  },
+  {
+    "item_code": "ITEM00399",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1261,
+    "last_updated": 1732838400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP973"
+  },
+  {
+    "item_code": "ITEM00400",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1853,
+    "last_updated": 1716595200,
+    "category": "Alimentari",
+    "supplier_id": "SUP799"
+  },
+  {
+    "item_code": "ITEM00401",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3316,
+    "last_updated": 1728518400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP811"
+  },
+  {
+    "item_code": "ITEM00402",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2011,
+    "last_updated": "2024-03-24",
+    "category": "Alimentari",
+    "supplier_id": "SUP503"
+  },
+  {
+    "item_code": "ITEM00403",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1083,
+    "last_updated": "2024-10-02",
+    "category": "Elettronica",
+    "supplier_id": "SUP864"
+  },
+  {
+    "item_code": "ITEM00404",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2207,
+    "last_updated": 1708041600,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP158"
+  },
+  {
+    "item_code": "ITEM00405",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4902,
+    "last_updated": "2025-03-23",
+    "category": "Sport",
+    "supplier_id": "SUP237"
+  },
+  {
+    "item_code": "ITEM00406",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1988,
+    "last_updated": 1721779200,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00407",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3044,
+    "last_updated": "2024-02-03",
+    "category": "Elettronica",
+    "supplier_id": "SUP709"
+  },
+  {
+    "item_code": "ITEM00408",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4639,
+    "last_updated": "2024-08-17",
+    "category": "Alimentari",
+    "supplier_id": "SUP915"
+  },
+  {
+    "item_code": "ITEM00409",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1481,
+    "last_updated": "2024-02-08",
+    "category": "Beauty",
+    "supplier_id": "SUP593"
+  },
+  {
+    "item_code": "ITEM00410",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3283,
+    "last_updated": "2024-08-04",
+    "category": "Giocattoli",
+    "supplier_id": "SUP584"
+  },
+  {
+    "item_code": "ITEM00411",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4167,
+    "last_updated": 1721692800,
+    "category": "Alimentari",
+    "supplier_id": "SUP245"
+  },
+  {
+    "item_code": "ITEM00412",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3487,
+    "last_updated": "2025-02-18",
+    "category": "Giocattoli",
+    "supplier_id": "SUP104"
+  },
+  {
+    "item_code": "ITEM00413",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4366,
+    "last_updated": 1717977600,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00414",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 867,
+    "last_updated": "2024-12-19",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP463"
+  },
+  {
+    "item_code": "ITEM00415",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2219,
+    "last_updated": "2025-01-30",
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00416",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 404,
+    "last_updated": 1723593600,
+    "category": "Casa",
+    "supplier_id": "SUP572"
+  },
+  {
+    "item_code": "ITEM00417",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4959,
+    "last_updated": 1720569600,
+    "category": "Beauty",
+    "supplier_id": "SUP980"
+  },
+  {
+    "item_code": "ITEM00418",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 765,
+    "last_updated": 1714435200,
+    "category": "Beauty",
+    "supplier_id": "SUP743"
+  },
+  {
+    "item_code": "ITEM00419",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4421,
+    "last_updated": 1730160000,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP107"
+  },
+  {
+    "item_code": "ITEM00420",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3957,
+    "last_updated": 1723075200,
+    "category": "Casa",
+    "supplier_id": "SUP949"
+  },
+  {
+    "item_code": "ITEM00421",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1920,
+    "last_updated": 1730073600,
+    "category": "Sport",
+    "supplier_id": "SUP540"
+  },
+  {
+    "item_code": "ITEM00422",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 468,
+    "last_updated": "2024-08-27",
+    "category": "Beauty",
+    "supplier_id": "SUP396"
+  },
+  {
+    "item_code": "ITEM00423",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4257,
+    "last_updated": "2024-09-14",
+    "category": "Giocattoli",
+    "supplier_id": "SUP852"
+  },
+  {
+    "item_code": "ITEM00424",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4435,
+    "last_updated": "2025-01-31",
+    "category": "Alimentari",
+    "supplier_id": "SUP827"
+  },
+  {
+    "item_code": "ITEM00425",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1408,
+    "last_updated": "2024-09-17",
+    "category": "Alimentari",
+    "supplier_id": "SUP228"
+  },
+  {
+    "item_code": "ITEM00426",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1775,
+    "last_updated": 1732233600,
+    "category": "Giocattoli",
+    "supplier_id": "SUP482"
+  },
+  {
+    "item_code": "ITEM00427",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3209,
+    "last_updated": "2024-03-22",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP458"
+  },
+  {
+    "item_code": "ITEM00428",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4368,
+    "last_updated": "2025-01-08",
+    "category": "Giocattoli",
+    "supplier_id": "SUP750"
+  },
+  {
+    "item_code": "ITEM00429",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2456,
+    "last_updated": 1728432000,
+    "category": "Casa",
+    "supplier_id": "SUP878"
+  },
+  {
+    "item_code": "ITEM00430",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 104,
+    "last_updated": "2024-03-27",
+    "category": "Giocattoli",
+    "supplier_id": "SUP380"
+  },
+  {
+    "item_code": "ITEM00431",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4697,
+    "last_updated": "2024-01-06",
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00432",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3632,
+    "last_updated": "2024-07-28",
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00433",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 431,
+    "last_updated": 1719964800,
+    "category": "Casa",
+    "supplier_id": "SUP168"
+  },
+  {
+    "item_code": "ITEM00434",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 322,
+    "last_updated": "2024-04-28",
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00435",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2012,
+    "last_updated": "2024-04-12",
+    "category": "Sport",
+    "supplier_id": "SUP237"
+  },
+  {
+    "item_code": "ITEM00436",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3798,
+    "last_updated": "2024-10-30",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP105"
+  },
+  {
+    "item_code": "ITEM00437",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 174,
+    "last_updated": 1710374400,
+    "category": "Casa",
+    "supplier_id": "SUP138"
+  },
+  {
+    "item_code": "ITEM00438",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3278,
+    "last_updated": "2024-12-16",
+    "category": "Beauty",
+    "supplier_id": "SUP960"
+  },
+  {
+    "item_code": "ITEM00439",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3571,
+    "last_updated": 1721347200,
+    "category": "Alimentari",
+    "supplier_id": "SUP638"
+  },
+  {
+    "item_code": "ITEM00440",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": "293",
+    "last_updated": "2024-08-25",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP533"
+  },
+  {
+    "item_code": "ITEM00441",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3486,
+    "last_updated": 1713916800,
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00442",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 939,
+    "last_updated": "2025-02-09",
+    "category": "Sport",
+    "supplier_id": "SUP829"
+  },
+  {
+    "item_code": "ITEM00443",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2454,
+    "last_updated": "2024-04-12",
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00444",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2356,
+    "last_updated": "2025-01-18",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP575"
+  },
+  {
+    "item_code": "ITEM00445",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3181,
+    "last_updated": 1725148800,
+    "category": "Casa",
+    "supplier_id": "SUP870"
+  },
+  {
+    "item_code": "ITEM00446",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1707,
+    "last_updated": 1730764800,
+    "category": "Alimentari",
+    "supplier_id": "SUP146"
+  },
+  {
+    "item_code": "ITEM00447",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 569,
+    "last_updated": 1719100800,
+    "category": "Elettronica",
+    "supplier_id": "SUP551"
+  },
+  {
+    "item_code": "ITEM00448",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4050,
+    "last_updated": 1729036800,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP814"
+  },
+  {
+    "item_code": "ITEM00449",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "86",
+    "last_updated": "2024-04-22",
+    "category": "Casa",
+    "supplier_id": "SUP890"
+  },
+  {
+    "item_code": "ITEM00450",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4064,
+    "last_updated": "2024-05-17",
+    "category": "Alimentari",
+    "supplier_id": "SUP443"
+  },
+  {
+    "item_code": "ITEM00451",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3184,
+    "last_updated": 1723852800,
+    "category": "Sport",
+    "supplier_id": "SUP111"
+  },
+  {
+    "item_code": "ITEM00452",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2403,
+    "last_updated": 1720396800,
+    "category": "Beauty",
+    "supplier_id": "SUP962"
+  },
+  {
+    "item_code": "ITEM00453",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4651,
+    "last_updated": "2024-12-18",
+    "category": "Casa",
+    "supplier_id": "SUP628"
+  },
+  {
+    "item_code": "ITEM00454",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2180,
+    "last_updated": "2024-01-07",
+    "category": "Elettronica",
+    "supplier_id": "SUP332"
+  },
+  {
+    "item_code": "ITEM00455",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2563,
+    "last_updated": 1715904000,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00456",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4833,
+    "last_updated": 1705449600,
+    "category": "Sport",
+    "supplier_id": "SUP588"
+  },
+  {
+    "item_code": "ITEM00457",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3500,
+    "last_updated": "2024-09-07",
+    "category": "Giocattoli",
+    "supplier_id": "SUP520"
+  },
+  {
+    "item_code": "ITEM00458",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3732,
+    "last_updated": 1727136000,
+    "category": "Alimentari",
+    "supplier_id": "SUP568"
+  },
+  {
+    "item_code": "ITEM00459",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3073,
+    "last_updated": "2025-01-20",
+    "category": "Casa",
+    "supplier_id": "SUP976"
+  },
+  {
+    "item_code": "ITEM00460",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2100,
+    "last_updated": 1724716800,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP497"
+  },
+  {
+    "item_code": "ITEM00461",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 550,
+    "last_updated": "2024-06-01",
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00462",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4988,
+    "last_updated": 1706659200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP812"
+  },
+  {
+    "item_code": "ITEM00463",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 901,
+    "last_updated": "2024-09-21",
+    "category": "Alimentari",
+    "supplier_id": "SUP814"
+  },
+  {
+    "item_code": "ITEM00464",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4604,
+    "last_updated": "2024-05-28",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP870"
+  },
+  {
+    "item_code": "ITEM00465",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": "460",
+    "last_updated": "2024-12-27",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP535"
+  },
+  {
+    "item_code": "ITEM00466",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3246,
+    "last_updated": 1723507200,
+    "category": "Beauty",
+    "supplier_id": "SUP937"
+  },
+  {
+    "item_code": "ITEM00467",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 985,
+    "last_updated": 1710028800,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP530"
+  },
+  {
+    "item_code": "ITEM00468",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3894,
+    "last_updated": 1732406400,
+    "category": "Alimentari",
+    "supplier_id": "SUP729"
+  },
+  {
+    "item_code": "ITEM00469",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3703,
+    "last_updated": 1726444800,
+    "category": "Casa",
+    "supplier_id": "SUP614"
+  },
+  {
+    "item_code": "ITEM00470",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 382,
+    "last_updated": "2025-01-19",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP309"
+  },
+  {
+    "item_code": "ITEM00471",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1385,
+    "last_updated": 1734739200,
+    "category": "Sport",
+    "supplier_id": "SUP615"
+  },
+  {
+    "item_code": "ITEM00472",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 197,
+    "last_updated": 1717977600,
+    "category": "Giocattoli",
+    "supplier_id": "SUP430"
+  },
+  {
+    "item_code": "ITEM00473",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2479,
+    "last_updated": 1710201600,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00474",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": "331",
+    "last_updated": 1722729600,
+    "category": "Giocattoli",
+    "supplier_id": "SUP179"
+  },
+  {
+    "item_code": "ITEM00475",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3627,
+    "last_updated": "2024-07-19",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP162"
+  },
+  {
+    "item_code": "ITEM00476",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1334,
+    "last_updated": 1733961600,
+    "category": "Elettronica",
+    "supplier_id": "SUP929"
+  },
+  {
+    "item_code": "ITEM00477",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4169,
+    "last_updated": 1707609600,
+    "category": "Beauty",
+    "supplier_id": "SUP935"
+  },
+  {
+    "item_code": "ITEM00478",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4602,
+    "last_updated": "2024-12-25",
+    "category": "Alimentari",
+    "supplier_id": "SUP887"
+  },
+  {
+    "item_code": "ITEM00479",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1911,
+    "last_updated": 1724284800,
+    "category": "Beauty",
+    "supplier_id": "SUP106"
+  },
+  {
+    "item_code": "ITEM00480",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2522,
+    "last_updated": 1711584000,
+    "category": "Casa",
+    "supplier_id": "SUP261"
+  },
+  {
+    "item_code": "ITEM00481",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4844,
+    "last_updated": 1733443200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP189"
+  },
+  {
+    "item_code": "ITEM00482",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2477,
+    "last_updated": 1732320000,
+    "category": "Sport",
+    "supplier_id": "SUP215"
+  },
+  {
+    "item_code": "ITEM00483",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4633,
+    "last_updated": 1722556800,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00484",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 520,
+    "last_updated": 1727827200,
+    "category": "Casa",
+    "supplier_id": "SUP476"
+  },
+  {
+    "item_code": "ITEM00485",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4345,
+    "last_updated": "2024-05-19",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP624"
+  },
+  {
+    "item_code": "ITEM00486",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2009,
+    "last_updated": 1734912000,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP810"
+  },
+  {
+    "item_code": "ITEM00487",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4413,
+    "last_updated": "2024-08-29",
+    "category": "Sport",
+    "supplier_id": "SUP105"
+  },
+  {
+    "item_code": "ITEM00488",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2220,
+    "last_updated": 1734048000,
+    "category": "Elettronica",
+    "supplier_id": "SUP760"
+  },
+  {
+    "item_code": "ITEM00489",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2069,
+    "last_updated": 1729728000,
+    "category": "Beauty",
+    "supplier_id": "SUP970"
+  },
+  {
+    "item_code": "ITEM00490",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1636,
+    "last_updated": 1738281600,
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00491",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1278,
+    "last_updated": 1717200000,
+    "category": "Elettronica",
+    "supplier_id": "SUP149"
+  },
+  {
+    "item_code": "ITEM00492",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "322",
+    "last_updated": 1726963200,
+    "category": "Beauty",
+    "supplier_id": "SUP979"
+  },
+  {
+    "item_code": "ITEM00493",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3294,
+    "last_updated": "2024-03-25",
+    "category": "Sport",
+    "supplier_id": "SUP663"
+  },
+  {
+    "item_code": "ITEM00494",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2424,
+    "last_updated": 1727308800,
+    "category": "Alimentari",
+    "supplier_id": "SUP130"
+  },
+  {
+    "item_code": "ITEM00495",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4229,
+    "last_updated": 1729641600,
+    "category": "Alimentari",
+    "supplier_id": "SUP288"
+  },
+  {
+    "item_code": "ITEM00496",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 727,
+    "last_updated": "2024-10-03",
+    "category": "Elettronica",
+    "supplier_id": "SUP706"
+  },
+  {
+    "item_code": "ITEM00497",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3152,
+    "last_updated": 1711584000,
+    "category": "Giocattoli",
+    "supplier_id": "SUP501"
+  },
+  {
+    "item_code": "ITEM00498",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "16",
+    "last_updated": 1704758400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP567"
+  },
+  {
+    "item_code": "ITEM00499",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1435,
+    "last_updated": 1722643200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP370"
+  },
+  {
+    "item_code": "ITEM00500",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2671,
+    "last_updated": 1720915200,
+    "category": "Beauty",
+    "supplier_id": "SUP757"
+  },
+  {
+    "item_code": "ITEM00501",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4275,
+    "last_updated": 1725494400,
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00502",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2418,
+    "last_updated": 1733097600,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP773"
+  },
+  {
+    "item_code": "ITEM00503",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4887,
+    "last_updated": "2024-02-16",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP569"
+  },
+  {
+    "item_code": "ITEM00504",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1496,
+    "last_updated": 1715817600,
+    "category": "Sport",
+    "supplier_id": "SUP942"
+  },
+  {
+    "item_code": "ITEM00505",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3086,
+    "last_updated": 1723852800,
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00506",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2607,
+    "last_updated": "2025-01-26",
+    "category": "Beauty",
+    "supplier_id": "SUP460"
+  },
+  {
+    "item_code": "ITEM00507",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3480,
+    "last_updated": "2025-01-20",
+    "category": "Elettronica",
+    "supplier_id": "SUP934"
+  },
+  {
+    "item_code": "ITEM00508",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2280,
+    "last_updated": 1714780800,
+    "category": "Giocattoli",
+    "supplier_id": "SUP818"
+  },
+  {
+    "item_code": "ITEM00509",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4178,
+    "last_updated": 1709251200,
+    "category": "Alimentari",
+    "supplier_id": "SUP683"
+  },
+  {
+    "item_code": "ITEM00510",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2037,
+    "last_updated": 1716249600,
+    "category": "Beauty",
+    "supplier_id": "SUP255"
+  },
+  {
+    "item_code": "ITEM00511",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1890,
+    "last_updated": 1720915200,
+    "category": "Casa",
+    "supplier_id": "SUP718"
+  },
+  {
+    "item_code": "ITEM00512",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 603,
+    "last_updated": "2024-10-24",
+    "category": "Alimentari",
+    "supplier_id": "SUP596"
+  },
+  {
+    "item_code": "ITEM00513",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 413,
+    "last_updated": 1712275200,
+    "category": "Sport",
+    "supplier_id": "SUP288"
+  },
+  {
+    "item_code": "ITEM00514",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4617,
+    "last_updated": 1704499200,
+    "category": "Casa",
+    "supplier_id": "SUP174"
+  },
+  {
+    "item_code": "ITEM00515",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4662,
+    "last_updated": 1711843200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP486"
+  },
+  {
+    "item_code": "ITEM00516",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4941,
+    "last_updated": 1736467200,
+    "category": "Sport",
+    "supplier_id": "SUP428"
+  },
+  {
+    "item_code": "ITEM00517",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3275,
+    "last_updated": 1724544000,
+    "category": "Beauty",
+    "supplier_id": "SUP725"
+  },
+  {
+    "item_code": "ITEM00518",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3553,
+    "last_updated": "2024-03-03",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP276"
+  },
+  {
+    "item_code": "ITEM00519",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2060,
+    "last_updated": 1714953600,
+    "category": "Elettronica",
+    "supplier_id": "SUP717"
+  },
+  {
+    "item_code": "ITEM00520",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4911,
+    "last_updated": "2024-03-05",
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00521",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2372,
+    "last_updated": "2024-11-30",
+    "category": "Beauty",
+    "supplier_id": "SUP508"
+  },
+  {
+    "item_code": "ITEM00522",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 551,
+    "last_updated": 1717545600,
+    "category": "Beauty",
+    "supplier_id": "SUP332"
+  },
+  {
+    "item_code": "ITEM00523",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4620,
+    "last_updated": "2024-06-02",
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00524",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4452,
+    "last_updated": 1705449600,
+    "category": "Sport",
+    "supplier_id": "SUP545"
+  },
+  {
+    "item_code": "ITEM00525",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3143,
+    "last_updated": "2025-01-15",
+    "category": "Giocattoli",
+    "supplier_id": "SUP814"
+  },
+  {
+    "item_code": "ITEM00526",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 93,
+    "last_updated": "2024-12-29",
+    "category": "Beauty",
+    "supplier_id": "SUP631"
+  },
+  {
+    "item_code": "ITEM00527",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1901,
+    "last_updated": "2024-09-05",
+    "category": "Casa",
+    "supplier_id": "SUP919"
+  },
+  {
+    "item_code": "ITEM00528",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2138,
+    "last_updated": 1731456000,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00529",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3031,
+    "last_updated": 1709856000,
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00530",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 22,
+    "last_updated": 1722124800,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00531",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3934,
+    "last_updated": "2025-01-26",
+    "category": "Beauty",
+    "supplier_id": "SUP757"
+  },
+  {
+    "item_code": "ITEM00532",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 55,
+    "last_updated": "2025-02-11",
+    "category": "Alimentari",
+    "supplier_id": "SUP223"
+  },
+  {
+    "item_code": "ITEM00533",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 594,
+    "last_updated": 1725321600,
+    "category": "Beauty",
+    "supplier_id": "SUP970"
+  },
+  {
+    "item_code": "ITEM00534",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 424,
+    "last_updated": 1725926400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP175"
+  },
+  {
+    "item_code": "ITEM00535",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2864,
+    "last_updated": "2024-08-02",
+    "category": "Elettronica",
+    "supplier_id": "SUP880"
+  },
+  {
+    "item_code": "ITEM00536",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1201,
+    "last_updated": 1731542400,
+    "category": "Beauty",
+    "supplier_id": "SUP711"
+  },
+  {
+    "item_code": "ITEM00537",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4224,
+    "last_updated": 1713312000,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00538",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2407,
+    "last_updated": 1717718400,
+    "category": "Alimentari",
+    "supplier_id": "SUP393"
+  },
+  {
+    "item_code": "ITEM00539",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4041,
+    "last_updated": 1723680000,
+    "category": "Beauty",
+    "supplier_id": "SUP525"
+  },
+  {
+    "item_code": "ITEM00540",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2582,
+    "last_updated": 1704240000,
+    "category": "Beauty",
+    "supplier_id": "SUP523"
+  },
+  {
+    "item_code": "ITEM00541",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4983,
+    "last_updated": "2024-08-29",
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00542",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1957,
+    "last_updated": 1711411200,
+    "category": "Giocattoli",
+    "supplier_id": "SUP455"
+  },
+  {
+    "item_code": "ITEM00543",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3141,
+    "last_updated": "2024-05-10",
+    "category": "Elettronica",
+    "supplier_id": "SUP175"
+  },
+  {
+    "item_code": "ITEM00544",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2820,
+    "last_updated": "2025-01-14",
+    "category": "Elettronica",
+    "supplier_id": "SUP927"
+  },
+  {
+    "item_code": "ITEM00545",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3701,
+    "last_updated": "2025-01-02",
+    "category": "Giocattoli",
+    "supplier_id": "SUP785"
+  },
+  {
+    "item_code": "ITEM00546",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 958,
+    "last_updated": 1706140800,
+    "category": "Beauty",
+    "supplier_id": "SUP584"
+  },
+  {
+    "item_code": "ITEM00547",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "5",
+    "last_updated": 1704585600,
+    "category": "Beauty",
+    "supplier_id": "SUP419"
+  },
+  {
+    "item_code": "ITEM00548",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 150,
+    "last_updated": 1715040000,
+    "category": "Sport",
+    "supplier_id": "SUP828"
+  },
+  {
+    "item_code": "ITEM00549",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4420,
+    "last_updated": "2024-04-17",
+    "category": "Sport",
+    "supplier_id": "SUP887"
+  },
+  {
+    "item_code": "ITEM00550",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 326,
+    "last_updated": "2024-07-09",
+    "category": "Giocattoli",
+    "supplier_id": "SUP508"
+  },
+  {
+    "item_code": "ITEM00551",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 172,
+    "last_updated": 1727654400,
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00552",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4981,
+    "last_updated": 1708041600,
+    "category": "Casa",
+    "supplier_id": "SUP547"
+  },
+  {
+    "item_code": "ITEM00553",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1939,
+    "last_updated": "2024-08-01",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP294"
+  },
+  {
+    "item_code": "ITEM00554",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 169,
+    "last_updated": 1726444800,
+    "category": "Elettronica",
+    "supplier_id": "SUP960"
+  },
+  {
+    "item_code": "ITEM00555",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4141,
+    "last_updated": 1730764800,
+    "category": "Sport",
+    "supplier_id": "SUP143"
+  },
+  {
+    "item_code": "ITEM00556",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "347",
+    "last_updated": 1730505600,
+    "category": "Beauty",
+    "supplier_id": "SUP653"
+  },
+  {
+    "item_code": "ITEM00557",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 646,
+    "last_updated": "2024-12-14",
+    "category": "Giocattoli",
+    "supplier_id": "SUP930"
+  },
+  {
+    "item_code": "ITEM00558",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 788,
+    "last_updated": "2024-05-21",
+    "category": "Sport",
+    "supplier_id": "SUP148"
+  },
+  {
+    "item_code": "ITEM00559",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3271,
+    "last_updated": "2024-12-02",
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00560",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": "232",
+    "last_updated": 1733788800,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00561",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3853,
+    "last_updated": 1725062400,
+    "category": "Casa",
+    "supplier_id": "SUP472"
+  },
+  {
+    "item_code": "ITEM00562",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 464,
+    "last_updated": 1734048000,
+    "category": "Beauty",
+    "supplier_id": "SUP755"
+  },
+  {
+    "item_code": "ITEM00563",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 520,
+    "last_updated": "2025-01-16",
+    "category": "Elettronica",
+    "supplier_id": "SUP686"
+  },
+  {
+    "item_code": "ITEM00564",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4723,
+    "last_updated": "2025-03-24",
+    "category": "Giocattoli",
+    "supplier_id": "SUP496"
+  },
+  {
+    "item_code": "ITEM00565",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3337,
+    "last_updated": "2024-06-16",
+    "category": "Beauty",
+    "supplier_id": "SUP484"
+  },
+  {
+    "item_code": "ITEM00566",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 111,
+    "last_updated": "2024-07-15",
+    "category": "Elettronica",
+    "supplier_id": "SUP408"
+  },
+  {
+    "item_code": "ITEM00567",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3982,
+    "last_updated": 1723852800,
+    "category": "Elettronica",
+    "supplier_id": "SUP497"
+  },
+  {
+    "item_code": "ITEM00568",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": "475",
+    "last_updated": 1721433600,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00569",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 68,
+    "last_updated": "2024-03-07",
+    "category": "Beauty",
+    "supplier_id": "SUP756"
+  },
+  {
+    "item_code": "ITEM00570",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3513,
+    "last_updated": "2024-01-05",
+    "category": "Sport",
+    "supplier_id": "SUP223"
+  },
+  {
+    "item_code": "ITEM00571",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4805,
+    "last_updated": "2024-03-01",
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00572",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1172,
+    "last_updated": "2024-01-12",
+    "category": "Sport",
+    "supplier_id": "SUP261"
+  },
+  {
+    "item_code": "ITEM00573",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3768,
+    "last_updated": 1729209600,
+    "category": "Casa",
+    "supplier_id": "SUP475"
+  },
+  {
+    "item_code": "ITEM00574",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4706,
+    "last_updated": 1712275200,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00575",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": "441",
+    "last_updated": 1719446400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP402"
+  },
+  {
+    "item_code": "ITEM00576",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2239,
+    "last_updated": 1730160000,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00577",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4955,
+    "last_updated": "2024-05-26",
+    "category": "Alimentari",
+    "supplier_id": "SUP192"
+  },
+  {
+    "item_code": "ITEM00578",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4596,
+    "last_updated": "2024-10-07",
+    "category": "Sport",
+    "supplier_id": "SUP744"
+  },
+  {
+    "item_code": "ITEM00579",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2321,
+    "last_updated": 1716508800,
+    "category": "Giocattoli",
+    "supplier_id": "SUP515"
+  },
+  {
+    "item_code": "ITEM00580",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4891,
+    "last_updated": 1720396800,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00581",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": "358",
+    "last_updated": 1704585600,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP518"
+  },
+  {
+    "item_code": "ITEM00582",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1143,
+    "last_updated": "2024-08-04",
+    "category": "Elettronica",
+    "supplier_id": "SUP403"
+  },
+  {
+    "item_code": "ITEM00583",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1263,
+    "last_updated": 1721952000,
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00584",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 515,
+    "last_updated": "2024-07-05",
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00585",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 555,
+    "last_updated": 1734048000,
+    "category": "Beauty",
+    "supplier_id": "SUP192"
+  },
+  {
+    "item_code": "ITEM00586",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 769,
+    "last_updated": "2024-01-28",
+    "category": "Alimentari",
+    "supplier_id": "SUP685"
+  },
+  {
+    "item_code": "ITEM00587",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1468,
+    "last_updated": "2024-02-08",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP434"
+  },
+  {
+    "item_code": "ITEM00588",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2173,
+    "last_updated": "2024-07-11",
+    "category": "Alimentari",
+    "supplier_id": "SUP474"
+  },
+  {
+    "item_code": "ITEM00589",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2620,
+    "last_updated": 1724716800,
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00590",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 654,
+    "last_updated": 1727222400,
+    "category": "Beauty",
+    "supplier_id": "SUP507"
+  },
+  {
+    "item_code": "ITEM00591",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2460,
+    "last_updated": 1721952000,
+    "category": "Sport",
+    "supplier_id": "SUP438"
+  },
+  {
+    "item_code": "ITEM00592",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4536,
+    "last_updated": "2024-06-14",
+    "category": "Beauty",
+    "supplier_id": "SUP370"
+  },
+  {
+    "item_code": "ITEM00593",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 56,
+    "last_updated": "2024-08-27",
+    "category": "Elettronica",
+    "supplier_id": "SUP348"
+  },
+  {
+    "item_code": "ITEM00594",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 726,
+    "last_updated": 1714867200,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00595",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1343,
+    "last_updated": "2024-07-03",
+    "category": "Casa",
+    "supplier_id": "SUP322"
+  },
+  {
+    "item_code": "ITEM00596",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1176,
+    "last_updated": 1730764800,
+    "category": "Beauty",
+    "supplier_id": "SUP905"
+  },
+  {
+    "item_code": "ITEM00597",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3316,
+    "last_updated": "2024-01-21",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP236"
+  },
+  {
+    "item_code": "ITEM00598",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1342,
+    "last_updated": 1724371200,
+    "category": "Casa",
+    "supplier_id": "SUP707"
+  },
+  {
+    "item_code": "ITEM00599",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3598,
+    "last_updated": 1714521600,
+    "category": "Sport",
+    "supplier_id": "SUP263"
+  },
+  {
+    "item_code": "ITEM00600",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2770,
+    "last_updated": 1706054400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP286"
+  },
+  {
+    "item_code": "ITEM00601",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2059,
+    "last_updated": 1704067200,
+    "category": "Elettronica",
+    "supplier_id": "SUP293"
+  },
+  {
+    "item_code": "ITEM00602",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1435,
+    "last_updated": 1717027200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP404"
+  },
+  {
+    "item_code": "ITEM00603",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4953,
+    "last_updated": 1710633600,
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00604",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2630,
+    "last_updated": 1718582400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP450"
+  },
+  {
+    "item_code": "ITEM00605",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 471,
+    "last_updated": 1723593600,
+    "category": "Alimentari",
+    "supplier_id": "SUP806"
+  },
+  {
+    "item_code": "ITEM00606",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1811,
+    "last_updated": "2024-01-02",
+    "category": "Beauty",
+    "supplier_id": "SUP907"
+  },
+  {
+    "item_code": "ITEM00607",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1748,
+    "last_updated": 1712188800,
+    "category": "Giocattoli",
+    "supplier_id": "SUP740"
+  },
+  {
+    "item_code": "ITEM00608",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4036,
+    "last_updated": 1724716800,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP177"
+  },
+  {
+    "item_code": "ITEM00609",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4147,
+    "last_updated": 1705536000,
+    "category": "Casa",
+    "supplier_id": "SUP405"
+  },
+  {
+    "item_code": "ITEM00610",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": "410",
+    "last_updated": 1713225600,
+    "category": "Sport",
+    "supplier_id": "SUP343"
+  },
+  {
+    "item_code": "ITEM00611",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2744,
+    "last_updated": 1711497600,
+    "category": "Sport",
+    "supplier_id": "SUP411"
+  },
+  {
+    "item_code": "ITEM00612",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 694,
+    "last_updated": 1705708800,
+    "category": "Beauty",
+    "supplier_id": "SUP825"
+  },
+  {
+    "item_code": "ITEM00613",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1083,
+    "last_updated": 1715990400,
+    "category": "Elettronica",
+    "supplier_id": "SUP989"
+  },
+  {
+    "item_code": "ITEM00614",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3005,
+    "last_updated": 1722988800,
+    "category": "Casa",
+    "supplier_id": "SUP480"
+  },
+  {
+    "item_code": "ITEM00615",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3520,
+    "last_updated": 1704672000,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00616",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4164,
+    "last_updated": 1719792000,
+    "category": "Beauty",
+    "supplier_id": "SUP929"
+  },
+  {
+    "item_code": "ITEM00617",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2149,
+    "last_updated": 1736294400,
+    "category": "Elettronica",
+    "supplier_id": "SUP558"
+  },
+  {
+    "item_code": "ITEM00618",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3978,
+    "last_updated": 1713225600,
+    "category": "Elettronica",
+    "supplier_id": "SUP322"
+  },
+  {
+    "item_code": "ITEM00619",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4437,
+    "last_updated": 1730505600,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00620",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": "378",
+    "last_updated": 1717977600,
+    "category": "Giocattoli",
+    "supplier_id": "SUP987"
+  },
+  {
+    "item_code": "ITEM00621",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1700,
+    "last_updated": "2024-08-01",
+    "category": "Giocattoli",
+    "supplier_id": "SUP403"
+  },
+  {
+    "item_code": "ITEM00622",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1822,
+    "last_updated": 1715385600,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00623",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4489,
+    "last_updated": 1727654400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP776"
+  },
+  {
+    "item_code": "ITEM00624",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2361,
+    "last_updated": 1719014400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP104"
+  },
+  {
+    "item_code": "ITEM00625",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3689,
+    "last_updated": 1734912000,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00626",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4350,
+    "last_updated": 1717459200,
+    "category": "Casa",
+    "supplier_id": "SUP946"
+  },
+  {
+    "item_code": "ITEM00627",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3777,
+    "last_updated": 1734825600,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00628",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1054,
+    "last_updated": "2024-09-26",
+    "category": "Beauty",
+    "supplier_id": "SUP594"
+  },
+  {
+    "item_code": "ITEM00629",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4478,
+    "last_updated": 1716854400,
+    "category": "Elettronica",
+    "supplier_id": "SUP150"
+  },
+  {
+    "item_code": "ITEM00630",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1637,
+    "last_updated": 1715299200,
+    "category": "Sport",
+    "supplier_id": "SUP510"
+  },
+  {
+    "item_code": "ITEM00631",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4710,
+    "last_updated": 1715990400,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00632",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3635,
+    "last_updated": 1729123200,
+    "category": "Giocattoli",
+    "supplier_id": "SUP297"
+  },
+  {
+    "item_code": "ITEM00633",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3643,
+    "last_updated": "2024-07-21",
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00634",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1152,
+    "last_updated": 1721001600,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00635",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2919,
+    "last_updated": 1736467200,
+    "category": "Casa",
+    "supplier_id": "SUP516"
+  },
+  {
+    "item_code": "ITEM00636",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4282,
+    "last_updated": 1718323200,
+    "category": "Alimentari",
+    "supplier_id": "SUP467"
+  },
+  {
+    "item_code": "ITEM00637",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1410,
+    "last_updated": "2024-08-08",
+    "category": "Alimentari",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00638",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3656,
+    "last_updated": "2025-02-06",
+    "category": "Giocattoli",
+    "supplier_id": "SUP643"
+  },
+  {
+    "item_code": "ITEM00639",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 470,
+    "last_updated": "2024-07-31",
+    "category": "Casa",
+    "supplier_id": "SUP432"
+  },
+  {
+    "item_code": "ITEM00640",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2102,
+    "last_updated": 1715558400,
+    "category": "Elettronica",
+    "supplier_id": "SUP702"
+  },
+  {
+    "item_code": "ITEM00641",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 40,
+    "last_updated": "2025-03-10",
+    "category": "Giocattoli",
+    "supplier_id": "SUP641"
+  },
+  {
+    "item_code": "ITEM00642",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3488,
+    "last_updated": "2025-02-01",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP940"
+  },
+  {
+    "item_code": "ITEM00643",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 520,
+    "last_updated": 1714867200,
+    "category": "Casa",
+    "supplier_id": "SUP737"
+  },
+  {
+    "item_code": "ITEM00644",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2193,
+    "last_updated": "2024-04-18",
+    "category": "Sport",
+    "supplier_id": "SUP162"
+  },
+  {
+    "item_code": "ITEM00645",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "355",
+    "last_updated": "2024-01-25",
+    "category": "Sport",
+    "supplier_id": "SUP647"
+  },
+  {
+    "item_code": "ITEM00646",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "311",
+    "last_updated": 1716336000,
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00647",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 99,
+    "last_updated": 1723161600,
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00648",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4717,
+    "last_updated": 1710028800,
+    "category": "Giocattoli",
+    "supplier_id": "SUP256"
+  },
+  {
+    "item_code": "ITEM00649",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2970,
+    "last_updated": "2024-05-18",
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00650",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3801,
+    "last_updated": "2025-01-20",
+    "category": "Giocattoli",
+    "supplier_id": "SUP807"
+  },
+  {
+    "item_code": "ITEM00651",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4173,
+    "last_updated": 1704672000,
+    "category": "Sport",
+    "supplier_id": "SUP755"
+  },
+  {
+    "item_code": "ITEM00652",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 154,
+    "last_updated": 1729900800,
+    "category": "Giocattoli",
+    "supplier_id": "SUP661"
+  },
+  {
+    "item_code": "ITEM00653",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3540,
+    "last_updated": "2025-01-02",
+    "category": "Sport",
+    "supplier_id": "SUP250"
+  },
+  {
+    "item_code": "ITEM00654",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 737,
+    "last_updated": "2024-09-28",
+    "category": "Sport",
+    "supplier_id": "SUP243"
+  },
+  {
+    "item_code": "ITEM00655",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 143,
+    "last_updated": 1717804800,
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00656",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3604,
+    "last_updated": 1724889600,
+    "category": "Alimentari",
+    "supplier_id": "SUP571"
+  },
+  {
+    "item_code": "ITEM00657",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 931,
+    "last_updated": 1707004800,
+    "category": "Sport",
+    "supplier_id": "SUP855"
+  },
+  {
+    "item_code": "ITEM00658",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4281,
+    "last_updated": 1712966400,
+    "category": "Elettronica",
+    "supplier_id": "SUP872"
+  },
+  {
+    "item_code": "ITEM00659",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2621,
+    "last_updated": 1727049600,
+    "category": "Giocattoli",
+    "supplier_id": "SUP626"
+  },
+  {
+    "item_code": "ITEM00660",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3442,
+    "last_updated": "2024-11-27",
+    "category": "Giocattoli",
+    "supplier_id": "SUP539"
+  },
+  {
+    "item_code": "ITEM00661",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2953,
+    "last_updated": 1720656000,
+    "category": "Beauty",
+    "supplier_id": "SUP386"
+  },
+  {
+    "item_code": "ITEM00662",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3936,
+    "last_updated": "2024-09-21",
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00663",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 20,
+    "last_updated": "2024-04-03",
+    "category": "Giocattoli",
+    "supplier_id": "SUP772"
+  },
+  {
+    "item_code": "ITEM00664",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4338,
+    "last_updated": 1737849600,
+    "category": "Elettronica",
+    "supplier_id": "SUP612"
+  },
+  {
+    "item_code": "ITEM00665",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1201,
+    "last_updated": 1720051200,
+    "category": "Giocattoli",
+    "supplier_id": "SUP419"
+  },
+  {
+    "item_code": "ITEM00666",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4863,
+    "last_updated": 1722643200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP571"
+  },
+  {
+    "item_code": "ITEM00667",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3881,
+    "last_updated": "2024-11-15",
+    "category": "Sport",
+    "supplier_id": "SUP127"
+  },
+  {
+    "item_code": "ITEM00668",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1867,
+    "last_updated": 1729382400,
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00669",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2234,
+    "last_updated": 1735603200,
+    "category": "Sport",
+    "supplier_id": "SUP558"
+  },
+  {
+    "item_code": "ITEM00670",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4523,
+    "last_updated": "2024-08-26",
+    "category": "Casa",
+    "supplier_id": "SUP820"
+  },
+  {
+    "item_code": "ITEM00671",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3646,
+    "last_updated": 1717891200,
+    "category": "Alimentari",
+    "supplier_id": "SUP637"
+  },
+  {
+    "item_code": "ITEM00672",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4461,
+    "last_updated": 1734307200,
+    "category": "Elettronica",
+    "supplier_id": "SUP866"
+  },
+  {
+    "item_code": "ITEM00673",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 543,
+    "last_updated": "2024-02-03",
+    "category": "Alimentari",
+    "supplier_id": "SUP159"
+  },
+  {
+    "item_code": "ITEM00674",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4985,
+    "last_updated": 1731801600,
+    "category": "Casa",
+    "supplier_id": "SUP946"
+  },
+  {
+    "item_code": "ITEM00675",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4509,
+    "last_updated": 1722211200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP981"
+  },
+  {
+    "item_code": "ITEM00676",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3923,
+    "last_updated": "2024-03-18",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP797"
+  },
+  {
+    "item_code": "ITEM00677",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4936,
+    "last_updated": "2025-03-11",
+    "category": "Alimentari",
+    "supplier_id": "SUP660"
+  },
+  {
+    "item_code": "ITEM00678",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4645,
+    "last_updated": 1727913600,
+    "category": "Sport",
+    "supplier_id": "SUP967"
+  },
+  {
+    "item_code": "ITEM00679",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1096,
+    "last_updated": 1705190400,
+    "category": "Beauty",
+    "supplier_id": "SUP107"
+  },
+  {
+    "item_code": "ITEM00680",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4882,
+    "last_updated": "2024-03-01",
+    "category": "Elettronica",
+    "supplier_id": "SUP235"
+  },
+  {
+    "item_code": "ITEM00681",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1202,
+    "last_updated": 1710374400,
+    "category": "Casa",
+    "supplier_id": "SUP336"
+  },
+  {
+    "item_code": "ITEM00682",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4189,
+    "last_updated": 1723334400,
+    "category": "Beauty",
+    "supplier_id": "SUP565"
+  },
+  {
+    "item_code": "ITEM00683",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2590,
+    "last_updated": "2024-09-08",
+    "category": "Alimentari",
+    "supplier_id": "SUP728"
+  },
+  {
+    "item_code": "ITEM00684",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1845,
+    "last_updated": 1712448000,
+    "category": "Alimentari",
+    "supplier_id": "SUP556"
+  },
+  {
+    "item_code": "ITEM00685",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3622,
+    "last_updated": "2024-02-21",
+    "category": "Giocattoli",
+    "supplier_id": "SUP924"
+  },
+  {
+    "item_code": "ITEM00686",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2697,
+    "last_updated": "2024-01-22",
+    "category": "Beauty",
+    "supplier_id": "SUP425"
+  },
+  {
+    "item_code": "ITEM00687",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 268,
+    "last_updated": "2024-11-25",
+    "category": "Elettronica",
+    "supplier_id": "SUP732"
+  },
+  {
+    "item_code": "ITEM00688",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2295,
+    "last_updated": "2024-06-08",
+    "category": "Alimentari",
+    "supplier_id": "SUP650"
+  },
+  {
+    "item_code": "ITEM00689",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 625,
+    "last_updated": "2024-06-06",
+    "category": "Casa",
+    "supplier_id": "SUP767"
+  },
+  {
+    "item_code": "ITEM00690",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1858,
+    "last_updated": 1718323200,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00691",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3636,
+    "last_updated": "2024-11-17",
+    "category": "Giocattoli",
+    "supplier_id": "SUP895"
+  },
+  {
+    "item_code": "ITEM00692",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4774,
+    "last_updated": 1723939200,
+    "category": "Sport",
+    "supplier_id": "SUP154"
+  },
+  {
+    "item_code": "ITEM00693",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2478,
+    "last_updated": 1731801600,
+    "category": "Alimentari",
+    "supplier_id": "SUP624"
+  },
+  {
+    "item_code": "ITEM00694",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3875,
+    "last_updated": 1717027200,
+    "category": "Elettronica",
+    "supplier_id": "SUP337"
+  },
+  {
+    "item_code": "ITEM00695",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3500,
+    "last_updated": 1705017600,
+    "category": "Elettronica",
+    "supplier_id": "SUP237"
+  },
+  {
+    "item_code": "ITEM00696",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4084,
+    "last_updated": 1713225600,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00697",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1312,
+    "last_updated": 1735171200,
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00698",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4170,
+    "last_updated": "2024-10-13",
+    "category": "Giocattoli",
+    "supplier_id": "SUP827"
+  },
+  {
+    "item_code": "ITEM00699",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 726,
+    "last_updated": "2024-07-07",
+    "category": "Beauty",
+    "supplier_id": "SUP757"
+  },
+  {
+    "item_code": "ITEM00700",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1857,
+    "last_updated": "2024-06-02",
+    "category": "Elettronica",
+    "supplier_id": "SUP854"
+  },
+  {
+    "item_code": "ITEM00701",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2842,
+    "last_updated": 1715299200,
+    "category": "Sport",
+    "supplier_id": "SUP543"
+  },
+  {
+    "item_code": "ITEM00702",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": "238",
+    "last_updated": 1717286400,
+    "category": "Alimentari",
+    "supplier_id": "SUP966"
+  },
+  {
+    "item_code": "ITEM00703",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3184,
+    "last_updated": "2024-03-03",
+    "category": "Alimentari",
+    "supplier_id": "SUP686"
+  },
+  {
+    "item_code": "ITEM00704",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 674,
+    "last_updated": 1725580800,
+    "category": "Alimentari",
+    "supplier_id": "SUP724"
+  },
+  {
+    "item_code": "ITEM00705",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3620,
+    "last_updated": "2024-01-07",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP178"
+  },
+  {
+    "item_code": "ITEM00706",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4520,
+    "last_updated": "2025-03-03",
+    "category": "Alimentari",
+    "supplier_id": "SUP201"
+  },
+  {
+    "item_code": "ITEM00707",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2456,
+    "last_updated": 1733529600,
+    "category": "Casa",
+    "supplier_id": "SUP159"
+  },
+  {
+    "item_code": "ITEM00708",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1666,
+    "last_updated": 1723939200,
+    "category": "Alimentari",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00709",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1027,
+    "last_updated": 1716768000,
+    "category": "Beauty",
+    "supplier_id": "SUP347"
+  },
+  {
+    "item_code": "ITEM00710",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 234,
+    "last_updated": 1722816000,
+    "category": "Giocattoli",
+    "supplier_id": "SUP867"
+  },
+  {
+    "item_code": "ITEM00711",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4793,
+    "last_updated": "2025-02-23",
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00712",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3706,
+    "last_updated": 1730592000,
+    "category": "Beauty",
+    "supplier_id": "SUP525"
+  },
+  {
+    "item_code": "ITEM00713",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 638,
+    "last_updated": "2024-06-09",
+    "category": "Beauty",
+    "supplier_id": "SUP346"
+  },
+  {
+    "item_code": "ITEM00714",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 262,
+    "last_updated": "2025-03-10",
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00715",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4820,
+    "last_updated": 1707264000,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP533"
+  },
+  {
+    "item_code": "ITEM00716",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3999,
+    "last_updated": "2025-01-14",
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00717",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 2682,
+    "last_updated": "2024-06-04",
+    "category": "Alimentari",
+    "supplier_id": "SUP223"
+  },
+  {
+    "item_code": "ITEM00718",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1345,
+    "last_updated": "2025-02-01",
+    "category": "Giocattoli",
+    "supplier_id": "SUP568"
+  },
+  {
+    "item_code": "ITEM00719",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2953,
+    "last_updated": 1717632000,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP485"
+  },
+  {
+    "item_code": "ITEM00720",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3143,
+    "last_updated": "2025-01-19",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP168"
+  },
+  {
+    "item_code": "ITEM00721",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3124,
+    "last_updated": 1732060800,
+    "category": "Alimentari",
+    "supplier_id": "SUP876"
+  },
+  {
+    "item_code": "ITEM00722",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3981,
+    "last_updated": 1720656000,
+    "category": "Giocattoli",
+    "supplier_id": "SUP931"
+  },
+  {
+    "item_code": "ITEM00723",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 368,
+    "last_updated": "2025-03-15",
+    "category": "Giocattoli",
+    "supplier_id": "SUP660"
+  },
+  {
+    "item_code": "ITEM00724",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": "91",
+    "last_updated": 1718841600,
+    "category": "Alimentari",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00725",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2220,
+    "last_updated": 1734220800,
+    "category": "Alimentari",
+    "supplier_id": "SUP508"
+  },
+  {
+    "item_code": "ITEM00726",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4369,
+    "last_updated": 1714176000,
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00727",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1912,
+    "last_updated": "2024-07-03",
+    "category": "Alimentari",
+    "supplier_id": "SUP856"
+  },
+  {
+    "item_code": "ITEM00728",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3950,
+    "last_updated": "2025-02-28",
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00729",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4819,
+    "last_updated": 1726876800,
+    "category": "Casa",
+    "supplier_id": "SUP424"
+  },
+  {
+    "item_code": "ITEM00730",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 66,
+    "last_updated": "2024-10-25",
+    "category": "Alimentari",
+    "supplier_id": "SUP551"
+  },
+  {
+    "item_code": "ITEM00731",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3480,
+    "last_updated": "2024-04-09",
+    "category": "Elettronica",
+    "supplier_id": "SUP923"
+  },
+  {
+    "item_code": "ITEM00732",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 489,
+    "last_updated": "2024-12-22",
+    "category": "Sport",
+    "supplier_id": "SUP349"
+  },
+  {
+    "item_code": "ITEM00733",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4770,
+    "last_updated": "2024-02-17",
+    "category": "Elettronica",
+    "supplier_id": "SUP543"
+  },
+  {
+    "item_code": "ITEM00734",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1399,
+    "last_updated": 1704672000,
+    "category": "Casa",
+    "supplier_id": "SUP179"
+  },
+  {
+    "item_code": "ITEM00735",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3320,
+    "last_updated": 1718150400,
+    "category": "Casa",
+    "supplier_id": "SUP438"
+  },
+  {
+    "item_code": "ITEM00736",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3330,
+    "last_updated": 1732838400,
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00737",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 1621,
+    "last_updated": "2025-02-18",
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00738",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1607,
+    "last_updated": "2024-01-18",
+    "category": "Elettronica",
+    "supplier_id": "SUP155"
+  },
+  {
+    "item_code": "ITEM00739",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3536,
+    "last_updated": 1732665600,
+    "category": "Beauty",
+    "supplier_id": "SUP812"
+  },
+  {
+    "item_code": "ITEM00740",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1131,
+    "last_updated": "2025-01-14",
+    "category": "Elettronica",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00741",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "209",
+    "last_updated": 1708560000,
+    "category": "Alimentari",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00742",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 4639,
+    "last_updated": "2024-02-18",
+    "category": "Giocattoli",
+    "supplier_id": "SUP355"
+  },
+  {
+    "item_code": "ITEM00743",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4254,
+    "last_updated": "2024-03-10",
+    "category": "Giocattoli",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00744",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "163",
+    "last_updated": "2024-10-27",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP280"
+  },
+  {
+    "item_code": "ITEM00745",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1145,
+    "last_updated": 1708214400,
+    "category": "Beauty",
+    "supplier_id": "SUP875"
+  },
+  {
+    "item_code": "ITEM00746",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 932,
+    "last_updated": 1715385600,
+    "category": "Sport",
+    "supplier_id": "SUP328"
+  },
+  {
+    "item_code": "ITEM00747",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 1427,
+    "last_updated": "2024-09-21",
+    "category": "Casa",
+    "supplier_id": "SUP219"
+  },
+  {
+    "item_code": "ITEM00748",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4896,
+    "last_updated": "2025-03-02",
+    "category": "Giocattoli",
+    "supplier_id": "SUP390"
+  },
+  {
+    "item_code": "ITEM00749",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2492,
+    "last_updated": "2024-07-23",
+    "category": "Alimentari",
+    "supplier_id": "SUP405"
+  },
+  {
+    "item_code": "ITEM00750",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 40,
+    "last_updated": "2024-10-25",
+    "category": "Sport",
+    "supplier_id": "SUP297"
+  },
+  {
+    "item_code": "ITEM00751",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 446,
+    "last_updated": 1729814400,
+    "category": "Alimentari",
+    "supplier_id": "SUP868"
+  },
+  {
+    "item_code": "ITEM00752",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3879,
+    "last_updated": 1714780800,
+    "category": "Alimentari",
+    "supplier_id": "SUP663"
+  },
+  {
+    "item_code": "ITEM00753",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3865,
+    "last_updated": 1719792000,
+    "category": "Casa",
+    "supplier_id": "SUP194"
+  },
+  {
+    "item_code": "ITEM00754",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3142,
+    "last_updated": 1721865600,
+    "category": "Alimentari",
+    "supplier_id": "SUP676"
+  },
+  {
+    "item_code": "ITEM00755",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3195,
+    "last_updated": 1720396800,
+    "category": "Giocattoli",
+    "supplier_id": "SUP754"
+  },
+  {
+    "item_code": "ITEM00756",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3412,
+    "last_updated": 1708646400,
+    "category": "Alimentari",
+    "supplier_id": "SUP478"
+  },
+  {
+    "item_code": "ITEM00757",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4764,
+    "last_updated": 1711065600,
+    "category": "Alimentari",
+    "supplier_id": "SUP896"
+  },
+  {
+    "item_code": "ITEM00758",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3226,
+    "last_updated": 1718064000,
+    "category": "Beauty",
+    "supplier_id": "SUP313"
+  },
+  {
+    "item_code": "ITEM00759",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4723,
+    "last_updated": 1719014400,
+    "category": "Beauty",
+    "supplier_id": "SUP396"
+  },
+  {
+    "item_code": "ITEM00760",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3180,
+    "last_updated": 1730246400,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP446"
+  },
+  {
+    "item_code": "ITEM00761",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3749,
+    "last_updated": 1734912000,
+    "category": "Casa",
+    "supplier_id": "SUP862"
+  },
+  {
+    "item_code": "ITEM00762",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1740,
+    "last_updated": 1716681600,
+    "category": "Casa",
+    "supplier_id": "SUP612"
+  },
+  {
+    "item_code": "ITEM00763",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4732,
+    "last_updated": "2025-02-05",
+    "category": "Elettronica",
+    "supplier_id": "SUP651"
+  },
+  {
+    "item_code": "ITEM00764",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3853,
+    "last_updated": 1714521600,
+    "category": "Sport",
+    "supplier_id": "SUP877"
+  },
+  {
+    "item_code": "ITEM00765",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2903,
+    "last_updated": 1733788800,
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00766",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4221,
+    "last_updated": 1734739200,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00767",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": "412",
+    "last_updated": "2024-03-07",
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00768",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 33,
+    "last_updated": 1716163200,
+    "category": "Sport",
+    "supplier_id": "SUP934"
+  },
+  {
+    "item_code": "ITEM00769",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 156,
+    "last_updated": 1710201600,
+    "category": "Casa",
+    "supplier_id": "SUP687"
+  },
+  {
+    "item_code": "ITEM00770",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1003,
+    "last_updated": 1721606400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP886"
+  },
+  {
+    "item_code": "ITEM00771",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3621,
+    "last_updated": "2024-06-14",
+    "category": "Beauty",
+    "supplier_id": "SUP247"
+  },
+  {
+    "item_code": "ITEM00772",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2429,
+    "last_updated": "2024-07-26",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP295"
+  },
+  {
+    "item_code": "ITEM00773",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4792,
+    "last_updated": 1730073600,
+    "category": "Beauty",
+    "supplier_id": "SUP111"
+  },
+  {
+    "item_code": "ITEM00774",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4691,
+    "last_updated": "2025-03-09",
+    "category": "Beauty",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00775",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3388,
+    "last_updated": 1721001600,
+    "category": "Beauty",
+    "supplier_id": "SUP571"
+  },
+  {
+    "item_code": "ITEM00776",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 3698,
+    "last_updated": 1705190400,
+    "category": "Casa",
+    "supplier_id": "SUP663"
+  },
+  {
+    "item_code": "ITEM00777",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 1807,
+    "last_updated": 1705449600,
+    "category": "Elettronica",
+    "supplier_id": "SUP210"
+  },
+  {
+    "item_code": "ITEM00778",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 4679,
+    "last_updated": "2024-07-24",
+    "category": "Giocattoli",
+    "supplier_id": "SUP681"
+  },
+  {
+    "item_code": "ITEM00779",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 277,
+    "last_updated": 1707609600,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP378"
+  },
+  {
+    "item_code": "ITEM00780",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3434,
+    "last_updated": 1733097600,
+    "category": "Giocattoli",
+    "supplier_id": "SUP802"
+  },
+  {
+    "item_code": "ITEM00781",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 822,
+    "last_updated": "2025-02-26",
+    "category": "Sport",
+    "supplier_id": "SUP807"
+  },
+  {
+    "item_code": "ITEM00782",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 508,
+    "last_updated": 1723248000,
+    "category": "Casa",
+    "supplier_id": "SUP138"
+  },
+  {
+    "item_code": "ITEM00783",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4459,
+    "last_updated": "2024-07-24",
+    "category": "Elettronica",
+    "supplier_id": "SUP692"
+  },
+  {
+    "item_code": "ITEM00784",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 389,
+    "last_updated": 1733011200,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP139"
+  },
+  {
+    "item_code": "ITEM00785",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 3417,
+    "last_updated": 1709251200,
+    "category": "Casa",
+    "supplier_id": "SUP133"
+  },
+  {
+    "item_code": "ITEM00786",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 4933,
+    "last_updated": "2024-05-29",
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00787",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 2696,
+    "last_updated": "2024-05-13",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP314"
+  },
+  {
+    "item_code": "ITEM00788",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 3485,
+    "last_updated": "2024-09-01",
+    "category": "Sport",
+    "supplier_id": "SUP198"
+  },
+  {
+    "item_code": "ITEM00789",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 4847,
+    "last_updated": "2024-10-05",
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00790",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 810,
+    "last_updated": 1707868800,
+    "category": "Giocattoli",
+    "supplier_id": "SUP308"
+  },
+  {
+    "item_code": "ITEM00791",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 800,
+    "last_updated": 1717718400,
+    "category": "Giocattoli",
+    "supplier_id": "SUP238"
+  },
+  {
+    "item_code": "ITEM00792",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 35,
+    "last_updated": "2024-09-23",
+    "category": "Sport",
+    "supplier_id": "SUP190"
+  },
+  {
+    "item_code": "ITEM00793",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 1085,
+    "last_updated": 1724371200,
+    "category": "Giocattoli",
+    "supplier_id": "SUP424"
+  },
+  {
+    "item_code": "ITEM00794",
+    "warehouse": "WH_SUD",
+    "quantity_on_hand": 615,
+    "last_updated": 1730937600,
+    "category": "Abbigliamento",
+    "supplier_id": "SUP587"
+  },
+  {
+    "item_code": "ITEM00795",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2413,
+    "last_updated": 1712361600,
+    "category": "Sport",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00796",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": "326",
+    "last_updated": 1731196800,
+    "category": "Elettronica",
+    "supplier_id": "SUP488"
+  },
+  {
+    "item_code": "ITEM00797",
+    "warehouse": "WH_NORD",
+    "quantity_on_hand": 2345,
+    "last_updated": "2024-11-24",
+    "category": "Abbigliamento",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00798",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 623,
+    "last_updated": 1707696000,
+    "category": "Alimentari",
+    "supplier_id": "SUP152"
+  },
+  {
+    "item_code": "ITEM00799",
+    "warehouse": "WH_ISOLE",
+    "quantity_on_hand": 3549,
+    "last_updated": 1712188800,
+    "category": "Casa",
+    "supplier_id": null
+  },
+  {
+    "item_code": "ITEM00800",
+    "warehouse": "WH_CENTRO",
+    "quantity_on_hand": 2761,
+    "last_updated": "2024-06-14",
+    "category": "Abbigliamento",
+    "supplier_id": "SUP608"
+  }
+]
